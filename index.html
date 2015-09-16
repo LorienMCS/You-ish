@@ -13,17 +13,23 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="container" ng-controller="YouishController">
+<body>
 
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <div class="navbar-brand"><a href="#home" class="logo">You-ish</a></div>
+      </div>
+        <ul class="nav navbar-nav">
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+  </header>
 
-  <label>Enter Your First Name: <input type="text" ng-model="firstName"/></label>
-  <label>Enter Your Birth Month: <input type="text" ng-model="month"/></label>
-  <label>Enter Your Birth Day: <input type="text" ng-model="day"/></label>
-
-  <h3>Your Name, Reversed:</h3>
-  <h3>{{firstName | reverse}}</h3>
-
-
+  <div class="container">
+    <div ng-view></div>
+  </div>
 
   <!-- JavaScript files -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js"></script>

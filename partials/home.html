@@ -1,0 +1,9 @@
+<div ng-controller="YouishController">
+  <label>Enter Your First Name: <input type="text" ng-model="firstName"/></label>
+  <label>Enter Your Birth Month in Two-Digit Format: <input type="text" ng-model="month" placeholder="MM"/></label>
+  <label>Enter Your Birth Day in Two-Digit Format: <input type="text" ng-model="day" placeholder="DD"/></label>
+
+  <h3>Your Name, Reversed:</h3>
+  <h3>{{firstName | reverse}}</h3>
+
+</div>
