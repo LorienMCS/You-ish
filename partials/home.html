@@ -1,9 +1,46 @@
 <div ng-controller="YouishController">
-  <label>Enter Your First Name: <input type="text" ng-model="firstName"/></label>
-  <label>Enter Your Birth Month in Two-Digit Format: <input type="text" ng-model="month" placeholder="MM"/></label>
-  <label>Enter Your Birth Day in Two-Digit Format: <input type="text" ng-model="day" placeholder="DD"/></label>
 
-  <h3>Your Name, Reversed:</h3>
-  <h3>{{firstName | reverse}}</h3>
+	<form class="form-horizontal data-form">
+
+	  <div class="form-group">
+	    <label class="col-md-4 control-label data-input" for="name">Enter Your First Name: </label>
+	    <div class="col-md-4 text-col">
+	    	<input class="form-control input-md data-input" type="text" ng-model="firstName" name="name" placeholder="First Name">
+	    </div>
+	  </div>
+
+		<div class="form-group">
+	    <label class="col-md-4 control-label data-input" for="month">Enter Your Birth Month in Two-Digit Format: </label>
+	    <div class="col-md-4 text-col">
+	    	<input class="form-control input-md data-input" type="text" ng-model="month" name="month" placeholder="MM">
+	    </div>
+	  </div>
+
+		<div class="form-group">
+	    <label class="col-md-4 control-label data-input" for="day">Enter Your Birth Day in Two-Digit Format: </label>
+	    <div class="col-md-4 text-col">
+	    	<input class="form-control input-md data-input" type="text" ng-model="day" name="day" placeholder="DD">
+	    </div>
+	  </div>
+
+		<div class="form-group">
+		 	<label class="col-md-4 control-label data-input" for="first-search">Click Button for Results: </label>
+  	 	<div class="col-md-4 text-col">
+	     	<button class="btn button-custom" name="first-search" type="submit" ng-click="">Click Me</button>
+	  	</div>
+	  </div>
+
+	</form>
+
+
+
+
+
+
+
+</fieldset>
+</form>
+
+  <h3>Your Name, Reversed: <span>{{firstName | reverse}}</span></h3>
 
 </div>

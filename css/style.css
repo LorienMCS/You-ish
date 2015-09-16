@@ -4,5 +4,52 @@
 
 .logo {
 	font-size: 1.5em;
-	color: #0E6E61;
+	color: #2A7E7D;
+}
+
+.data-form {
+	background-color: #C6ECD6;
+	padding: 20px 0 2px 0;
+}
+
+.data-input {
+	font-size: 1.2em;
+}
+
+.text-col {
+	padding-top: 3px;
+}
+
+.button-custom {
+	border-top: 1px solid #0b453c;
+	background: #3ea39e;
+	background: -webkit-gradient(linear, left top, left bottom, from(#27a395), to(#3ea39e));
+	background: -webkit-linear-gradient(top, #27a395, #3ea39e);
+	background: -moz-linear-gradient(top, #27a395, #3ea39e);
+	background: -ms-linear-gradient(top, #27a395, #3ea39e);
+	background: -o-linear-gradient(top, #27a395, #3ea39e);
+	padding: 6px 10px;
+	-webkit-border-radius: 31px;
+	-moz-border-radius: 31px;
+	border-radius: 31px;
+	-webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+	-moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+	box-shadow: rgba(0,0,0,1) 0 1px 0;
+	text-shadow: rgba(0,0,0,.4) 0 1px 0;
+	color: white;
+	font-size: 15px;
+	font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+	text-decoration: none;
+	vertical-align: middle;
+}
+
+.button-custom:hover {
+  border-top-color: #3dccc0;
+  background: #3dccc0;
+  color: #ffffff;
+}
+
+.button-custom:active {
+  border-top-color: #4accc8;
+  background: #4accc8;
 }
