@@ -73,9 +73,13 @@
 	border-radius: 11px 11px 11px 11px;
 	-moz-border-radius: 11px 11px 11px 11px;
 	-webkit-border-radius: 11px 11px 11px 11px;
+	border: 2px solid #172e26;
+	-webkit-box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
+	-moz-box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
+	box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
 }
 
-.giffy-button {
+.giphy-button {
 	margin-left: 20px;
 	border-top: 1px solid #f24805;
 	background: #f06413;
@@ -94,16 +98,20 @@
 	vertical-align: middle;
 }
 
-.giffy-button:hover {
+.giphy-button:hover {
   border-top-color: #f57b29;
   background: #f57b29;
   color: #ffffff;
 }
 
-.gif-error {
+.giphy-error, .movie-error {
 	background-color: #f57b29;
 	padding: 5px 0 5px 10px;
 	border-radius: 11px 11px 11px 11px;
 	-moz-border-radius: 11px 11px 11px 11px;
 	-webkit-border-radius: 11px 11px 11px 11px;
+}
+
+.new-section {
+	padding-top: 20px;
 }

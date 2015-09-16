@@ -1,67 +1,96 @@
-<div class="container-flud" ng-controller="YouishController">
+<div ng-controller="YouishController">
 
-	<div class="col-md-6 data-form">
+<div class="col-md-12">
 
-		<div class="row">
-			<h2 class="intro">Enter Some Data About Yourself</h2>
-			<h2 class="intro">And See Some Fun Results!</h2>
-		</div>
+	<div class="row">
+		<div class="col-md-6 data-form">
 
-		<div class="row">
-			<form class="form-horizontal">
-
-			  <div class="form-group">
-			  	<label class="col-md-6 control-label data-input" for="name">First Name: </label>
-			    <div class="col-md-4 text-col">
-			    	<input class="form-control input-md data-input" type="text" ng-model="firstName" name="name" placeholder="First Name">
-			    		</div>
-			  	</div>
-
-					<div class="form-group">
-			    	<label class="col-md-6 control-label data-input" for="month">Birth Month in Two-Digit Format: </label>
-			    	<div class="col-md-4 text-col">
-			    		<input class="form-control input-md data-input" type="text" ng-model="month" name="month" placeholder="MM">
-			    	</div>
-			  	</div>
-
-					<div class="form-group">
-			    	<label class="col-md-6 control-label data-input" for="day">Birth Day in Two-Digit Format: </label>
-			    	<div class="col-md-4 text-col">
-			    		<input class="form-control input-md data-input" type="text" ng-model="day" name="day" placeholder="DD">
-			    	</div>
-			  	</div>
-
-					<div class="form-group">
-				 		<label class="col-md-6 control-label data-input" for="first-search">Click Button for Results: </label>
-		  	 		<div class="col-md-4 text-col">
-			     		<button class="btn button-custom" name="first-search" type="submit" ng-click="getGiphy()">Click Me</button>
-			  		</div>
-			  	</div>
-
-				</form>
+			<div class="row">
+				<h2 class="intro">Enter Some Data About Yourself</h2>
+				<h2 class="intro">And See Some Fun Results!</h2>
 			</div>
 
-	</div>
+			<div class="row">
+				<form class="form-horizontal">
 
-	<div class="col-md-1">
-	</div>
+				  <div class="form-group">
+				  	<label class="col-md-6 control-label data-input" for="name">First Name: </label>
+				    <div class="col-md-4 text-col">
+				    	<input class="form-control input-md data-input" type="text" ng-model="firstName" name="name" placeholder="First Name">
+				    		</div>
+				  	</div>
 
-	<div class="col-md-4">
-		<div class="row">
-	  	<h3 class="reverse">Your Name, Reversed: <span>{{firstName | reverse}}</span></h3>
-	  </div>
-	  <div class="row text-center" ng-hide="noGiphy">
-	  	<img ng-src="{{giphy}}" alt="giphy of {{firstName}}"/>
-	  </div>
-		<div class="row text-center" ng-hide="noGiphy">
-			<button class="btn giffy-button" name="hide-gif" type="submit" ng-click="noGiphy=true">Enough Giphy, Please Hide</button>
+						<div class="form-group">
+				    	<label class="col-md-6 control-label data-input" for="month">Birth Month in Two-Digit Format: </label>
+				    	<div class="col-md-4 text-col">
+				    		<input class="form-control input-md data-input" type="text" ng-model="month" name="month" placeholder="MM">
+				    	</div>
+				  	</div>
+
+						<div class="form-group">
+				    	<label class="col-md-6 control-label data-input" for="day">Birth Day in Two-Digit Format: </label>
+				    	<div class="col-md-4 text-col">
+				    		<input class="form-control input-md data-input" type="text" ng-model="day" name="day" placeholder="DD">
+				    	</div>
+				  	</div>
+
+						<div class="form-group">
+					 		<label class="col-md-6 control-label data-input" for="first-search">Click Button for Results: </label>
+			  	 		<div class="col-md-4 text-col">
+				     		<button class="btn button-custom" name="first-search" type="submit" ng-click="searchAll()">Click Me</button>
+				  		</div>
+				  	</div>
+
+					</form>
+				</div>
+
 		</div>
-		<div class="row text-center" ng-hide="noError">
-			<h2 class="gif-error">{{error}}</h2>
-		<div>
+
+		<div class="col-md-1">
+		</div>
+
+		<div class="col-md-4">
+			<div class="row">
+		  	<h3 class="reverse">Your Name, Reversed: <span>{{firstName | reverse}}</span></h3>
+		  </div>
+		  <div class="row text-center" ng-hide="noGiphy">
+		  	<img ng-src="{{giphy}}" alt="giphy of {{firstName}}"/>
+		  </div>
+			<div class="row text-center" ng-hide="noGiphy">
+				<button class="btn giphy-button" name="hide-giphy" type="submit" ng-click="noGiphy=true">Enough Giphy, Please Hide</button>
+			</div>
+			<div class="row text-center" ng-hide="noGiphyError">
+				<h2 class="giphy-error">{{giphyError}}</h2>
+			<div>
+		</div>
+
+		<div class="col-md-1">
+		</div>
+
 	</div>
 
-	<div class="col-md-1">
-	</div>
+</div>
+
+	<div class="clearfix"></div>
+
+<div class="col-md-12 new-section">
+
+	<div class="row" ng-hide="noMovies">
+		<div ng-repeat="movie in movies track by $index">
+    	<div class="col-md-3">
+      	<div class="panel panel-default">
+        	<div class="panel-heading">
+          	<a href="#"><h3 class="panel-title">{{movie.title}}</h3></a>
+        	</div>
+      		<div class="panel-body">{{movie.year}}</div>
+    		</div>
+  		</div>
+  	</div>
+  	<div class="row text-center" ng-hide="noMovieError">
+			<h2 class="movie-error">{{movieError}}</h2>
+		<div>
+  </div>
+
+</div>
 
 </div>
