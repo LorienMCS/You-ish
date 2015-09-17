@@ -1,96 +1,205 @@
 <div ng-controller="YouishController">
 
-<div class="col-md-12">
+	<div class="col-md-12">
 
-	<div class="row">
-		<div class="col-md-6 data-form">
+		<div class="row">
+			<!-- Entry form for initial search info -->
+			<div class="col-md-6 data-form">
 
-			<div class="row">
-				<h2 class="intro">Enter Some Data About Yourself</h2>
-				<h2 class="intro">And See Some Fun Results!</h2>
-			</div>
-
-			<div class="row">
-				<form class="form-horizontal">
-
-				  <div class="form-group">
-				  	<label class="col-md-6 control-label data-input" for="name">First Name: </label>
-				    <div class="col-md-4 text-col">
-				    	<input class="form-control input-md data-input" type="text" ng-model="firstName" name="name" placeholder="First Name">
-				    		</div>
-				  	</div>
-
-						<div class="form-group">
-				    	<label class="col-md-6 control-label data-input" for="month">Birth Month in Two-Digit Format: </label>
-				    	<div class="col-md-4 text-col">
-				    		<input class="form-control input-md data-input" type="text" ng-model="month" name="month" placeholder="MM">
-				    	</div>
-				  	</div>
-
-						<div class="form-group">
-				    	<label class="col-md-6 control-label data-input" for="day">Birth Day in Two-Digit Format: </label>
-				    	<div class="col-md-4 text-col">
-				    		<input class="form-control input-md data-input" type="text" ng-model="day" name="day" placeholder="DD">
-				    	</div>
-				  	</div>
-
-						<div class="form-group">
-					 		<label class="col-md-6 control-label data-input" for="first-search">Click Button for Results: </label>
-			  	 		<div class="col-md-4 text-col">
-				     		<button class="btn button-custom" name="first-search" type="submit" ng-click="searchAll()">Click Me</button>
-				  		</div>
-				  	</div>
-
-					</form>
+				<div class="row">
+					<h2 class="intro">Enter Some Data About Yourself</h2>
+					<h2 class="intro">And See Some Fun Results!</h2>
 				</div>
 
-		</div>
+				<div class="row">
+					<form class="form-horizontal">
 
-		<div class="col-md-1">
-		</div>
+					  <div class="form-group">
+					  	<label class="col-md-6 control-label data-input" for="name">First Name: </label>
+					    <div class="col-md-4 text-col">
+					    	<input class="form-control input-md data-input" type="text" ng-model="firstName" name="name" placeholder="First Name">
+					    		</div>
+					  	</div>
 
-		<div class="col-md-4">
-			<div class="row">
-		  	<h3 class="reverse">Your Name, Reversed: <span>{{firstName | reverse}}</span></h3>
-		  </div>
-		  <div class="row text-center" ng-hide="noGiphy">
-		  	<img ng-src="{{giphy}}" alt="giphy of {{firstName}}"/>
-		  </div>
-			<div class="row text-center" ng-hide="noGiphy">
-				<button class="btn giphy-button" name="hide-giphy" type="submit" ng-click="noGiphy=true">Enough Giphy, Please Hide</button>
+							<div class="form-group">
+					    	<label class="col-md-6 control-label data-input" for="month">Birth Month in Two-Digit Format: </label>
+					    	<div class="col-md-4 text-col">
+					    		<input class="form-control input-md data-input" type="text" ng-model="month" name="month" placeholder="MM">
+					    	</div>
+					  	</div>
+
+							<div class="form-group">
+					    	<label class="col-md-6 control-label data-input" for="day">Birth Day in Two-Digit Format: </label>
+					    	<div class="col-md-4 text-col">
+					    		<input class="form-control input-md data-input" type="text" ng-model="day" name="day" placeholder="DD">
+					    	</div>
+					  	</div>
+
+							<div class="form-group">
+						 		<label class="col-md-6 control-label data-input" for="first-search">Click Button for Results: </label>
+				  	 		<div class="col-md-4 text-col">
+					     		<button class="btn button-custom" name="first-search" type="submit" ng-click="searchAll()">Click Me</button>
+					  		</div>
+					  	</div>
+
+						</form>
+					</div>
+
+			</div><!-- Closing div for initial search info -->
+
+			<div class="col-md-1">
 			</div>
-			<div class="row text-center" ng-hide="noGiphyError">
-				<h2 class="giphy-error">{{giphyError}}</h2>
-			<div>
+
+			<div class="col-md-4">
+				<div class="row">
+			  	<h3 class="reverse">Your Name, Reversed: <span>{{firstName | reverse}}</span></h3>
+			  </div>
+			  <div class="row text-center" ng-hide="noGiphy">
+			  	<img ng-src="{{giphy}}" alt="giphy of {{firstName}}"/>
+			  </div>
+				<div class="row text-center" ng-hide="noGiphy">
+					<button class="btn giphy-button" name="hide-giphy" type="submit" ng-click="noGiphy=true">Enough Giphy, Please Hide</button>
+				</div>
+				<div class="row text-center" ng-hide="noGiphyError">
+					<h2 class="giphy-error">{{giphyError}}</h2>
+				<div>
+			</div>
+
+			<div class="col-md-1">
+			</div>
+
 		</div>
 
-		<div class="col-md-1">
-		</div>
-
-	</div>
-
-</div>
+	</div><!-- Closing div for first section -->
 
 	<div class="clearfix"></div>
 
-<div class="col-md-12 new-section">
+	<div class="col-md-12 new-section">
 
-	<div class="row" ng-hide="noMovies">
-		<div ng-repeat="movie in movies track by $index">
-    	<div class="col-md-3">
-      	<div class="panel panel-default">
-        	<div class="panel-heading">
-          	<a href="#"><h3 class="panel-title">{{movie.title}}</h3></a>
-        	</div>
-      		<div class="panel-body">{{movie.year}}</div>
-    		</div>
-  		</div>
-  	</div>
-  	<div class="row text-center" ng-hide="noMovieError">
-			<h2 class="movie-error">{{movieError}}</h2>
-		<div>
-  </div>
+		<!-- Initial movies search -->
+		<div class="row" ng-hide="noMovies">
+			<div ng-repeat="movie in movies track by $index">
+	    	<div class="col-md-6">
+	      	<div class="panel panel-default">
+	        	<div class="panel-heading">
+	          	<h3 class="panel-title">{{movie.title}}</h3>
+	        	</div>
+	      		<div class="panel-body">{{movie.year}}<span class="pull-right"><button class="btn btn-default btn-sm" name="find-movie" type="submit" ng-click="getMovieDetails()">Click for Details</button></span>
+	      		</div>
+	    		</div>
+	  		</div>
+	  	</div>
+	  	<div class="row text-center" ng-hide="noMovieError">
+				<h2 class="movie-error">{{movieError}}</h2>
+			<div>
+	  </div>
 
-</div>
+	  <!-- Search on individual movie -->
+	  <div class="row" ng-show="showMovie">
+	    <div class="col-md-6">
+	    	<div class="panel panel-default">
+   				<div class="panel-heading">{{details.Title}}</div>
+      		<div class="panel-body">
+         		<p>{{details.Plot}}</p>
+   				</div>
+   				<ul class="list-group">
+      			<li class="list-group-item">Starring: {{details.Actors}}</li>
+      			<li class="list-group-item">Awards: {{details.Awards}}</li>
+      			<li class="list-group-item">Country: {{details.Country}}</li>
+      			<li class="list-group-item">Director: {{details.Director}}</li>
+      			<li class="list-group-item">Genre: {{details.Genre}}</li>
+      			<li class="list-group-item">Language: {{details.Language}}</li>
+      			<li class="list-group-item">Metascore: {{details.Metascore}}</li>
+   				</ul>
+				</div>
 
-</div>
+
+	          <h5>Rated</h5>
+	          <p>{{details.Rated}}</p>
+	        </div>
+	        <div class="row">
+	          <h5>Released</h5>
+	          <p>{{details.Released}}</p>
+	        </div>
+	        <div class="row">
+	          <h5>Runtime</h5>
+	          <p>{{details.Runtime}}</p>
+	        </div>
+	        <div class="row">
+	          <h5>Writer</h5>
+	          <p>{{details.Writer}}</p>
+	        </div>
+	        <div class="row">
+	          <h5>Year</h5>
+	          <p>{{details.Year}}</p>
+	        </div>
+	        <div class="row">
+	          <h5>imdb Rating</h5>
+	          <p>{{details.imdbRating}}</p>
+	        </div>
+	        <div class="row">
+	          <h5>imdb Votes</h5>
+	          <p>{{details.imdbVotes}}</p>
+	        </div>
+	      </div><!-- closing div for details section -->
+	      <div class="row">
+	        <div class="row">
+	          <h4>Rotten Tomatoes Data</h4>
+	        </div>
+	        <div class="row">
+	              <h5>Tomato Consensus</h5>
+	              <p>{{details.tomatoConsensus}}</p>
+	            </div>
+	        <div class="row">
+	          <div class="col-md-6">
+	            <div class="row">
+	              <h5>Tomato Fresh</h5>
+	              <p>{{details.tomatoFresh}}</p>
+	            </div>
+	            <div class="row">
+	              <h5>Tomato Image</h5>
+	              <p>{{details.tomatoImage}}</p>
+	            </div>
+	            <div class="row">
+	              <h5>Tomato Meter</h5>
+	              <p>{{details.tomatoMeter}}</p>
+	            </div>
+	            <div class="row">
+	              <h5>Tomato Rating</h5>
+	              <p>{{details.tomatoRating}}</p>
+	            </div>
+	            <div class="row">
+	              <h5>Tomato Reviews</h5>
+	              <p>{{details.tomatoReviews}}</p>
+	            </div>
+	          </div>
+	          <div class="col-md-6">
+	            <div class="row">
+	              <h5>Tomato Rotten</h5>
+	              <p>{{details.tomatoRotten}}</p>
+	            </div>
+	            <div class="row">
+	              <h5>Tomato User Meter</h5>
+	              <p>{{details.tomatoUserMeter}}</p>
+	            </div>
+	            <div class="row">
+	              <h5>Tomato User Rating</h5>
+	              <p>{{details.tomatoUserRating}}</p>
+	            </div>
+	            <div class="row">
+	              <h5>Tomato User Reviews</h5>
+	              <p>{{details.tomatoUserReviews}}</p>
+	            </div>
+	          </div>
+	        </div>
+	      </div><!-- closing div for Tomatoes section -->
+	    </div><!-- closing div for all details inc poster -->
+	    <div class="row text-center" ng-hide="noMovieError">
+				<h2 class="movie-error">{{movieError}}</h2>
+			<div>
+	    <div class="col-md-2"></div>
+	  </div> <!-- closing div for movie section -->
+
+	</div><!-- Closing div for second section -->
+
+</div><!-- closing div for controller -->

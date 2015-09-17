@@ -1,4 +1,4 @@
-app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', function($scope, GiphyService, ImdbService) {
+app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$http', function($scope, GiphyService, ImdbService, $http) {
 	$scope.firstName = "";
 	$scope.month = "";
 	$scope.day = "";
@@ -7,9 +7,10 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', fun
 	$scope.noGiphyError = true;
 	$scope.giphyError = "";
 	$scope.movies = [];
-	$scope.noMovie = true;
+	$scope.noMovies = true;
 	$scope.noMovieError = true;
 	$scope.movieError = "";
+	$scope.showMovie = false;
 
 	$scope.getGiphy = function() {
 		GiphyService.search($scope.firstName)
@@ -26,17 +27,18 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', fun
 	};
 
 	$scope.searchImdb = function() {
+		$scope.showMovie = false;
 		ImdbService.search($scope.firstName)
 		.then(function(obj) {
 			if(!obj.Error && obj.Search[0]!=undefined && obj.Search.length !== 0){
-				$scope.noMovie = false;
+				$scope.noMovies = false;
 				$scope.movies = [];
 				var objArr = obj.Search;
 				objArr.forEach(function(movie){
 					$scope.movies.push({'title': movie.Title, 'year': movie.Year, 'id': movie.imdbID});
 				});
 			} else {
-				$scope.noMovie = true;
+				$scope.noMovies = true;
 				$scope.noMovieError = false;
 				$scope.movieError = "Sorry, no movies for your name!"
 			};
@@ -46,7 +48,27 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', fun
 	$scope.searchAll = function() {
 		$scope.getGiphy();
 		$scope.searchImdb();
-	}
+	};
+
+
+	$scope.getMovieDetails = function(movie) {
+		$scope.noMovies = true;
+		$scope.details = {};
+		$scope.searchResults = true;
+		$scope.showMovie = true;
+		$http.get('http://www.omdbapi.com/?i=' + this.movie.id + "&tomatoes=true").then(function(object){
+			if(object.data.Error) {
+				$scope.noMovieError = false;
+				$scope.movieErr = "Sorry, no data available for this movie."
+			};
+			$scope.details = object.data;
+		},function(data){
+			if(data.status){
+				$scope.noMovieError = false;
+				$scope.movieErr = "Not able to get data";
+			};
+		});
+	};
 
 
 }]);

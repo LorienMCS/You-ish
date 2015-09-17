@@ -2,6 +2,10 @@
 	cursor: pointer;
 }
 
+li {
+	font-size: 1.2em;
+}
+
 .intro {
 	padding-bottom: 10px;
 	text-align: center;
@@ -114,4 +118,8 @@
 
 .new-section {
 	padding-top: 20px;
+}
+
+.panel-title, .panel-body {
+	font-size: 1.2em;
 }
