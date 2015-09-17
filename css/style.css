@@ -87,29 +87,28 @@ li {
 	box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
 }
 
-.giphy-button {
-	margin-left: 20px;
-	border-top: 1px solid #f24805;
-	background: #f06413;
-	padding: 10px 20px 8px;
-	-webkit-border-radius: 31px;
-	-moz-border-radius: 31px;
-	border-radius: 31px;
-	-webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-	-moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-	box-shadow: rgba(0,0,0,1) 0 1px 0;
-	text-shadow: rgba(0,0,0,.4) 0 1px 0;
-	color: white;
-	font-size: 14px;
-	font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
-	text-decoration: none;
-	vertical-align: middle;
+.giphy-btn {
+  border-top: 1px solid #1a665b;
+  background: #87edcd;
+  padding: 5px 10px;
+  border-radius: 11px 11px 11px 11px;
+	-moz-border-radius: 11px 11px 11px 11px;
+	-webkit-border-radius: 11px 11px 11px 11px;
+	border: 2px solid #172e26;
+	-webkit-box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
+	-moz-box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
+	box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
+  color: black;
+  font-size: 12px;
+  font-family: Helvetica, Arial, Sans-Serif;
+  text-decoration: none;
+  vertical-align: middle;
 }
 
-.giphy-button:hover {
-  border-top-color: #f57b29;
-  background: #f57b29;
-  color: #ffffff;
+.giphy-btn:hover {
+ 	border-top-color: #ffa861;
+  background: #ffa861;
+  color: #2A7E7D;
 }
 
 .new-section {
