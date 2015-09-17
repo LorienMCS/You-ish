@@ -3,24 +3,23 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 	$scope.month = "";
 	$scope.day = "";
 	$scope.giphy = "";
-	$scope.noGiphy = true;
-	$scope.noGiphyError = true;
+	$scope.showGiphy = false;
 	$scope.giphyError = "";
 	$scope.movies = [];
-	$scope.noMovies = true;
-	$scope.noMovieError = true;
-	$scope.movieError = "";
+	$scope.showMovies = false;
+	$scope.moviesError = "";
 	$scope.showMovie = false;
+	$scope.movieError = "";$scope.movieError = "";
 
 	$scope.getGiphy = function() {
 		GiphyService.search($scope.firstName)
 		.then(function(obj) {
 			if(obj.data[0]!=undefined && obj.data.length !== 0){
-				$scope.noGiphy = false;
+				$scope.showGiphy = true;
 				$scope.giphy = obj.data[0].images.fixed_height.url;
 			} else {
+				$scope.showGiphy = false;
 				$scope.noGiphy = true;
-				$scope.noGiphyError = false;
 				$scope.giphyError = "Sorry, no Giphy for your name!"
 			}
 		});
@@ -28,54 +27,47 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 
 	$scope.searchImdb = function() {
 		$scope.showMovie = false;
+		$scope.showMovies = true;
 		ImdbService.search($scope.firstName)
 		.then(function(obj) {
 			if(!obj.Error && obj.Search[0]!=undefined && obj.Search.length !== 0){
-				$scope.noMovies = false;
-				$scope.movies = [];
 				var objArr = obj.Search;
 				objArr.forEach(function(movie){
 					$scope.movies.push({'title': movie.Title, 'year': movie.Year, 'id': movie.imdbID});
 				});
 			} else {
-				$scope.noMovies = true;
-				$scope.noMovieError = false;
-				$scope.movieError = "Sorry, no movies for your name!"
+				$scope.moviesError = "Sorry, no movies for your name!"
 			};
 		});
 	};
 
 	$scope.searchAll = function() {
+		$scope.giphyError = "";
+		$scope.moviesError = "";
+		$scope.movieError = "";
+		$scope.movies = [];
+		$scope.showGiphy = false;
+		$scope.showMovies = false;
 		$scope.getGiphy();
 		$scope.searchImdb();
 	};
 
-
 	$scope.getMovieDetails = function(movie) {
-		$scope.noMovies = true;
 		$scope.details = {};
-		$scope.searchResults = true;
 		$scope.showMovie = true;
-		$http.get('http://www.omdbapi.com/?i=' + this.movie.id + "&tomatoes=true").then(function(object){
+		$http.get('http://www.omdbapi.com/?i=' + movie.id + "&tomatoes=true").then(function(object){
 			if(object.data.Error) {
-				$scope.noMovieError = false;
 				$scope.movieErr = "Sorry, no data available for this movie."
 			};
 			$scope.details = object.data;
 		},function(data){
 			if(data.status){
-				$scope.noMovieError = false;
 				$scope.movieErr = "Not able to get data";
 			};
 		});
 	};
 
-
 }]);
-
-
-
-
 
 
 

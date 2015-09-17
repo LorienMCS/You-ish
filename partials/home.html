@@ -54,13 +54,13 @@
 				<div class="row">
 			  	<h3 class="reverse">Your Name, Reversed: <span>{{firstName | reverse}}</span></h3>
 			  </div>
-			  <div class="row text-center" ng-hide="noGiphy">
+			  <div class="row text-center" ng-show="showGiphy">
 			  	<img ng-src="{{giphy}}" alt="giphy of {{firstName}}"/>
 			  </div>
-				<div class="row text-center" ng-hide="noGiphy">
-					<button class="btn giphy-button" name="hide-giphy" type="submit" ng-click="noGiphy=true">Enough Giphy, Please Hide</button>
+				<div class="row text-center" ng-show="showGiphy">
+					<button class="btn giphy-button" type="submit" ng-click="showGiphy=false">Had Enough Giphy? Click Here to Hide It</button>
 				</div>
-				<div class="row text-center" ng-hide="noGiphyError">
+				<div class="row text-center">
 					<h2 class="giphy-error">{{giphyError}}</h2>
 				<div>
 			</div>
@@ -76,26 +76,31 @@
 
 	<div class="col-md-12 new-section">
 
-		<!-- Initial movies search -->
-		<div class="row" ng-hide="noMovies">
+		<!-- Movies search -->
+		<div class="row" ng-show="showMovies">
+			<h2 class="movies-error">{{moviesError}}</h2>
 			<div ng-repeat="movie in movies track by $index">
 	    	<div class="col-md-6">
 	      	<div class="panel panel-default">
 	        	<div class="panel-heading">
 	          	<h3 class="panel-title">{{movie.title}}</h3>
 	        	</div>
-	      		<div class="panel-body">{{movie.year}}<span class="pull-right"><button class="btn btn-default btn-sm" name="find-movie" type="submit" ng-click="getMovieDetails()">Click for Details</button></span>
+	      		<div class="panel-body">{{movie.year}}<span class="pull-right"><button class="btn btn-default btn-sm" name="find-movie" type="submit" ng-click="getMovieDetails(movie)">Click for Details</button></span>
 	      		</div>
 	    		</div>
 	  		</div>
 	  	</div>
-	  	<div class="row text-center" ng-hide="noMovieError">
-				<h2 class="movie-error">{{movieError}}</h2>
-			<div>
 	  </div>
 
-	  <!-- Search on individual movie -->
+	</div><!-- Closing div for all movies section -->
+
+	<div class="clearfix"></div>
+
+	<div class="col-md-12 new-section">
+
+		<!-- Display individual movie -->
 	  <div class="row" ng-show="showMovie">
+	  <h2 class="movie-error">{{movieError}}</h2>
 	    <div class="col-md-6">
 	    	<div class="panel panel-default">
    				<div class="panel-heading">{{details.Title}}</div>
@@ -103,103 +108,42 @@
          		<p>{{details.Plot}}</p>
    				</div>
    				<ul class="list-group">
+   				  <li class="list-group-item"><strong>Director: </strong>{{details.Director}}</li>
       			<li class="list-group-item">Starring: {{details.Actors}}</li>
       			<li class="list-group-item">Awards: {{details.Awards}}</li>
       			<li class="list-group-item">Country: {{details.Country}}</li>
-      			<li class="list-group-item">Director: {{details.Director}}</li>
       			<li class="list-group-item">Genre: {{details.Genre}}</li>
       			<li class="list-group-item">Language: {{details.Language}}</li>
-      			<li class="list-group-item">Metascore: {{details.Metascore}}</li>
+      			<li class="list-group-item">Rated: {{details.Rated}}</li>
+      			<li class="list-group-item">Runtime: {{details.Runtime}}</li>
+      			<li class="list-group-item">Writer: {{details.Writer}}</li>
+      			<li class="list-group-item">Year: {{details.Year}}</li>
+      			<li class="list-group-item">imdb Rating: {{details.imdbRating}}</li>
+      			<li class="list-group-item">imdb Votes: {{details.imdbVotes}}</li>
    				</ul>
 				</div>
+			</div><!-- closing div for details section -->
+			<div class="col-md-6">
+				<div class="panel panel-default">
+			   	<div class="panel-heading">Rotten Tomatoes details for {{details.Title}}</div>
+			   	<ul class="list-group">
+			   		<li class="list-group-item">Tomato Consensus: {{details.tomatoConsensus}}</li>
+			      <li class="list-group-item">Tomato Fresh: {{details.tomatoFresh}}</li>
+			      <li class="list-group-item">Tomato Image: {{details.tomatoImage}}</li>
+			      <li class="list-group-item">Tomato Meter: {{details.tomatoMeter}}</li>
+			      <li class="list-group-item">Tomato Rating: {{details.tomatoRating}}</li>
+			      <li class="list-group-item">Tomato Reviews: {{details.tomatoReviews}}</li>
+			      <li class="list-group-item">Tomato Rotten: {{details.tomatoRotten}}</li>
+			      <li class="list-group-item">Tomato User Meter: {{details.tomatoUserMeter}}</li>
+			      <li class="list-group-item">Tomato User Rating: {{details.tomatoUserRating}}</li>
+			      <li class="list-group-item">Tomato User Reviews: {{details.tomatoUserReviews}}</li>
+			   	</ul>
+				</div>
+			</div><!-- closing div for Rotten Tomatoes section -->
+	  </div><!-- closing div for all details -->
 
+	</div><!-- Closing div for individual movie section -->
 
-	          <h5>Rated</h5>
-	          <p>{{details.Rated}}</p>
-	        </div>
-	        <div class="row">
-	          <h5>Released</h5>
-	          <p>{{details.Released}}</p>
-	        </div>
-	        <div class="row">
-	          <h5>Runtime</h5>
-	          <p>{{details.Runtime}}</p>
-	        </div>
-	        <div class="row">
-	          <h5>Writer</h5>
-	          <p>{{details.Writer}}</p>
-	        </div>
-	        <div class="row">
-	          <h5>Year</h5>
-	          <p>{{details.Year}}</p>
-	        </div>
-	        <div class="row">
-	          <h5>imdb Rating</h5>
-	          <p>{{details.imdbRating}}</p>
-	        </div>
-	        <div class="row">
-	          <h5>imdb Votes</h5>
-	          <p>{{details.imdbVotes}}</p>
-	        </div>
-	      </div><!-- closing div for details section -->
-	      <div class="row">
-	        <div class="row">
-	          <h4>Rotten Tomatoes Data</h4>
-	        </div>
-	        <div class="row">
-	              <h5>Tomato Consensus</h5>
-	              <p>{{details.tomatoConsensus}}</p>
-	            </div>
-	        <div class="row">
-	          <div class="col-md-6">
-	            <div class="row">
-	              <h5>Tomato Fresh</h5>
-	              <p>{{details.tomatoFresh}}</p>
-	            </div>
-	            <div class="row">
-	              <h5>Tomato Image</h5>
-	              <p>{{details.tomatoImage}}</p>
-	            </div>
-	            <div class="row">
-	              <h5>Tomato Meter</h5>
-	              <p>{{details.tomatoMeter}}</p>
-	            </div>
-	            <div class="row">
-	              <h5>Tomato Rating</h5>
-	              <p>{{details.tomatoRating}}</p>
-	            </div>
-	            <div class="row">
-	              <h5>Tomato Reviews</h5>
-	              <p>{{details.tomatoReviews}}</p>
-	            </div>
-	          </div>
-	          <div class="col-md-6">
-	            <div class="row">
-	              <h5>Tomato Rotten</h5>
-	              <p>{{details.tomatoRotten}}</p>
-	            </div>
-	            <div class="row">
-	              <h5>Tomato User Meter</h5>
-	              <p>{{details.tomatoUserMeter}}</p>
-	            </div>
-	            <div class="row">
-	              <h5>Tomato User Rating</h5>
-	              <p>{{details.tomatoUserRating}}</p>
-	            </div>
-	            <div class="row">
-	              <h5>Tomato User Reviews</h5>
-	              <p>{{details.tomatoUserReviews}}</p>
-	            </div>
-	          </div>
-	        </div>
-	      </div><!-- closing div for Tomatoes section -->
-	    </div><!-- closing div for all details inc poster -->
-	    <div class="row text-center" ng-hide="noMovieError">
-				<h2 class="movie-error">{{movieError}}</h2>
-			<div>
-	    <div class="col-md-2"></div>
-	  </div> <!-- closing div for movie section -->
-
-	</div><!-- Closing div for second section -->
+	<div class="clearfix"></div>
 
 </div><!-- closing div for controller -->
