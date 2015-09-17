@@ -4,6 +4,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 	$scope.day = "";
 	$scope.giphy = "";
 	$scope.showGiphy = false;
+	$scope.noGiphy = false;
 	$scope.giphyError = "";
 	$scope.movies = [];
 	$scope.showMovies = false;
@@ -19,10 +20,19 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 				$scope.giphy = obj.data[0].images.fixed_height.url;
 			} else {
 				$scope.showGiphy = false;
-				$scope.noGiphy = true;
 				$scope.giphyError = "Sorry, no Giphy for your name!"
 			}
 		});
+	};
+
+	$scope.toggleGiphy = function() {
+		if($scope.showGiphy) {
+			$scope.noGiphy = true;
+			$scope.showGiphy = false;
+		} else {
+			$scope.noGiphy = false;
+			$scope.showGiphy = true;
+		};
 	};
 
 	$scope.searchImdb = function() {
