@@ -6,6 +6,10 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 	$scope.showGiphy = false;
 	$scope.noGiphy = false;
 	$scope.giphyError = "";
+	$scope.births = [];
+	$scope.events = [];
+	$scope.showWiki = false;
+	$scope.wikiError = "";
 	$scope.movies = [];
 	$scope.showMovies = false;
 	$scope.moviesError = "";
@@ -36,11 +40,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 	};
 
 	$scope.getWiki = function() {
-		$scope.births = [];
-		$scope.birth = {};
-		$scope.events = [];
-		$scope.event = {};
-		// $scope.showWiki = true;
+		$scope.showWiki = true;
 		$http.jsonp('http://history.muffinlabs.com/date/' + $scope.month + '/' + $scope.day + '?callback=JSON_CALLBACK').then(function(obj){
 			if(obj.data.data.Births[0]!=undefined && obj.data.data.Births.length !== 0){
 				var birthArr = obj.data.data.Births;
@@ -54,13 +54,11 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 					$scope.events.push({'info': occasion.text, 'year': occasion.year});
 				});
 			};
-			console.log($scope.births);
-			console.log($scope.events);
 		 },function(data){
 			 	if(data.status){
-			 		console.log(data.status);
-		// 		$scope.showMovie = false;
-		// 		$scope.movieError = "Sorry, not able to get data";
+			 	console.log(data.status);
+		 		$scope.showWiki = false;
+		 		$scope.wikiError = "Sorry, not able to get data";
 		 		};
 		});
 	};
@@ -89,12 +87,9 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 		$scope.showGiphy = false;
 		$scope.noGiphy = false;
 		$scope.showMovies = false;
-		// $scope.getGiphy();
+		$scope.getGiphy();
 		$scope.getWiki();
-		// $scope.searchImdb();
-		$scope.firstName = "";
-		$scope.month = "";
-		$scope.day = "";
+		$scope.searchImdb();
 	};
 
 	$scope.getMovieDetails = function(movie) {

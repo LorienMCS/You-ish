@@ -82,8 +82,8 @@
 		<h2>{{wikiError}}</h2>
 		<div class="row" ng-show="showWiki">
 			<div class="col-md-6">
-			<h2>Some Other Notable People Born on {{month}}/{{day}}</h2>
-				<table class="table table-striped table-bordered">
+				<div class="text-center"><h3 class="header">Some Other Notable People Born on {{month}}/{{day}}</h2></div>
+				<table class="table table-striped">
 			  	<thead>
 			  		<tr>
 			  			<th>Year</th>
@@ -92,13 +92,29 @@
 			  	</thead>
 			  	<tbody>
 			  		<tr ng-repeat="birth in births">
-			  			<td>birth.year</td>
-							<td>birth.info</td>
+			  			<td>{{birth.year}}</td>
+							<td>{{birth.info}}s</td>
 			  		</tr>
 			  	</tbody>
 			  </table>
-
-
+			</div>
+			<div class="col-md-6">
+				<div class="text-center"><h3 class="header">Some Notable Events on {{month}}/{{day}}</h3></div>
+				<table class="table table-striped">
+			  	<thead>
+			  		<tr>
+			  			<th>Year</th>
+			  			<th>Information</th>
+			  		</tr>
+			  	</thead>
+			  	<tbody>
+			  		<tr ng-repeat="event in events">
+			  			<td>{{event.year}}</td>
+							<td>{{event.info}}s</td>
+			  		</tr>
+			  	</tbody>
+			  </table>
+			</div>
 		</div><!-- Closing div for showWiki -->
 	</div><!-- Closing div for entire Wiki section -->
 
@@ -108,6 +124,7 @@
 	<div class="col-md-12 new-section">
 		<!-- Movies search -->
 		<h2>{{moviesError}}</h2>
+		<div class="text-center" ng-show="showMovies"><h3 class="header">Some Movies and TV Shows With {{firstName}} In The Title</h2></div>
 		<div class="row" ng-show="showMovies">
 			<div ng-repeat="movie in movies track by $index">
 	    	<div class="col-md-6">
@@ -133,21 +150,21 @@
 	    	<div class="panel panel-default">
    				<div class="panel-heading">{{details.Title}}</div>
       		<div class="panel-body">
-         		<p>{{details.Plot}}</p>
+         		<p><strong>Plot: </strong>{{details.Plot}}</p>
    				</div>
    				<ul class="list-group">
    				  <li class="list-group-item"><strong>Director: </strong>{{details.Director}}</li>
-      			<li class="list-group-item">Starring: {{details.Actors}}</li>
-      			<li class="list-group-item">Awards: {{details.Awards}}</li>
-      			<li class="list-group-item">Country: {{details.Country}}</li>
-      			<li class="list-group-item">Genre: {{details.Genre}}</li>
-      			<li class="list-group-item">Language: {{details.Language}}</li>
-      			<li class="list-group-item">Rated: {{details.Rated}}</li>
-      			<li class="list-group-item">Runtime: {{details.Runtime}}</li>
-      			<li class="list-group-item">Writer: {{details.Writer}}</li>
-      			<li class="list-group-item">Year: {{details.Year}}</li>
-      			<li class="list-group-item">imdb Rating: {{details.imdbRating}}</li>
-      			<li class="list-group-item">imdb Votes: {{details.imdbVotes}}</li>
+      			<li class="list-group-item"><strong>Starring: </strong>{{details.Actors}}</li>
+      			<li class="list-group-item"><strong>Awards: </strong>{{details.Awards}}</li>
+      			<li class="list-group-item"><strong>Country: </strong>{{details.Country}}</li>
+      			<li class="list-group-item"><strong>Genre: </strong>{{details.Genre}}</li>
+      			<li class="list-group-item"><strong>Language: </strong>{{details.Language}}</li>
+      			<li class="list-group-item"><strong>Rated: </strong>{{details.Rated}}</li>
+      			<li class="list-group-item"><strong>Runtime: </strong>{{details.Runtime}}</li>
+      			<li class="list-group-item"><strong>Writer: </strong>{{details.Writer}}</li>
+      			<li class="list-group-item"><strong>Year: </strong>{{details.Year}}</li>
+      			<li class="list-group-item"><strong>imdb Rating: </strong>{{details.imdbRating}}</li>
+      			<li class="list-group-item"><strong>imdb Votes: </strong>{{details.imdbVotes}}</li>
    				</ul>
 				</div>
 			</div><!-- closing div for details section -->
@@ -155,15 +172,15 @@
 				<div class="panel panel-default">
 			   	<div class="panel-heading">Rotten Tomatoes details for {{details.Title}}</div>
 			   	<ul class="list-group">
-			   		<li class="list-group-item">Tomato Consensus: {{details.tomatoConsensus}}</li>
-			      <li class="list-group-item">Tomato Fresh: {{details.tomatoFresh}}</li>
-			      <li class="list-group-item">Tomato Meter: {{details.tomatoMeter}}</li>
-			      <li class="list-group-item">Tomato Rating: {{details.tomatoRating}}</li>
-			      <li class="list-group-item">Tomato Reviews: {{details.tomatoReviews}}</li>
-			      <li class="list-group-item">Tomato Rotten: {{details.tomatoRotten}}</li>
-			      <li class="list-group-item">Tomato User Meter: {{details.tomatoUserMeter}}</li>
-			      <li class="list-group-item">Tomato User Rating: {{details.tomatoUserRating}}</li>
-			      <li class="list-group-item">Tomato User Reviews: {{details.tomatoUserReviews}}</li>
+			   		<li class="list-group-item"><strong>Tomato Consensus: </strong>{{details.tomatoConsensus}}</li>
+			      <li class="list-group-item"><strong>Tomato Fresh: </strong>{{details.tomatoFresh}}</li>
+			      <li class="list-group-item"><strong>Tomato Rotten: </strong>{{details.tomatoRotten}}</li>
+			      <li class="list-group-item"><strong>Tomato Meter: </strong>{{details.tomatoMeter}}</li>
+			      <li class="list-group-item"><strong>Tomato Rating: </strong>{{details.tomatoRating}}</li>
+			      <li class="list-group-item"><strong>Tomato Reviews: </strong>{{details.tomatoReviews}}</li>
+			      <li class="list-group-item"><strong>Tomato User Meter: </strong>{{details.tomatoUserMeter}}</li>
+			      <li class="list-group-item"><strong>Tomato User Rating: </strong>{{details.tomatoUserRating}}</li>
+			      <li class="list-group-item"><strong>Tomato User Reviews: </strong>{{details.tomatoUserReviews}}</li>
 			   	</ul>
 				</div>
 			</div><!-- closing div for Rotten Tomatoes section -->

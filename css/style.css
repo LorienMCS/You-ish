@@ -77,11 +77,22 @@ li {
 
 .reverse {
 	background-color: #88D7CA;
-	padding: 5px 0 5px 10px;
+	border: 2px solid #172e26;
 	border-radius: 11px 11px 11px 11px;
 	-moz-border-radius: 11px 11px 11px 11px;
 	-webkit-border-radius: 11px 11px 11px 11px;
-	border: 2px solid #172e26;
+}
+
+.header {
+	background-color: #AFE4DC;
+	border: 2px ridge #172e26;
+	border-radius: 15px 15px 15px 15px;
+	-moz-border-radius: 15px 15px 15px 15px;
+	-webkit-border-radius: 15px 15px 15px 15px;
+}
+
+.reverse, .header {
+	padding: 5px 0 5px 10px;
 	-webkit-box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
 	-moz-box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
 	box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
