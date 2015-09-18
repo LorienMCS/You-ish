@@ -89,9 +89,9 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 		$scope.showGiphy = false;
 		$scope.noGiphy = false;
 		$scope.showMovies = false;
-		$scope.getGiphy();
+		// $scope.getGiphy();
 		$scope.getWiki();
-		$scope.searchImdb();
+		// $scope.searchImdb();
 		$scope.firstName = "";
 		$scope.month = "";
 		$scope.day = "";

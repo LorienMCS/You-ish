@@ -64,7 +64,7 @@
 					<button class="btn giphy-btn" type="submit" ng-click="toggleGiphy()">I Changed My Mind, Show Me The Giphy</button>
 				</div>
 				<div class="row text-center">
-					<h2 class="giphy-error">{{giphyError}}</h2>
+					<h2>{{giphyError}}</h2>
 				<div>
 			</div>
 
@@ -78,10 +78,37 @@
 	<div class="clearfix"></div>
 
 	<div class="col-md-12 new-section">
+		<!-- Wiki search -->
+		<h2>{{wikiError}}</h2>
+		<div class="row" ng-show="showWiki">
+			<div class="col-md-6">
+			<h2>Some Other Notable People Born on {{month}}/{{day}}</h2>
+				<table class="table table-striped table-bordered">
+			  	<thead>
+			  		<tr>
+			  			<th>Year</th>
+			  			<th>Information</th>
+			  		</tr>
+			  	</thead>
+			  	<tbody>
+			  		<tr ng-repeat="birth in births">
+			  			<td>birth.year</td>
+							<td>birth.info</td>
+			  		</tr>
+			  	</tbody>
+			  </table>
 
+
+		</div><!-- Closing div for showWiki -->
+	</div><!-- Closing div for entire Wiki section -->
+
+
+	<div class="clearfix"></div>
+
+	<div class="col-md-12 new-section">
 		<!-- Movies search -->
+		<h2>{{moviesError}}</h2>
 		<div class="row" ng-show="showMovies">
-			<h2 class="movies-error">{{moviesError}}</h2>
 			<div ng-repeat="movie in movies track by $index">
 	    	<div class="col-md-6">
 	      	<div class="panel panel-default">
@@ -100,8 +127,7 @@
 
 	<div class="col-md-12 new-section">
 		<!-- Display individual movie -->
-		<h2 class="movie-error">{{movieError}}</h2>
-
+		<h2>{{movieError}}</h2>
 	  <div class="row" ng-show="showMovie">
 	    <div class="col-md-6">
 	    	<div class="panel panel-default">
