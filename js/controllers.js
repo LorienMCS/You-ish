@@ -81,11 +81,15 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 
 	$scope.searchAll = function() {
 		$scope.giphyError = "";
+		$scope.wikiError = "";
 		$scope.moviesError = "";
 		$scope.movieError = "";
+		$scope.births = [];
+		$scope.events = [];
 		$scope.movies = [];
 		$scope.showGiphy = false;
 		$scope.noGiphy = false;
+		$scope.showWiki = false;
 		$scope.showMovies = false;
 		$scope.getGiphy();
 		$scope.getWiki();

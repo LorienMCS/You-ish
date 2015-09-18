@@ -1,6 +1,7 @@
 app.factory('GiphyService', ["$http", "$q", function($http, $q) {
   var GiphyService = {};
   var baseUrl = "http://api.giphy.com/v1/gifs/search?q=";
+  var rating = "&rating=g"
   var publicKey = "&api_key=dc6zaTOxFJmzC";
   var searchTerm = '';
 
@@ -17,7 +18,7 @@ app.factory('GiphyService', ["$http", "$q", function($http, $q) {
       GiphyService.setSearchTerm(term);
     }
 
-    var url = baseUrl + searchTerm + publicKey;
+    var url = baseUrl + searchTerm + rating + publicKey;
 
     var deferred = $q.defer();
 
