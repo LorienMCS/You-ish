@@ -94,16 +94,15 @@
 	  		</div>
 	  	</div>
 	  </div>
-
 	</div><!-- Closing div for all movies section -->
 
 	<div class="clearfix"></div>
 
 	<div class="col-md-12 new-section">
-
 		<!-- Display individual movie -->
+		<h2 class="movie-error">{{movieError}}</h2>
+
 	  <div class="row" ng-show="showMovie">
-	  <h2 class="movie-error">{{movieError}}</h2>
 	    <div class="col-md-6">
 	    	<div class="panel panel-default">
    				<div class="panel-heading">{{details.Title}}</div>
@@ -132,7 +131,6 @@
 			   	<ul class="list-group">
 			   		<li class="list-group-item">Tomato Consensus: {{details.tomatoConsensus}}</li>
 			      <li class="list-group-item">Tomato Fresh: {{details.tomatoFresh}}</li>
-			      <li class="list-group-item">Tomato Image: {{details.tomatoImage}}</li>
 			      <li class="list-group-item">Tomato Meter: {{details.tomatoMeter}}</li>
 			      <li class="list-group-item">Tomato Rating: {{details.tomatoRating}}</li>
 			      <li class="list-group-item">Tomato Reviews: {{details.tomatoReviews}}</li>

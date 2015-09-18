@@ -20,7 +20,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 				$scope.giphy = obj.data[0].images.fixed_height.url;
 			} else {
 				$scope.showGiphy = false;
-				$scope.giphyError = "Sorry, no Giphy for your name!"
+				$scope.giphyError = "Sorry, not able to get a Giphy!"
 			}
 		});
 	};
@@ -35,6 +35,36 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 		};
 	};
 
+	$scope.getWiki = function() {
+		$scope.births = [];
+		$scope.birth = {};
+		$scope.events = [];
+		$scope.event = {};
+		// $scope.showWiki = true;
+		$http.jsonp('http://history.muffinlabs.com/date/' + $scope.month + '/' + $scope.day + '?callback=JSON_CALLBACK').then(function(obj){
+			if(obj.data.data.Births[0]!=undefined && obj.data.data.Births.length !== 0){
+				var birthArr = obj.data.data.Births;
+				birthArr.forEach(function(birth){
+					$scope.births.push({'info': birth.text, 'year': birth.year});
+				});
+			};
+			if(obj.data.data.Events[0]!=undefined && obj.data.data.Events.length !== 0){
+				var eventArr = obj.data.data.Events;
+				eventArr.forEach(function(occasion){
+					$scope.events.push({'info': occasion.text, 'year': occasion.year});
+				});
+			};
+			console.log($scope.births);
+			console.log($scope.events);
+		 },function(data){
+			 	if(data.status){
+			 		console.log(data.status);
+		// 		$scope.showMovie = false;
+		// 		$scope.movieError = "Sorry, not able to get data";
+		 		};
+		});
+	};
+
 	$scope.searchImdb = function() {
 		$scope.showMovie = false;
 		$scope.showMovies = true;
@@ -46,7 +76,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 					$scope.movies.push({'title': movie.Title, 'year': movie.Year, 'id': movie.imdbID});
 				});
 			} else {
-				$scope.moviesError = "Sorry, no movies for your name!"
+				$scope.moviesError = "Sorry, not able to get movies!"
 			};
 		});
 	};
@@ -57,9 +87,14 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 		$scope.movieError = "";
 		$scope.movies = [];
 		$scope.showGiphy = false;
+		$scope.noGiphy = false;
 		$scope.showMovies = false;
 		$scope.getGiphy();
+		$scope.getWiki();
 		$scope.searchImdb();
+		$scope.firstName = "";
+		$scope.month = "";
+		$scope.day = "";
 	};
 
 	$scope.getMovieDetails = function(movie) {
@@ -67,12 +102,14 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 		$scope.showMovie = true;
 		$http.get('http://www.omdbapi.com/?i=' + movie.id + "&tomatoes=true").then(function(object){
 			if(object.data.Error) {
-				$scope.movieErr = "Sorry, no data available for this movie."
+				$scope.showMovie = false;
+				$scope.movieError = "Sorry, no data available for this movie."
 			};
 			$scope.details = object.data;
 		},function(data){
 			if(data.status){
-				$scope.movieErr = "Not able to get data";
+				$scope.showMovie = false;
+				$scope.movieError = "Sorry, not able to get data";
 			};
 		});
 	};
