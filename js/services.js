@@ -35,6 +35,41 @@ app.factory('GiphyService', ["$http", "$q", function($http, $q) {
 }]);
 
 
+app.factory('WaybackLAService', ["$http", "$q", function($http, $q) {
+  var WaybackLAService = {};
+  var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=latimes.com&timestamp=2005";
+  var searchTerm = '';
+
+  WaybackLAService.setSearchTerm = function(term) {
+    searchTerm = encodeURIComponent(term);
+  }
+
+  WaybackLAService.getSearchTerm = function() {
+    return decodeURIComponent(searchTerm);
+  }
+
+  WaybackLAService.search = function(term,cb) {
+    if (term !== undefined) {
+      WaybackLAService.setSearchTerm(term);
+    }
+
+    var url = baseUrl + searchTerm;
+
+    var deferred = $q.defer();
+
+    $http.jsonp(url).success(function(data) {
+      deferred.resolve(data);
+    }).error(function() {
+      deferred.reject("Cannot Get LA Times Wayback")
+    });
+
+    return deferred.promise;
+  }
+
+  return WaybackLAService;
+}]);
+
+
 app.factory('ImdbService', ["$http", "$q", function($http, $q) {
   var ImdbService = {};
   var baseUrl = "http://www.omdbapi.com/?s=";

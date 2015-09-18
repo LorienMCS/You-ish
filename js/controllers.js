@@ -1,4 +1,4 @@
-app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$http', function($scope, GiphyService, ImdbService, $http) {
+app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'ImdbService', '$http', '$sce', function($scope, GiphyService, WaybackLAService, ImdbService, $http, $sce) {
 	$scope.firstName = "";
 	$scope.month = "";
 	$scope.day = "";
@@ -10,11 +10,14 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 	$scope.events = [];
 	$scope.showWiki = false;
 	$scope.wikiError = "";
+	$scope.laTimes = "";
+	$scope.showLATimes = false;
+	$scope.latTimesError = "";
 	$scope.movies = [];
 	$scope.showMovies = false;
 	$scope.moviesError = "";
 	$scope.showMovie = false;
-	$scope.movieError = "";$scope.movieError = "";
+	$scope.movieError = "";
 
 	$scope.getGiphy = function() {
 		GiphyService.search($scope.firstName)
@@ -63,6 +66,23 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 		});
 	};
 
+	$scope.getLATimes = function() {
+		$scope.showLATimes = true;
+		var waybackObj = {};
+		var date = $scope.month + $scope.day;
+		WaybackLAService.search(date)
+		.then(function(obj) {
+			waybackObj = obj.archived_snapshots.closest;
+			if(waybackObj!=undefined && waybackObj.available){
+				$scope.laTimes = $sce.trustAsResourceUrl(waybackObj.url);
+				console.log($scope.laTimes);
+			} else {
+				$scope.showLATimes = false;
+				$scope.laTimesError = "Sorry, not able to get data"
+			};
+		});
+	}
+
 	$scope.searchImdb = function() {
 		$scope.showMovie = false;
 		$scope.showMovies = true;
@@ -74,6 +94,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 					$scope.movies.push({'title': movie.Title, 'year': movie.Year, 'id': movie.imdbID});
 				});
 			} else {
+				$scope.showMovies = false;
 				$scope.moviesError = "Sorry, not able to get movies!"
 			};
 		});
@@ -82,6 +103,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 	$scope.searchAll = function() {
 		$scope.giphyError = "";
 		$scope.wikiError = "";
+		$scope.laTimesError = "";
 		$scope.moviesError = "";
 		$scope.movieError = "";
 		$scope.births = [];
@@ -90,10 +112,12 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'ImdbService', '$h
 		$scope.showGiphy = false;
 		$scope.noGiphy = false;
 		$scope.showWiki = false;
+		$scope.showLATimes = false;
 		$scope.showMovies = false;
-		$scope.getGiphy();
+		// $scope.getGiphy();
 		$scope.getWiki();
-		$scope.searchImdb();
+		$scope.getLATimes();
+		// $scope.searchImdb();
 	};
 
 	$scope.getMovieDetails = function(movie) {

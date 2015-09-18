@@ -2,6 +2,14 @@
 	cursor: pointer;
 }
 
+body {
+    background: url('../images/sm-bkgrnd.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 .panel-heading {
 	font-size: 1.2em;
 }
@@ -128,4 +136,17 @@ li {
 
 .panel-title, .panel-body {
 	font-size: 1.2em;
+}
+
+.la-frame {
+	height: 800px;
+	background-color: #DDDEF4;
+	padding: 5px;
+	border-radius: 24px 24px 24px 24px;
+	-moz-border-radius: 24px 24px 24px 24px;
+	-webkit-border-radius: 24px 24px 24px 24px;
+	border: 4px ridge #172e26;
+	-webkit-box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
+	-moz-box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
+	box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
 }
