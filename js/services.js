@@ -70,6 +70,41 @@ app.factory('WaybackLAService', ["$http", "$q", function($http, $q) {
 }]);
 
 
+app.factory('WaybackRSService', ["$http", "$q", function($http, $q) {
+  var WaybackRSService = {};
+  var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=rollingstone.com&timestamp=2005";
+  var searchTerm = '';
+
+  WaybackRSService.setSearchTerm = function(term) {
+    searchTerm = encodeURIComponent(term);
+  }
+
+  WaybackRSService.getSearchTerm = function() {
+    return decodeURIComponent(searchTerm);
+  }
+
+  WaybackRSService.search = function(term,cb) {
+    if (term !== undefined) {
+      WaybackRSService.setSearchTerm(term);
+    }
+
+    var url = baseUrl + searchTerm;
+
+    var deferred = $q.defer();
+
+    $http.jsonp(url).success(function(data) {
+      deferred.resolve(data);
+    }).error(function() {
+      deferred.reject("Cannot Get Rolling Stone Wayback")
+    });
+
+    return deferred.promise;
+  }
+
+  return WaybackRSService;
+}]);
+
+
 app.factory('ImdbService', ["$http", "$q", function($http, $q) {
   var ImdbService = {};
   var baseUrl = "http://www.omdbapi.com/?s=";

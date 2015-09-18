@@ -139,6 +139,7 @@ li {
 }
 
 .la-frame {
+	margin-bottom: 10px;
 	height: 800px;
 	background-color: #DDDEF4;
 	padding: 5px;

@@ -127,6 +127,17 @@
 						<iframe width="100%" height="650px" ng-src="{{laTimes}}"></iframe>
 					</div>
 				</div>
+				<div class="row la-frame">
+					<h2>{{rollingError}}</h2>
+					<div ng-show="showRolling">
+						<div class="text-center">
+							<h3>Website for Rolling Stone From {{month}}/{{day}}/05<h3>
+							<h4>(Or nearest available date)</h4>
+							<h5>(Not all website elements may be available)</h5>
+						</div>
+						<iframe width="100%" height="650px" ng-src="{{rollingStone}}"></iframe>
+					</div>
+				</div>
 			</div>
 		</div><!-- Closing div for showWiki -->
 	</div><!-- Closing div for entire Wiki section -->

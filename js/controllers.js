@@ -1,4 +1,4 @@
-app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'ImdbService', '$http', '$sce', function($scope, GiphyService, WaybackLAService, ImdbService, $http, $sce) {
+app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'WaybackRSService', 'ImdbService', '$http', '$sce', function($scope, GiphyService, WaybackLAService, WaybackRSService, ImdbService, $http, $sce) {
 	$scope.firstName = "";
 	$scope.month = "";
 	$scope.day = "";
@@ -13,6 +13,9 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 	$scope.laTimes = "";
 	$scope.showLATimes = false;
 	$scope.latTimesError = "";
+	$scope.rollingStone = "";
+	$scope.showRolling = false;
+	$scope.rollingError = "";
 	$scope.movies = [];
 	$scope.showMovies = false;
 	$scope.moviesError = "";
@@ -81,7 +84,23 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 				$scope.laTimesError = "Sorry, not able to get data"
 			};
 		});
-	}
+	};
+
+	$scope.getRollingStone = function() {
+		$scope.showRolling = true;
+		var waybackObj = {};
+		var date = $scope.month + $scope.day;
+		WaybackRSService.search(date)
+		.then(function(obj) {
+			waybackObj = obj.archived_snapshots.closest;
+			if(waybackObj!=undefined && waybackObj.available){
+				$scope.rollingStone = $sce.trustAsResourceUrl(waybackObj.url);
+			} else {
+				$scope.showRolling = false;
+				$scope.rollingError = "Sorry, not able to get data"
+			};
+		});
+	};
 
 	$scope.searchImdb = function() {
 		$scope.showMovie = false;
@@ -104,6 +123,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		$scope.giphyError = "";
 		$scope.wikiError = "";
 		$scope.laTimesError = "";
+		$scope.rollingError = "";
 		$scope.moviesError = "";
 		$scope.movieError = "";
 		$scope.births = [];
@@ -113,10 +133,12 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		$scope.noGiphy = false;
 		$scope.showWiki = false;
 		$scope.showLATimes = false;
+		$scope.showRolling = false;
 		$scope.showMovies = false;
 		// $scope.getGiphy();
 		$scope.getWiki();
 		$scope.getLATimes();
+		$scope.getRollingStone();
 		// $scope.searchImdb();
 	};
 
