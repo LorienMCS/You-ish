@@ -105,6 +105,41 @@ app.factory('WaybackRSService', ["$http", "$q", function($http, $q) {
 }]);
 
 
+app.factory('WaybackIMDbService', ["$http", "$q", function($http, $q) {
+  var WaybackIMDbService = {};
+  var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=imdb.com&timestamp=2005";
+  var searchTerm = '';
+
+  WaybackIMDbService.setSearchTerm = function(term) {
+    searchTerm = encodeURIComponent(term);
+  }
+
+  WaybackIMDbService.getSearchTerm = function() {
+    return decodeURIComponent(searchTerm);
+  }
+
+  WaybackIMDbService.search = function(term,cb) {
+    if (term !== undefined) {
+      WaybackIMDbService.setSearchTerm(term);
+    }
+
+    var url = baseUrl + searchTerm;
+
+    var deferred = $q.defer();
+
+    $http.jsonp(url).success(function(data) {
+      deferred.resolve(data);
+    }).error(function() {
+      deferred.reject("Cannot Get BBC Wayback")
+    });
+
+    return deferred.promise;
+  }
+
+  return WaybackIMDbService;
+}]);
+
+
 app.factory('ImdbService', ["$http", "$q", function($http, $q) {
   var ImdbService = {};
   var baseUrl = "http://www.omdbapi.com/?s=";

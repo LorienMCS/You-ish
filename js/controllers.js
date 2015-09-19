@@ -1,4 +1,4 @@
-app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'WaybackRSService', 'ImdbService', '$http', '$sce', function($scope, GiphyService, WaybackLAService, WaybackRSService, ImdbService, $http, $sce) {
+app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'WaybackRSService', 'WaybackIMDbService', 'ImdbService', '$http', '$sce', '$timeout', function($scope, GiphyService, WaybackLAService, WaybackRSService, WaybackIMDbService, ImdbService, $http, $sce, $timeout) {
 	$scope.firstName = "";
 	$scope.month = "";
 	$scope.day = "";
@@ -16,6 +16,9 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 	$scope.rollingStone = "";
 	$scope.showRolling = false;
 	$scope.rollingError = "";
+	$scope.imdb = "";
+	$scope.showImdb = false;
+	$scope.imdbError = "";
 	$scope.movies = [];
 	$scope.showMovies = false;
 	$scope.moviesError = "";
@@ -78,7 +81,6 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 			waybackObj = obj.archived_snapshots.closest;
 			if(waybackObj!=undefined && waybackObj.available){
 				$scope.laTimes = $sce.trustAsResourceUrl(waybackObj.url);
-				console.log($scope.laTimes);
 			} else {
 				$scope.showLATimes = false;
 				$scope.laTimesError = "Sorry, not able to get data"
@@ -98,6 +100,23 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 			} else {
 				$scope.showRolling = false;
 				$scope.rollingError = "Sorry, not able to get data"
+			};
+		});
+	};
+
+	$scope.getIMDb = function() {
+		$scope.showImdb = true;
+		var waybackObj = {};
+		var date = $scope.month + $scope.day;
+		WaybackIMDbService.search(date)
+		.then(function(obj) {
+			waybackObj = obj.archived_snapshots.closest;
+			if(waybackObj!=undefined && waybackObj.available){
+				console.log(waybackObj.url);
+				$scope.bbc = $sce.trustAsResourceUrl(waybackObj.url);
+			} else {
+				$scope.showImdb = false;
+				$scope.imdbError = "Sorry, not able to get data"
 			};
 		});
 	};
@@ -124,6 +143,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		$scope.wikiError = "";
 		$scope.laTimesError = "";
 		$scope.rollingError = "";
+		$scope.imbdError = "";
 		$scope.moviesError = "";
 		$scope.movieError = "";
 		$scope.births = [];
@@ -134,12 +154,14 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		$scope.showWiki = false;
 		$scope.showLATimes = false;
 		$scope.showRolling = false;
+		$scope.showImdb = false;
 		$scope.showMovies = false;
-		// $scope.getGiphy();
+		$scope.getGiphy();
 		$scope.getWiki();
 		$scope.getLATimes();
-		$scope.getRollingStone();
-		// $scope.searchImdb();
+		$timeout( function(){ $scope.getRollingStone(); }, 3000);
+		$timeout( function(){ $scope.getIMDb(); }, 6000);
+		$scope.searchImdb();
 	};
 
 	$scope.getMovieDetails = function(movie) {
