@@ -113,7 +113,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 			waybackObj = obj.archived_snapshots.closest;
 			if(waybackObj!=undefined && waybackObj.available){
 				console.log(waybackObj.url);
-				$scope.bbc = $sce.trustAsResourceUrl(waybackObj.url);
+				$scope.imdb = $sce.trustAsResourceUrl(waybackObj.url);
 			} else {
 				$scope.showImdb = false;
 				$scope.imdbError = "Sorry, not able to get data"

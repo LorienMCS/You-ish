@@ -138,6 +138,42 @@ li {
 	font-size: 1.2em;
 }
 
+.births-animate.ng-enter {
+  -webkit-animation:leftSlideIn 1s both ease-in;
+	-moz-animation:leftSlideIn 1s both ease-in;
+	animation:leftSlideIn 1s both ease-in;
+}
+@-webkit-keyframes leftSlideIn {
+	from 	{ -webkit-transform:translateX(-100%); }
+	to 		{ -webkit-transform: translateX(0%); }
+}
+@-moz-keyframes leftSlideIn {
+	from 	{ -moz-transform:translateX(-100%); }
+	to 		{ -moz-transform: translateX(0%); }
+}
+@keyframes leftSlideIn {
+	from 	{ transform:translateX(-100%); }
+	to 		{ transform: translateX(0%); }
+}
+
+.events-animate.ng-enter {
+  -webkit-animation:rightSlideIn 1s both ease-in;
+	-moz-animation:rightSlideIn 1s both ease-in;
+	animation:rightSlideIn 1s both ease-in;
+}
+@-webkit-keyframes rightSlideIn {
+	from 	{ -webkit-transform:translateX(100%); }
+	to 		{ -webkit-transform: translateX(0%); }
+}
+@-moz-keyframes rightSlideIn {
+	from 	{ -moz-transform:translateX(100%); }
+	to 		{ -moz-transform: translateX(0%); }
+}
+@keyframes rightSlideIn {
+	from 	{ transform:translateX(100%); }
+	to 		{ transform: translateX(0%); }
+}
+
 .la-frame {
 	margin-bottom: 10px;
 	height: 800px;
