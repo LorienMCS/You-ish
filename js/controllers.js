@@ -65,7 +65,6 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 			};
 		 },function(data){
 			 	if(data.status){
-			 	console.log(data.status);
 		 		$scope.showWiki = false;
 		 		$scope.wikiError = "Sorry, not able to get data";
 		 		};
@@ -112,7 +111,6 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		.then(function(obj) {
 			waybackObj = obj.archived_snapshots.closest;
 			if(waybackObj!=undefined && waybackObj.available){
-				console.log(waybackObj.url);
 				$scope.imdb = $sce.trustAsResourceUrl(waybackObj.url);
 			} else {
 				$scope.showImdb = false;

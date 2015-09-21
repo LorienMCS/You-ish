@@ -130,7 +130,7 @@ app.factory('WaybackIMDbService', ["$http", "$q", function($http, $q) {
     $http.jsonp(url).success(function(data) {
       deferred.resolve(data);
     }).error(function() {
-      deferred.reject("Cannot Get BBC Wayback")
+      deferred.reject("Cannot Get IMDb Wayback")
     });
 
     return deferred.promise;
