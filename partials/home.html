@@ -81,7 +81,7 @@
 		<!-- Wiki search -->
 		<div class="row" ng-show="showWiki">
 			<div class="col-md-6">
-				<div class="text-center"><h3 class="header">Some Other Notable People Born on {{month}}/{{day}}</h2></div>
+				<div class="text-center"><h3 class="header">Some Other Notable People Born on {{month}}/{{day}}</h3></div>
 				<h2>{{wikiError}}</h2>
 				<table class="table">
 			  	<thead>
@@ -117,39 +117,6 @@
 				  	</tbody>
 				  </table>
 				</div>
-				<div class="row la-frame">
-					<div ng-show="showLATimes">
-						<div class="text-center">
-							<h2>{{laTimesError}}</h2>
-							<h3>Website for the LA Times From {{month}}/{{day}}/05<h3>
-							<h4>(Or nearest available date)</h4>
-							<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
-						</div>
-						<iframe width="100%" height="610px" ng-src="{{laTimes}}"></iframe>
-					</div>
-				</div>
-				<div class="row la-frame">
-					<div ng-show="showRolling">
-						<div class="text-center">
-							<h2>{{rollingError}}</h2>
-							<h3>Website for Rolling Stone From {{month}}/{{day}}/05<h3>
-							<h4>(Or nearest available date)</h4>
-							<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
-						</div>
-						<iframe width="100%" height="610px" ng-src="{{rollingStone}}"></iframe>
-					</div>
-				</div>
-				<div class="row la-frame">
-					<div ng-show="showImdb">
-						<div class="text-center">
-							<h2>{{imdbError}}</h2>
-							<h3>Website for IMDb From {{month}}/{{day}}/05<h3>
-							<h4>(Or nearest available date)</h4>
-							<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
-						</div>
-						<iframe width="100%" height="610px" ng-src="{{imdb}}"></iframe>
-					</div>
-				</div>
 				<!-- Songs search -->
 				<div class="clearfix"></div>
 				<div class="row">
@@ -157,19 +124,43 @@
 					<div class="row" ng-show="showITunes">
 						<h2>{{iTunesError}}</h2>
 						<div ng-repeat="song in songs track by $index">
-					  	<div class="panel panel-default">
+					  	<div class="panel panel-default song-data">
 					    	<div class="panel-heading">
 					      	<h3 class="panel-title">{{song.title}}</h3>
 					    	</div>
-					  		<div class="panel-body">{{song.artist}}<span class="pull-right"><button class="btn btn-default btn-sm" name="find-song" type="submit" ng-click="">Find on iTunes</button></span>
+					  		<div class="panel-body">
+					  			<div class="row">
+									  <div class="col-md-3"><img ng-src="{{song.image}}" alt="photo of {{song.title}}" class="img-responsive" class="song-img"/></div>
+									  <div class="col-md-9">
+									  	<div class="row">
+									  		<strong>Artist: </strong>{{song.artist}}
+									  	</div>
+									  	<div class="row">
+									  		<strong>Album: </strong>{{song.album}}
+									  	</div>
+									  </div>
+									</div>
+									<div class="row">
+									  <div class="col-md-4">
+									  	<audio id="{{song.id}}" ng-src="{{song.preview}}"></audio>
+					  					<button class="btn btn-default btn-sm" name="play-song" ng-click="play(song)">Play Song Preview</button>
+					  				</div>
+									  <div class="col-md-4">
+									  	<button class="btn btn-default btn-sm" name="pause-song" ng-click="pause(song)">Pause Song Preview</button>
+									  </div>
+									  <div class="col-md-4">
+									  	<a href="{{song.itunes}}" target="_blank">
+											<img ng-src="images/iTunes_Badge.png" width="90" height="30" alt="Link to iTunes" /></a>
+										</div>
+									</div>
 					  		</div>
 							</div>
 				  	</div>
 				  </div>
 	  		</div>
 			</div>
-		</div><!-- Closing div for showWiki -->
-	</div><!-- Closing div for entire Wiki section -->
+		</div>
+	</div><!-- Closing div for second section -->
 
 	<div class="clearfix"></div>
 
@@ -241,5 +232,38 @@
 	</div><!-- Closing div for individual movie section -->
 
 	<div class="clearfix"></div>
+
+	<!-- Wayback Machine search -->
+
+	<div class="col-md-12 new-section">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10 wayback-frame" ng-show="showLATimes">
+				<div class="text-center">
+					<h2>{{laTimesError}}</h2>
+					<h3>Website for the LA Times From {{month}}/{{day}}/05<h3>
+					<h4>(Or nearest available date)</h4>
+					<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
+				</div>
+				<iframe width="100%" height="700px" ng-src="{{laTimes}}"></iframe>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	</div><!-- Closing div for Wayback LA Times section -->
+
+	<div class="col-md-12 new-section">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10 wayback-frame" ng-show="showImdb">
+				<div class="text-center">
+					<h2>{{imdbError}}</h2>
+					<h3>Website for IMDb From {{month}}/{{day}}/05<h3>
+					<h4>(Or nearest available date)</h4>
+					<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
+				</div>
+				<iframe width="100%" height="700px" ng-src="{{imdb}}"></iframe>
+			</div>
+		</div>
+	</div><!-- Closing div for Wayback IMDb section -->
 
 </div><!-- closing div for controller -->

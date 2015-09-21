@@ -1,4 +1,4 @@
-app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'WaybackRSService', 'WaybackIMDbService', 'ITunesService', 'ImdbService', '$http', '$sce', '$timeout', function($scope, GiphyService, WaybackLAService, WaybackRSService, WaybackIMDbService, ITunesService, ImdbService, $http, $sce, $timeout) {
+app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'WaybackIMDbService', 'ITunesService', 'ImdbService', '$http', '$sce', '$timeout', function($scope, GiphyService, WaybackLAService, WaybackIMDbService, ITunesService, ImdbService, $http, $sce, $timeout) {
 	$scope.firstName = "";
 	$scope.month = "";
 	$scope.day = "";
@@ -13,9 +13,6 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 	$scope.laTimes = "";
 	$scope.showLATimes = false;
 	$scope.latTimesError = "";
-	$scope.rollingStone = "";
-	$scope.showRolling = false;
-	$scope.rollingError = "";
 	$scope.imdb = "";
 	$scope.showImdb = false;
 	$scope.imdbError = "";
@@ -90,22 +87,6 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		});
 	};
 
-	$scope.getRollingStone = function() {
-		$scope.showRolling = true;
-		var waybackObj = {};
-		var date = $scope.month + $scope.day;
-		WaybackRSService.search(date)
-		.then(function(obj) {
-			waybackObj = obj.archived_snapshots.closest;
-			if(waybackObj!=undefined && waybackObj.available){
-				$scope.rollingStone = $sce.trustAsResourceUrl(waybackObj.url);
-				waybackObj = {};
-			} else {
-				$scope.rollingError = "Sorry, not able to get Rolling Stones website"
-			};
-		});
-	};
-
 	$scope.getIMDb = function() {
 		$scope.showImdb = true;
 		var waybackObj = {};
@@ -129,12 +110,23 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 			if(obj.results.length!==0){
 				var objArr = obj.results;
 				objArr.forEach(function(song){
-					$scope.songs.push({'artist': song.artistName, 'title': song.trackName, 'album': song.collectionName, 'image': song.artworkUrl100, 'date': song.releaseDate, 'song': song.previewUrl, 'itunes': song.trackViewUrl});
+					$scope.songs.push({'artist': song.artistName, 'title': song.trackName, 'album': song.collectionName, 'image': song.artworkUrl100, 'date': song.releaseDate, 'id': song.trackId, 'preview': $sce.trustAsResourceUrl(song.previewUrl), 'itunes': song.trackViewUrl});
 				});
 			} else {
 			 	$scope.iTunesError = "Sorry, not able to get songs"
 		 	};
 		});
+	};
+
+	$scope.play = function(song) {
+		$scope.songs.forEach(function(otherSong){
+			$scope.pause(otherSong);
+		});
+		document.getElementById(song.id).play();
+	};
+
+	$scope.pause = function(song) {
+		document.getElementById(song.id).pause();
 	};
 
 	$scope.searchImdb = function() {
@@ -168,14 +160,13 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		$scope.noGiphy = false;
 		$scope.showWiki = false;
 		$scope.showLATimes = false;
-		$scope.showRolling = false;
+		$scope.showITunes = false;
 		$scope.showImdb = false;
 		$scope.showMovies = false;
 		$scope.getGiphy();
 		$scope.getWiki();
 		$scope.getLATimes();
-		$timeout( function(){ $scope.getRollingStone(); }, 3000);
-		$timeout( function(){ $scope.getIMDb(); }, 6000);
+		$timeout( function(){ $scope.getIMDb(); }, 3000);
 		$scope.searchITunes();
 		$scope.searchImdb();
 	};

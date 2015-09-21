@@ -37,7 +37,7 @@ app.factory('GiphyService', ["$http", "$q", function($http, $q) {
 
 app.factory('WaybackLAService', ["$http", "$q", function($http, $q) {
   var WaybackLAService = {};
-  var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=latimes.com&timestamp=2005";
+  var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=latimes.coppm&timestamp=2005";
   var searchTerm = '';
 
   WaybackLAService.setSearchTerm = function(term) {
@@ -70,44 +70,9 @@ app.factory('WaybackLAService', ["$http", "$q", function($http, $q) {
 }]);
 
 
-app.factory('WaybackRSService', ["$http", "$q", function($http, $q) {
-  var WaybackRSService = {};
-  var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=rollingstone.com&timestamp=2005";
-  var searchTerm = '';
-
-  WaybackRSService.setSearchTerm = function(term) {
-    searchTerm = encodeURIComponent(term);
-  }
-
-  WaybackRSService.getSearchTerm = function() {
-    return decodeURIComponent(searchTerm);
-  }
-
-  WaybackRSService.search = function(term,cb) {
-    if (term !== undefined) {
-      WaybackRSService.setSearchTerm(term);
-    }
-
-    var url = baseUrl + searchTerm;
-
-    var deferred = $q.defer();
-
-    $http.jsonp(url).success(function(data) {
-      deferred.resolve(data);
-    }).error(function() {
-      deferred.reject("Cannot Get Rolling Stones Website");
-    });
-
-    return deferred.promise;
-  }
-
-  return WaybackRSService;
-}]);
-
-
 app.factory('WaybackIMDbService', ["$http", "$q", function($http, $q) {
   var WaybackIMDbService = {};
-  var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=imdb.com&timestamp=2005";
+  var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=imdb.coppppm&timestamp=2005";
   var searchTerm = '';
 
   WaybackIMDbService.setSearchTerm = function(term) {
@@ -137,41 +102,6 @@ app.factory('WaybackIMDbService', ["$http", "$q", function($http, $q) {
   }
 
   return WaybackIMDbService;
-}]);
-
-
-app.factory('ImdbService', ["$http", "$q", function($http, $q) {
-  var ImdbService = {};
-  var baseUrl = "http://www.omdbapi.com/?s=";
-  var searchTerm = '';
-
-  ImdbService.setSearchTerm = function(term) {
-    searchTerm = encodeURIComponent(term);
-  }
-
-  ImdbService.getSearchTerm = function() {
-    return decodeURIComponent(searchTerm);
-  }
-
-  ImdbService.search = function(term,cb) {
-    if (term !== undefined) {
-      ImdbService.setSearchTerm(term);
-    }
-
-    var url = baseUrl + searchTerm;
-
-    var deferred = $q.defer();
-
-    $http.get(url).success(function(data) {
-      deferred.resolve(data);
-    }).error(function() {
-      deferred.reject("Cannot Get Movies")
-    });
-
-    return deferred.promise;
-  }
-
-  return ImdbService;
 }]);
 
 
@@ -208,4 +138,39 @@ app.factory('ITunesService', ["$http", "$q", function($http, $q) {
   }
 
   return ITunesService;
+}]);
+
+
+app.factory('ImdbService', ["$http", "$q", function($http, $q) {
+  var ImdbService = {};
+  var baseUrl = "http://www.omdbapi.com/?s=";
+  var searchTerm = '';
+
+  ImdbService.setSearchTerm = function(term) {
+    searchTerm = encodeURIComponent(term);
+  }
+
+  ImdbService.getSearchTerm = function() {
+    return decodeURIComponent(searchTerm);
+  }
+
+  ImdbService.search = function(term,cb) {
+    if (term !== undefined) {
+      ImdbService.setSearchTerm(term);
+    }
+
+    var url = baseUrl + searchTerm;
+
+    var deferred = $q.defer();
+
+    $http.get(url).success(function(data) {
+      deferred.resolve(data);
+    }).error(function() {
+      deferred.reject("Cannot Get Movies")
+    });
+
+    return deferred.promise;
+  }
+
+  return ImdbService;
 }]);

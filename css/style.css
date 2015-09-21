@@ -174,9 +174,9 @@ li {
 	to 		{ transform: translateX(0%); }
 }
 
-.la-frame {
+.wayback-frame {
 	margin-bottom: 10px;
-	height: 800px;
+	height: 890px;
 	background-color: #DDDEF4;
 	padding: 5px;
 	border-radius: 24px 24px 24px 24px;
@@ -186,4 +186,12 @@ li {
 	-webkit-box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
 	-moz-box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
 	box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
+}
+
+.song-data {
+	padding-right: 5px;
+}
+
+.song-img {
+	height: 90px;
 }
