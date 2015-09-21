@@ -79,10 +79,10 @@
 
 	<div class="col-md-12 new-section">
 		<!-- Wiki search -->
-		<h2>{{wikiError}}</h2>
 		<div class="row" ng-show="showWiki">
 			<div class="col-md-6">
 				<div class="text-center"><h3 class="header">Some Other Notable People Born on {{month}}/{{day}}</h2></div>
+				<h2>{{wikiError}}</h2>
 				<table class="table">
 			  	<thead>
 			  		<tr>
@@ -101,6 +101,7 @@
 			<div class="col-md-6">
 				<div class="row">
 					<div class="text-center"><h3 class="header">Some Notable Events on {{month}}/{{day}}</h3></div>
+					<h2>{{wikiError}}</h2>
 					<table class="table">
 				  	<thead>
 				  		<tr>
@@ -117,49 +118,65 @@
 				  </table>
 				</div>
 				<div class="row la-frame">
-					<h2>{{laTimesError}}</h2>
 					<div ng-show="showLATimes">
 						<div class="text-center">
+							<h2>{{laTimesError}}</h2>
 							<h3>Website for the LA Times From {{month}}/{{day}}/05<h3>
 							<h4>(Or nearest available date)</h4>
 							<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
 						</div>
-						<iframe width="100%" height="650px" ng-src="{{laTimes}}"></iframe>
+						<iframe width="100%" height="610px" ng-src="{{laTimes}}"></iframe>
 					</div>
 				</div>
 				<div class="row la-frame">
-					<h2>{{rollingError}}</h2>
 					<div ng-show="showRolling">
 						<div class="text-center">
+							<h2>{{rollingError}}</h2>
 							<h3>Website for Rolling Stone From {{month}}/{{day}}/05<h3>
 							<h4>(Or nearest available date)</h4>
 							<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
 						</div>
-						<iframe width="100%" height="650px" ng-src="{{rollingStone}}"></iframe>
+						<iframe width="100%" height="610px" ng-src="{{rollingStone}}"></iframe>
 					</div>
 				</div>
 				<div class="row la-frame">
-					<h2>{{imdbError}}</h2>
 					<div ng-show="showImdb">
 						<div class="text-center">
+							<h2>{{imdbError}}</h2>
 							<h3>Website for IMDb From {{month}}/{{day}}/05<h3>
 							<h4>(Or nearest available date)</h4>
 							<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
 						</div>
-						<iframe width="100%" height="650px" ng-src="{{imdb}}"></iframe>
+						<iframe width="100%" height="610px" ng-src="{{imdb}}"></iframe>
 					</div>
 				</div>
+				<!-- Songs search -->
+				<div class="clearfix"></div>
+				<div class="row">
+					<div class="text-center" ng-show="showITunes"><h3 class="header">Some Songs With {{firstName}} In The Title</h3></div>
+					<div class="row" ng-show="showITunes">
+						<h2>{{iTunesError}}</h2>
+						<div ng-repeat="song in songs track by $index">
+					  	<div class="panel panel-default">
+					    	<div class="panel-heading">
+					      	<h3 class="panel-title">{{song.title}}</h3>
+					    	</div>
+					  		<div class="panel-body">{{song.artist}}<span class="pull-right"><button class="btn btn-default btn-sm" name="find-song" type="submit" ng-click="">Find on iTunes</button></span>
+					  		</div>
+							</div>
+				  	</div>
+				  </div>
+	  		</div>
 			</div>
 		</div><!-- Closing div for showWiki -->
 	</div><!-- Closing div for entire Wiki section -->
-
 
 	<div class="clearfix"></div>
 
 	<div class="col-md-12 new-section">
 		<!-- Movies search -->
-		<h2>{{moviesError}}</h2>
 		<div class="text-center" ng-show="showMovies"><h3 class="header">Some Movies and TV Shows With {{firstName}} In The Title</h2></div>
+		<h2>{{moviesError}}</h2>
 		<div class="row" ng-show="showMovies">
 			<div ng-repeat="movie in movies track by $index">
 	    	<div class="col-md-6">
@@ -179,8 +196,8 @@
 
 	<div class="col-md-12 new-section">
 		<!-- Display individual movie -->
-		<h2>{{movieError}}</h2>
 	  <div class="row" ng-show="showMovie">
+	  	<div class="text-center"><h2>{{movieError}}</h2></div>
 	    <div class="col-md-6">
 	    	<div class="panel panel-default">
    				<div class="panel-heading">{{details.Title}}</div>

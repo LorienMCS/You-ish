@@ -1,4 +1,4 @@
-var app = angular.module('youishApp', ['ngRoute', 'ngAnimate']);
+var app = angular.module('youishApp', ['ngRoute', 'angularMoment', 'ngAnimate']);
 
 app.config(function($routeProvider) {
     $routeProvider

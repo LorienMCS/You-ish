@@ -1,4 +1,4 @@
-app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'WaybackRSService', 'WaybackIMDbService', 'ImdbService', '$http', '$sce', '$timeout', function($scope, GiphyService, WaybackLAService, WaybackRSService, WaybackIMDbService, ImdbService, $http, $sce, $timeout) {
+app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'WaybackRSService', 'WaybackIMDbService', 'ITunesService', 'ImdbService', '$http', '$sce', '$timeout', function($scope, GiphyService, WaybackLAService, WaybackRSService, WaybackIMDbService, ITunesService, ImdbService, $http, $sce, $timeout) {
 	$scope.firstName = "";
 	$scope.month = "";
 	$scope.day = "";
@@ -19,6 +19,10 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 	$scope.imdb = "";
 	$scope.showImdb = false;
 	$scope.imdbError = "";
+	$scope.songs = [];
+	$scope.iTunes = "";
+	$scope.showITunes = false;
+	$scope.iTunesError = "";
 	$scope.movies = [];
 	$scope.showMovies = false;
 	$scope.moviesError = "";
@@ -65,7 +69,6 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 			};
 		 },function(data){
 			 	if(data.status){
-		 		$scope.showWiki = false;
 		 		$scope.wikiError = "Sorry, not able to get data";
 		 		};
 		});
@@ -80,9 +83,9 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 			waybackObj = obj.archived_snapshots.closest;
 			if(waybackObj!=undefined && waybackObj.available){
 				$scope.laTimes = $sce.trustAsResourceUrl(waybackObj.url);
+				waybackObj = {};
 			} else {
-				$scope.showLATimes = false;
-				$scope.laTimesError = "Sorry, not able to get data"
+				$scope.laTimesError = "Sorry, not able to get LA Times website"
 			};
 		});
 	};
@@ -96,9 +99,9 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 			waybackObj = obj.archived_snapshots.closest;
 			if(waybackObj!=undefined && waybackObj.available){
 				$scope.rollingStone = $sce.trustAsResourceUrl(waybackObj.url);
+				waybackObj = {};
 			} else {
-				$scope.showRolling = false;
-				$scope.rollingError = "Sorry, not able to get data"
+				$scope.rollingError = "Sorry, not able to get Rolling Stones website"
 			};
 		});
 	};
@@ -112,10 +115,25 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 			waybackObj = obj.archived_snapshots.closest;
 			if(waybackObj!=undefined && waybackObj.available){
 				$scope.imdb = $sce.trustAsResourceUrl(waybackObj.url);
+				waybackObj = {};
 			} else {
-				$scope.showImdb = false;
-				$scope.imdbError = "Sorry, not able to get data"
+				$scope.imdbError = "Sorry, not able to get IMDb Website"
 			};
+		});
+	};
+
+	$scope.searchITunes = function() {
+		$scope.showITunes = true;
+		ITunesService.search($scope.firstName)
+		.then(function(obj) {
+			if(obj.results.length!==0){
+				var objArr = obj.results;
+				objArr.forEach(function(song){
+					$scope.songs.push({'artist': song.artistName, 'title': song.trackName, 'album': song.collectionName, 'image': song.artworkUrl100, 'date': song.releaseDate, 'song': song.previewUrl, 'itunes': song.trackViewUrl});
+				});
+			} else {
+			 	$scope.iTunesError = "Sorry, not able to get songs"
+		 	};
 		});
 	};
 
@@ -130,8 +148,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 					$scope.movies.push({'title': movie.Title, 'year': movie.Year, 'id': movie.imdbID});
 				});
 			} else {
-				$scope.showMovies = false;
-				$scope.moviesError = "Sorry, not able to get movies!"
+				$scope.moviesError = "Sorry, not able to get movies"
 			};
 		});
 	};
@@ -159,6 +176,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		$scope.getLATimes();
 		$timeout( function(){ $scope.getRollingStone(); }, 3000);
 		$timeout( function(){ $scope.getIMDb(); }, 6000);
+		$scope.searchITunes();
 		$scope.searchImdb();
 	};
 
@@ -167,14 +185,12 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		$scope.showMovie = true;
 		$http.get('http://www.omdbapi.com/?i=' + movie.id + "&tomatoes=true").then(function(object){
 			if(object.data.Error) {
-				$scope.showMovie = false;
 				$scope.movieError = "Sorry, no data available for this movie."
 			};
 			$scope.details = object.data;
 		},function(data){
 			if(data.status){
-				$scope.showMovie = false;
-				$scope.movieError = "Sorry, not able to get data";
+				$scope.movieError = "Sorry, not able to get movie details";
 			};
 		});
 	};

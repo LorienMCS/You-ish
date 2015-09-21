@@ -60,7 +60,7 @@ app.factory('WaybackLAService', ["$http", "$q", function($http, $q) {
     $http.jsonp(url).success(function(data) {
       deferred.resolve(data);
     }).error(function() {
-      deferred.reject("Cannot Get LA Times Wayback")
+      deferred.reject("Cannot Get LA Times Website");
     });
 
     return deferred.promise;
@@ -95,7 +95,7 @@ app.factory('WaybackRSService', ["$http", "$q", function($http, $q) {
     $http.jsonp(url).success(function(data) {
       deferred.resolve(data);
     }).error(function() {
-      deferred.reject("Cannot Get Rolling Stone Wayback")
+      deferred.reject("Cannot Get Rolling Stones Website");
     });
 
     return deferred.promise;
@@ -130,7 +130,7 @@ app.factory('WaybackIMDbService', ["$http", "$q", function($http, $q) {
     $http.jsonp(url).success(function(data) {
       deferred.resolve(data);
     }).error(function() {
-      deferred.reject("Cannot Get IMDb Wayback")
+      deferred.reject("Cannot Get IMDb Website");
     });
 
     return deferred.promise;
@@ -172,4 +172,40 @@ app.factory('ImdbService', ["$http", "$q", function($http, $q) {
   }
 
   return ImdbService;
+}]);
+
+
+app.factory('ITunesService', ["$http", "$q", function($http, $q) {
+  var ITunesService = {};
+  var baseUrl = "http://itunes.apple.com/search?callback=JSON_CALLBACK&term=";
+  var searchTerm = '';
+  var songSearch = "&entity=song&attribute=songTerm&explicit=no&limit=25";
+
+  ITunesService.setSearchTerm = function(term) {
+    searchTerm = encodeURIComponent(term);
+  }
+
+  ITunesService.getSearchTerm = function() {
+    return decodeURIComponent(searchTerm);
+  }
+
+  ITunesService.search = function(term,cb) {
+    if (term !== undefined) {
+      ITunesService.setSearchTerm(term);
+    }
+
+    var url = baseUrl + searchTerm + songSearch;
+
+    var deferred = $q.defer();
+
+    $http.jsonp(url).success(function(data) {
+      deferred.resolve(data);
+    }).error(function() {
+      deferred.reject("Cannot Get LA Times Wayback")
+    });
+
+    return deferred.promise;
+  }
+
+  return ITunesService;
 }]);
