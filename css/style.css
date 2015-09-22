@@ -10,6 +10,15 @@ body {
     background-size: cover;
 }
 
+.form-horizontal input.ng-invalid.ng-touched {
+  background-color: #FCB1B5;
+  border: 1px solid red;
+}
+
+input.ng-valid.ng-touched {
+  border: 1px solid green;
+}
+
 .panel-heading {
 	font-size: 1.2em;
 }
@@ -93,11 +102,13 @@ li {
 
 .flip-word {
 	padding-left: 10px;
+	margin-bottom: 20px;
 	height: 112px;
 }
 
 .flip {
   transform: scaleY(-1);
+  -webkit-transform: scaleY(-1);
 }
 
 

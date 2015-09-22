@@ -79,32 +79,40 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		$scope.showLATimes = true;
 		var waybackObj = {};
 		var date = $scope.month + $scope.day;
-		WaybackLAService.search(date)
-		.then(function(obj) {
-			waybackObj = obj.archived_snapshots.closest;
-			if(waybackObj!=undefined && waybackObj.available){
-				$scope.laTimes = $sce.trustAsResourceUrl(waybackObj.url);
-				waybackObj = {};
-			} else {
-				$scope.laTimesError = "Sorry, not able to get LA Times website"
-			};
-		});
+		if($scope.month && $scope.day) {
+			WaybackLAService.search(date)
+			.then(function(obj) {
+				waybackObj = obj.archived_snapshots.closest;
+				if(waybackObj!=undefined && waybackObj.available){
+					$scope.laTimes = $sce.trustAsResourceUrl(waybackObj.url);
+					waybackObj = {};
+				} else {
+					$scope.laTimesError = "Sorry, not able to get LA Times website"
+				};
+			});
+		} else {
+			$scope.laTimesError = "Sorry, not able to get LA Times website"
+		};
 	};
 
 	$scope.getIMDb = function() {
 		$scope.showImdb = true;
 		var waybackObj = {};
 		var date = $scope.month + $scope.day;
-		WaybackIMDbService.search(date)
-		.then(function(obj) {
-			waybackObj = obj.archived_snapshots.closest;
-			if(waybackObj!=undefined && waybackObj.available){
-				$scope.imdb = $sce.trustAsResourceUrl(waybackObj.url);
-				waybackObj = {};
-			} else {
-				$scope.imdbError = "Sorry, not able to get IMDb Website"
-			};
-		});
+		if($scope.month && $scope.day) {
+			WaybackIMDbService.search(date)
+			.then(function(obj) {
+				waybackObj = obj.archived_snapshots.closest;
+				if(waybackObj!=undefined && waybackObj.available){
+					$scope.imdb = $sce.trustAsResourceUrl(waybackObj.url);
+					waybackObj = {};
+				} else {
+					$scope.imdbError = "Sorry, not able to get IMDb Website"
+				};
+			});
+		} else {
+			$scope.imdbError = "Sorry, not able to get IMDb website"
+		};
 	};
 
 	$scope.searchITunes = function() {
@@ -150,34 +158,36 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 	};
 
 	$scope.searchAll = function() {
-		$scope.giphyError = "";
-		$scope.wikiError = "";
-		$scope.iTunesError = "";
-		$scope.laTimesError = "";
-		$scope.imbdError = "";
-		$scope.iBooksError = "";
-		$scope.moviesError = "";
-		$scope.movieError = "";
-		$scope.births = [];
-		$scope.events = [];
-		$scope.movies = [];
-		$scope.songs = [];
-		$scope.books = [];
-		$scope.showGiphy = false;
-		$scope.noGiphy = false;
-		$scope.showWiki = false;
-		$scope.showLATimes = false;
-		$scope.showImdb = false;
-		$scope.showITunes = false;
-		$scope.showMovies = false;
-		$scope.showIBooks = false;
-		$scope.getGiphy();
-		$scope.getWiki();
-		$scope.getLATimes();
-		$timeout( function(){ $scope.getIMDb() }, 2000);
-		$scope.searchITunes();
-		$scope.searchImdb();
-		$timeout( function(){ $scope.searchIBooks() }, 2000);
+		if ($scope.entry.$valid) {
+			$scope.giphyError = "";
+			$scope.wikiError = "";
+			$scope.iTunesError = "";
+			$scope.laTimesError = "";
+			$scope.imbdError = "";
+			$scope.iBooksError = "";
+			$scope.moviesError = "";
+			$scope.movieError = "";
+			$scope.births = [];
+			$scope.events = [];
+			$scope.movies = [];
+			$scope.songs = [];
+			$scope.books = [];
+			$scope.showGiphy = false;
+			$scope.noGiphy = false;
+			$scope.showWiki = false;
+			$scope.showLATimes = false;
+			$scope.showImdb = false;
+			$scope.showITunes = false;
+			$scope.showMovies = false;
+			$scope.showIBooks = false;
+			$scope.getGiphy();
+			$scope.getWiki();
+			$scope.getLATimes();
+			$timeout( function(){ $scope.getIMDb() }, 2000);
+			$scope.searchITunes();
+			$scope.searchImdb();
+			$timeout( function(){ $scope.searchIBooks() }, 2000);
+		};
 	};
 
 	$scope.getMovieDetails = function(movie) {
