@@ -1,4 +1,4 @@
-app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'WaybackIMDbService', 'ITunesService', 'ImdbService', '$http', '$sce', '$timeout', function($scope, GiphyService, WaybackLAService, WaybackIMDbService, ITunesService, ImdbService, $http, $sce, $timeout) {
+app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'WaybackIMDbService', 'ITunesService', 'ImdbService', 'IBooksService', '$http', '$sce', '$timeout', function($scope, GiphyService, WaybackLAService, WaybackIMDbService, ITunesService, ImdbService, IBooksService, $http, $sce, $timeout) {
 	$scope.firstName = "";
 	$scope.month = "";
 	$scope.day = "";
@@ -25,6 +25,10 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 	$scope.moviesError = "";
 	$scope.showMovie = false;
 	$scope.movieError = "";
+	$scope.books = [];
+	$scope.iBooks = "";
+	$scope.showIBooks = false;
+	$scope.iBooksError = "";
 
 	$scope.getGiphy = function() {
 		GiphyService.search($scope.firstName)
@@ -148,27 +152,32 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 	$scope.searchAll = function() {
 		$scope.giphyError = "";
 		$scope.wikiError = "";
+		$scope.iTunesError = "";
 		$scope.laTimesError = "";
-		$scope.rollingError = "";
 		$scope.imbdError = "";
+		$scope.iBooksError = "";
 		$scope.moviesError = "";
 		$scope.movieError = "";
 		$scope.births = [];
 		$scope.events = [];
 		$scope.movies = [];
+		$scope.songs = [];
+		$scope.books = [];
 		$scope.showGiphy = false;
 		$scope.noGiphy = false;
 		$scope.showWiki = false;
 		$scope.showLATimes = false;
-		$scope.showITunes = false;
 		$scope.showImdb = false;
+		$scope.showITunes = false;
 		$scope.showMovies = false;
+		$scope.showIBooks = false;
 		$scope.getGiphy();
 		$scope.getWiki();
 		$scope.getLATimes();
-		$timeout( function(){ $scope.getIMDb(); }, 3000);
+		$timeout( function(){ $scope.getIMDb() }, 2000);
 		$scope.searchITunes();
 		$scope.searchImdb();
+		$timeout( function(){ $scope.searchIBooks() }, 2000);
 	};
 
 	$scope.getMovieDetails = function(movie) {
@@ -186,8 +195,23 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		});
 	};
 
-}]);
 
+$scope.searchIBooks = function() {
+		$scope.showIBooks = true;
+		IBooksService.search($scope.firstName)
+		.then(function(obj) {
+			if(obj.results.length!==0){
+				var objArr = obj.results;
+				objArr.forEach(function(book){
+				 $scope.books.push({'artist': book.artistName, 'title': book.trackName, 'image': book.artworkUrl100, 'date': book.releaseDate, 'itunes': book.trackViewUrl});
+				});
+			} else {
+			 	$scope.iBooksError = "Sorry, not able to get books"
+		 	};
+		});
+	};
+
+}]);
 
 
 app.controller('AboutController', ['$scope', function($scope) {

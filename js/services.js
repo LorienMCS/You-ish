@@ -131,7 +131,7 @@ app.factory('ITunesService', ["$http", "$q", function($http, $q) {
     $http.jsonp(url).success(function(data) {
       deferred.resolve(data);
     }).error(function() {
-      deferred.reject("Cannot Get LA Times Wayback")
+      deferred.reject("Cannot get songs")
     });
 
     return deferred.promise;
@@ -173,4 +173,40 @@ app.factory('ImdbService', ["$http", "$q", function($http, $q) {
   }
 
   return ImdbService;
+}]);
+
+
+app.factory('IBooksService', ["$http", "$q", function($http, $q) {
+  var IBooksService = {};
+  var baseUrl = "http://itunes.apple.com/search?callback=JSON_CALLBACK&term=";
+  var searchTerm = '';
+  var bookSearch = "&entity=ebook&attribute=allTrackTerm&explicit=no&limit=20";
+
+  IBooksService.setSearchTerm = function(term) {
+    searchTerm = encodeURIComponent(term);
+  }
+
+  IBooksService.getSearchTerm = function() {
+    return decodeURIComponent(searchTerm);
+  }
+
+  IBooksService.search = function(term,cb) {
+    if (term !== undefined) {
+      IBooksService.setSearchTerm(term);
+    }
+
+    var url = baseUrl + searchTerm + bookSearch;
+
+    var deferred = $q.defer();
+
+    $http.jsonp(url).success(function(data) {
+      deferred.resolve(data);
+    }).error(function() {
+      deferred.reject("Cannot get books")
+    });
+
+    return deferred.promise;
+  }
+
+  return IBooksService;
 }]);

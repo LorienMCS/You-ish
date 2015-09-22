@@ -124,13 +124,13 @@
 					<div class="row" ng-show="showITunes">
 						<h2>{{iTunesError}}</h2>
 						<div ng-repeat="song in songs track by $index">
-					  	<div class="panel panel-default song-data">
+					  	<div class="panel panel-default itunes-data">
 					    	<div class="panel-heading">
 					      	<h3 class="panel-title">{{song.title}}</h3>
 					    	</div>
 					  		<div class="panel-body">
 					  			<div class="row">
-									  <div class="col-md-3"><img ng-src="{{song.image}}" alt="photo of {{song.title}}" class="img-responsive" class="song-img"/></div>
+									  <div class="col-md-3"><img ng-src="{{song.image}}" alt="photo of {{song.title}}" class="img-responsive" class="itunes-img"/></div>
 									  <div class="col-md-9">
 									  	<div class="row">
 									  		<strong>Artist: </strong>{{song.artist}}
@@ -153,7 +153,7 @@
 									  </div>
 									  <div class="col-md-4">
 									  	<a href="{{song.itunes}}" target="_blank">
-											<img ng-src="images/iTunes_Badge.png" width="90" height="30" alt="Link to iTunes" /></a>
+											<img ng-src="images/iTunes_Badge.png" width="95" height="32" alt="Link to iTunes" /></a>
 										</div>
 									</div>
 					  		</div>
@@ -169,7 +169,7 @@
 
 	<div class="col-md-12 new-section">
 		<!-- Movies search -->
-		<div class="text-center" ng-show="showMovies"><h3 class="header">Some Movies and TV Shows With {{firstName}} In The Title</h2></div>
+		<div class="text-center" ng-show="showMovies"><h3 class="header">Some Movies and TV Shows With {{firstName}} In The Title</h3></div>
 		<h2>{{moviesError}}</h2>
 		<div class="row" ng-show="showMovies">
 			<div ng-repeat="movie in movies track by $index">
@@ -213,7 +213,7 @@
       			<li class="list-group-item"><strong>imdb Votes: </strong>{{details.imdbVotes}}</li>
    				</ul>
 				</div>
-			</div><!-- closing div for details section -->
+			</div><!-- closing div for movie details section -->
 			<div class="col-md-6">
 				<div class="panel panel-default">
 			   	<div class="panel-heading">Rotten Tomatoes details for {{details.Title}}</div>
@@ -233,6 +233,46 @@
 	  </div><!-- closing div for all details -->
 
 	</div><!-- Closing div for individual movie section -->
+
+
+	<div class="clearfix"></div>
+
+	<div class="col-md-12 new-section">
+		<!-- iTunes book search -->
+		<div class="text-center" ng-show="showIBooks"><h3 class="header">Some Books With {{firstName}} In The Title</h3></div>
+		<h2>{{iBooksError}}</h2>
+		<div class="row" ng-show="showIBooks">
+			<div ng-repeat="book in books track by $index">
+	    	<div class="col-md-12">
+	      	<div class="panel panel-default itunes-data">
+	        	<div class="panel-heading">
+	          	<h3 class="panel-title">{{book.title}}</h3>
+	        	</div>
+	      		<div class="panel-body">
+	      			<div class="row">
+	    				  <div class="col-md-3"><img ng-src="{{book.image}}" alt="photo of {{book.title}}" class="img-responsive" class="itunes-img"/></div>
+	    				  <div class="col-md-9">
+	    				  	<div class="row">
+	    				  		<strong>Artist: </strong>{{book.artist}}
+	    				  	</div>
+	    				  	<div class="row">
+	    				  		<strong>Release Date: </strong>{{book.date | amDateFormat: 'MMMM Do, YYYY'}}
+	    				  	</div>
+	    				  	<div class="row">
+	    				  		<a href="{{book.itunes}}" target="_blank">
+	    							<img ng-src="images/iTunes_Badge.png" width="90" height="28" alt="Link to iTunes" /></a>
+	    				  	</div>
+	    				  </div>
+	    				</div>
+	      		</div>
+	    		</div>
+	  		</div>
+	  	</div>
+	  </div>
+	</div><!-- Closing div for books section -->
+
+
+
 
 	<div class="clearfix"></div>
 
