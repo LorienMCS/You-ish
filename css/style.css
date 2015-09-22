@@ -83,13 +83,23 @@ li {
   background: #4accc8;
 }
 
-.reverse {
+.reverse, .flip-word {
 	background-color: #88D7CA;
 	border: 2px solid #172e26;
 	border-radius: 11px 11px 11px 11px;
 	-moz-border-radius: 11px 11px 11px 11px;
 	-webkit-border-radius: 11px 11px 11px 11px;
 }
+
+.flip-word {
+	padding-left: 10px;
+	height: 112px;
+}
+
+.flip {
+  transform: scaleY(-1);
+}
+
 
 .header {
 	background-color: #AFE4DC;
