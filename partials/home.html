@@ -31,7 +31,7 @@
 						<div class="form-group">
 				    	<label class="col-md-6 control-label data-input" for="day">Birth Day in Two-Digit Format: </label>
 				    	<div class="col-md-4 text-col">
-				    		<input class="form-control input-md data-input" type="text" ng-model="day" required ng-pattern="/^(0[1-9]|[12][0-9]|3[01])$/" name="day" placeholder="DD">
+				    		<input class="form-control input-md data-input" type="text" ng-model="day" ng-minlength=2 required ng-pattern="/^(0[1-9]|[12][0-9]|3[01])$/" name="day" placeholder="DD">
 				    	</div>
 				  	</div>
 
