@@ -37,7 +37,7 @@ app.factory('GiphyService', ["$http", "$q", function($http, $q) {
 
 app.factory('WaybackLAService', ["$http", "$q", function($http, $q) {
   var WaybackLAService = {};
-  var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=latimes.coppm&timestamp=2005";
+  var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=latimes.com&timestamp=2005";
   var searchTerm = '';
 
   WaybackLAService.setSearchTerm = function(term) {
@@ -72,7 +72,7 @@ app.factory('WaybackLAService', ["$http", "$q", function($http, $q) {
 
 app.factory('WaybackIMDbService', ["$http", "$q", function($http, $q) {
   var WaybackIMDbService = {};
-  var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=imdb.coppppm&timestamp=2005";
+  var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=imdb.com&timestamp=2005";
   var searchTerm = '';
 
   WaybackIMDbService.setSearchTerm = function(term) {
