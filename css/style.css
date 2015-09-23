@@ -10,6 +10,10 @@ body {
     background-size: cover;
 }
 
+.error {
+	color: red;
+}
+
 .form-horizontal input.ng-invalid.ng-touched {
   background-color: #FCB1B5;
   border: 1px solid red;

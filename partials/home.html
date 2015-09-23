@@ -38,6 +38,9 @@
 					  		<div class="row error" ng-show="entry.month.$touched">
     							<p class="error" ng-show="entry.month.$error.minlength">Please enter a two-digit number.</p>
 					  		</div>
+					  		<div class="row error" ng-show="entry.month.$touched">
+    							<p class="error" ng-show="entry.month.$error.pattern">Please enter a valid two-digit month.</p>
+					  		</div>
 				    	</div>
 				  	</div>
 
@@ -52,6 +55,9 @@
 					  		</div>
 					  		<div class="row error" ng-show="entry.day.$touched">
     							<p class="error" ng-show="entry.day.$error.minlength">Please enter a two-digit number.</p>
+					  		</div>
+					  		<div class="row error" ng-show="entry.day.$touched">
+    							<p class="error" ng-show="entry.day.$error.pattern">Please enter a valid two-digit day.</p>
 					  		</div>
 				    	</div>
 				  	</div>
