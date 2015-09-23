@@ -58,15 +58,15 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		$http.jsonp('http://history.muffinlabs.com/date/' + $scope.month + '/' + $scope.day + '?callback=JSON_CALLBACK').then(function(obj){
 			if(obj.data.data.Births[0]!=undefined && obj.data.data.Births.length !== 0){
 				var birthArr = obj.data.data.Births;
-				birthArr.forEach(function(birth){
-					$scope.births.push({'info': birth.text, 'year': birth.year});
-				});
+				for(var i = birthArr.length-1; i > birthArr.length-201; i--) {
+					$scope.births.push({'info': birthArr[i].text, 'year': birthArr[i].year});
+				};
 			};
 			if(obj.data.data.Events[0]!=undefined && obj.data.data.Events.length !== 0){
 				var eventArr = obj.data.data.Events;
-				eventArr.forEach(function(occasion){
-					$scope.events.push({'info': occasion.text, 'year': occasion.year});
-				});
+				for(var i = eventArr.length-1; i >= 0; i--) {
+					$scope.events.push({'info': eventArr[i].text, 'year': eventArr[i].year});
+				};
 			};
 		 },function(data){
 			 	if(data.status){
@@ -208,7 +208,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 			$scope.showITunes = false;
 			$scope.showMovies = false;
 			$scope.showIBooks = false;
-			$scope.getGiphy();
+			 $scope.getGiphy();
 			$scope.getWiki();
 			$scope.searchITunes();
 			$scope.searchImdb();

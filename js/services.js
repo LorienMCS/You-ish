@@ -109,7 +109,7 @@ app.factory('ITunesService', ["$http", "$q", function($http, $q) {
   var ITunesService = {};
   var baseUrl = "http://itunes.apple.com/search?callback=JSON_CALLBACK&term=";
   var searchTerm = '';
-  var songSearch = "&entity=song&attribute=songTerm&explicit=no&limit=25";
+  var songSearch = "&entity=song&attribute=songTerm&explicit=no&limit=20";
 
   ITunesService.setSearchTerm = function(term) {
     searchTerm = encodeURIComponent(term);
@@ -216,7 +216,7 @@ app.factory('IBooksService', ["$http", "$q", function($http, $q) {
   var IBooksService = {};
   var baseUrl = "http://itunes.apple.com/search?callback=JSON_CALLBACK&term=";
   var searchTerm = '';
-  var bookSearch = "&entity=ebook&attribute=allTrackTerm&explicit=no&limit=20";
+  var bookSearch = "&entity=ebook&attribute=allTrackTerm&explicit=no&limit=10";
 
   IBooksService.setSearchTerm = function(term) {
     searchTerm = encodeURIComponent(term);
