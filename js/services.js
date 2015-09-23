@@ -176,6 +176,42 @@ app.factory('ImdbService', ["$http", "$q", function($http, $q) {
 }]);
 
 
+app.factory('MovieService', ["$http", "$q", function($http, $q) {
+  var MovieService = {};
+  var baseUrl = "http://www.omdbapi.com/?i=";
+  var searchTerm = '';
+  var tomatoes = "&tomatoes=true";
+
+  MovieService.setSearchTerm = function(term) {
+    searchTerm = encodeURIComponent(term);
+  }
+
+  MovieService.getSearchTerm = function() {
+    return decodeURIComponent(searchTerm);
+  }
+
+  MovieService.search = function(term,cb) {
+    if (term !== undefined) {
+      MovieService.setSearchTerm(term);
+    }
+
+    var url = baseUrl + searchTerm + tomatoes;
+
+    var deferred = $q.defer();
+
+    $http.get(url).success(function(data) {
+      deferred.resolve(data);
+    }).error(function() {
+      deferred.reject("Cannot Get Movie")
+    });
+
+    return deferred.promise;
+  }
+
+  return MovieService;
+}]);
+
+
 app.factory('IBooksService', ["$http", "$q", function($http, $q) {
   var IBooksService = {};
   var baseUrl = "http://itunes.apple.com/search?callback=JSON_CALLBACK&term=";

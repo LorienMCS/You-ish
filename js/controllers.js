@@ -1,4 +1,4 @@
-app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'WaybackIMDbService', 'ITunesService', 'ImdbService', 'IBooksService', '$http', '$sce', '$timeout', function($scope, GiphyService, WaybackLAService, WaybackIMDbService, ITunesService, ImdbService, IBooksService, $http, $sce, $timeout) {
+app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'WaybackIMDbService', 'ITunesService', 'ImdbService', 'MovieService', 'IBooksService', '$http', '$sce', '$timeout', function($scope, GiphyService, WaybackLAService, WaybackIMDbService, ITunesService, ImdbService, MovieService, IBooksService, $http, $sce, $timeout) {
 	$scope.firstName = "";
 	$scope.month = "";
 	$scope.day = "";
@@ -38,7 +38,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 				$scope.giphy = obj.data[0].images.fixed_height.url;
 			} else {
 				$scope.showGiphy = false;
-				$scope.giphyError = "Sorry, not able to get a Giphy!"
+				$scope.giphyError = "Sorry, not able to get Giphy"
 			}
 		});
 	};
@@ -73,46 +73,6 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		 		$scope.wikiError = "Sorry, not able to get data";
 		 		};
 		});
-	};
-
-	$scope.getLATimes = function() {
-		$scope.showLATimes = true;
-		var waybackObj = {};
-		var date = $scope.month + $scope.day;
-		if($scope.month && $scope.day) {
-			WaybackLAService.search(date)
-			.then(function(obj) {
-				waybackObj = obj.archived_snapshots.closest;
-				if(waybackObj!=undefined && waybackObj.available){
-					$scope.laTimes = $sce.trustAsResourceUrl(waybackObj.url);
-					waybackObj = {};
-				} else {
-					$scope.laTimesError = "Sorry, not able to get LA Times website"
-				};
-			});
-		} else {
-			$scope.laTimesError = "Sorry, not able to get LA Times website"
-		};
-	};
-
-	$scope.getIMDb = function() {
-		$scope.showImdb = true;
-		var waybackObj = {};
-		var date = $scope.month + $scope.day;
-		if($scope.month && $scope.day) {
-			WaybackIMDbService.search(date)
-			.then(function(obj) {
-				waybackObj = obj.archived_snapshots.closest;
-				if(waybackObj!=undefined && waybackObj.available){
-					$scope.imdb = $sce.trustAsResourceUrl(waybackObj.url);
-					waybackObj = {};
-				} else {
-					$scope.imdbError = "Sorry, not able to get IMDb Website"
-				};
-			});
-		} else {
-			$scope.imdbError = "Sorry, not able to get IMDb website"
-		};
 	};
 
 	$scope.searchITunes = function() {
@@ -157,6 +117,74 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		});
 	};
 
+	$scope.getMovieDetails = function(movie) {
+		$scope.details = {};
+		$scope.showMovie = true;
+		MovieService.search(movie.id)
+		.then(function(object){
+			if(object) {
+			$scope.details = object;
+			} else {
+				$scope.movieError = "Sorry, not able to get movie details";
+			};
+		});
+	};
+
+	$scope.searchIBooks = function() {
+		$scope.showIBooks = true;
+		IBooksService.search($scope.firstName)
+		.then(function(obj) {
+			if(obj.results.length!==0){
+				var objArr = obj.results;
+				objArr.forEach(function(book){
+				 $scope.books.push({'artist': book.artistName, 'title': book.trackName, 'image': book.artworkUrl100, 'date': book.releaseDate, 'itunes': book.trackViewUrl});
+				});
+			} else {
+			 	$scope.iBooksError = "Sorry, not able to get books"
+		 	};
+		});
+	};
+
+	$scope.getLATimes = function() {
+		$scope.showLATimes = true;
+		var waybackObj = {};
+		var date = $scope.month + $scope.day;
+		if($scope.month && $scope.day) {
+			WaybackLAService.search(date)
+			.then(function(obj) {
+				waybackObj = obj.archived_snapshots.closest;
+				if(waybackObj!=undefined && waybackObj.available){
+					$scope.laTimes = $sce.trustAsResourceUrl(waybackObj.url);
+					waybackObj = {};
+				} else {
+					$scope.laTimesError = "Sorry, not able to get LA Times website"
+				};
+			});
+		} else {
+			$scope.laTimesError = "Sorry, not able to get LA Times website"
+		};
+	};
+
+	$scope.getIMDb = function() {
+		$scope.showImdb = true;
+		var waybackObj = {};
+		var date = $scope.month + $scope.day;
+		if($scope.month && $scope.day) {
+			WaybackIMDbService.search(date)
+			.then(function(obj) {
+				waybackObj = obj.archived_snapshots.closest;
+				if(waybackObj!=undefined && waybackObj.available){
+					$scope.imdb = $sce.trustAsResourceUrl(waybackObj.url);
+					waybackObj = {};
+				} else {
+					$scope.imdbError = "Sorry, not able to get IMDb Website"
+				};
+			});
+		} else {
+			$scope.imdbError = "Sorry, not able to get IMDb website"
+		};
+	};
+
 	$scope.searchAll = function() {
 		if ($scope.entry.$valid) {
 			$scope.giphyError = "";
@@ -182,43 +210,12 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 			$scope.showIBooks = false;
 			$scope.getGiphy();
 			$scope.getWiki();
-			$scope.getLATimes();
-			$timeout( function(){ $scope.getIMDb() }, 2000);
 			$scope.searchITunes();
 			$scope.searchImdb();
-			$timeout( function(){ $scope.searchIBooks() }, 2000);
+			$timeout(function(){ $scope.searchIBooks() }, 2000);
+			$scope.getLATimes();
+			$timeout(function(){ $scope.getIMDb() }, 2000);
 		};
-	};
-
-	$scope.getMovieDetails = function(movie) {
-		$scope.details = {};
-		$scope.showMovie = true;
-		$http.get('http://www.omdbapi.com/?i=' + movie.id + "&tomatoes=true").then(function(object){
-			if(object.data.Error) {
-				$scope.movieError = "Sorry, no data available for this movie."
-			};
-			$scope.details = object.data;
-		},function(data){
-			if(data.status){
-				$scope.movieError = "Sorry, not able to get movie details";
-			};
-		});
-	};
-
-
-$scope.searchIBooks = function() {
-		$scope.showIBooks = true;
-		IBooksService.search($scope.firstName)
-		.then(function(obj) {
-			if(obj.results.length!==0){
-				var objArr = obj.results;
-				objArr.forEach(function(book){
-				 $scope.books.push({'artist': book.artistName, 'title': book.trackName, 'image': book.artworkUrl100, 'date': book.releaseDate, 'itunes': book.trackViewUrl});
-				});
-			} else {
-			 	$scope.iBooksError = "Sorry, not able to get books"
-		 	};
-		});
 	};
 
 }]);
