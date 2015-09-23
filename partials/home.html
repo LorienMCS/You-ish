@@ -12,64 +12,66 @@
 				</div>
 
 				<div class="row">
-					<form class="form-horizontal" name="entry" novalidate>
+					<div class="col-md-1"></div>
+					<div class="col-md-10">
+						<form class="form-horizontal" name="entry" novalidate>
+						  <div class="form-group">
+						  	<label class="col-md-6 control-label data-input" for="name">First Name: </label>
+						    <div class="col-md-4 text-col">
+						    	<div class="row">
+						    		<input class="form-control input-md data-input" type="text" ng-model="firstName" name="name" placeholder="First Name" required>
+						    	</div>
+						    	<div class="row error" ng-show="entry.name.$touched">
+	    							<p class="error" ng-show="entry.name.$error.required">Please enter your first name.</p>
+						  		</div>
+						  	</div>
+						  </div>
 
-					  <div class="form-group">
-					  	<label class="col-md-6 control-label data-input" for="name">First Name: </label>
-					    <div class="col-md-4 text-col">
-					    	<div class="row">
-					    		<input class="form-control input-md data-input" type="text" ng-model="firstName" name="name" placeholder="First Name" required>
+							<div class="form-group">
+					    	<label class="col-md-6 control-label data-input" for="month">Two-Digit Birth Month: </label>
+					    	<div class="col-md-4 text-col">
+					    		<div class="row">
+					    			<input class="form-control input-md data-input" type="text" ng-model="month" ng-minlength=2 ng-pattern="/^(0?[1-9]|1[012])$/" name="month" placeholder="MM" required>
+					    		</div>
+					    		<div class="row error" ng-show="entry.month.$touched">
+	    							<p class="error" ng-show="entry.month.$error.required">Please enter your birth month.</p>
+						  		</div>
+						  		<div class="row error" ng-show="entry.month.$touched">
+	    							<p class="error" ng-show="entry.month.$error.minlength">Please enter a two-digit number.</p>
+						  		</div>
+						  		<div class="row error" ng-show="entry.month.$touched">
+	    							<p class="error" ng-show="entry.month.$error.pattern">Please enter a valid two-digit month.</p>
+						  		</div>
 					    	</div>
-					    	<div class="row error" ng-show="entry.name.$touched">
-    							<p class="error" ng-show="entry.name.$error.required">Please enter your first name.</p>
+					  	</div>
+
+							<div class="form-group">
+					    	<label class="col-md-6 control-label data-input" for="day">Two-Digit Birth Day: </label>
+					    	<div class="col-md-4 text-col">
+					    		<div class="row">
+					    			<input class="form-control input-md data-input" type="text" ng-model="day" ng-minlength=2 ng-pattern="/^(0[1-9]|[12][0-9]|3[01])$/" name="day" placeholder="DD" required>
+					    		</div>
+					    		<div class="row error" ng-show="entry.day.$touched">
+	    							<p class="error" ng-show="entry.day.$error.required">Please enter your birth day.</p>
+						  		</div>
+						  		<div class="row error" ng-show="entry.day.$touched">
+	    							<p class="error" ng-show="entry.day.$error.minlength">Please enter a two-digit number.</p>
+						  		</div>
+						  		<div class="row error" ng-show="entry.day.$touched">
+	    							<p class="error" ng-show="entry.day.$error.pattern">Please enter a valid two-digit day.</p>
+						  		</div>
+					    	</div>
+					  	</div>
+
+							<div class="form-group">
+						 		<label class="col-md-6 control-label data-input" for="first-search">Click Button for Results: </label>
+				  	 		<div class="col-md-4 text-col">
+					     		<button class="btn btn-custom" name="first-search" type="submit" ng-click="searchAll()">Click Me</button>
 					  		</div>
 					  	</div>
-					  </div>
-
-						<div class="form-group">
-				    	<label class="col-md-6 control-label data-input" for="month">Birth Month in Two-Digit Format: </label>
-				    	<div class="col-md-4 text-col">
-				    		<div class="row">
-				    			<input class="form-control input-md data-input" type="text" ng-model="month" ng-minlength=2 ng-pattern="/^(0?[1-9]|1[012])$/" name="month" placeholder="MM" required>
-				    		</div>
-				    		<div class="row error" ng-show="entry.month.$touched">
-    							<p class="error" ng-show="entry.month.$error.required">Please enter your birth month.</p>
-					  		</div>
-					  		<div class="row error" ng-show="entry.month.$touched">
-    							<p class="error" ng-show="entry.month.$error.minlength">Please enter a two-digit number.</p>
-					  		</div>
-					  		<div class="row error" ng-show="entry.month.$touched">
-    							<p class="error" ng-show="entry.month.$error.pattern">Please enter a valid two-digit month.</p>
-					  		</div>
-				    	</div>
-				  	</div>
-
-						<div class="form-group">
-				    	<label class="col-md-6 control-label data-input" for="day">Birth Day in Two-Digit Format: </label>
-				    	<div class="col-md-4 text-col">
-				    		<div class="row">
-				    			<input class="form-control input-md data-input" type="text" ng-model="day" ng-minlength=2 ng-pattern="/^(0[1-9]|[12][0-9]|3[01])$/" name="day" placeholder="DD" required>
-				    		</div>
-				    		<div class="row error" ng-show="entry.day.$touched">
-    							<p class="error" ng-show="entry.day.$error.required">Please enter your birth day.</p>
-					  		</div>
-					  		<div class="row error" ng-show="entry.day.$touched">
-    							<p class="error" ng-show="entry.day.$error.minlength">Please enter a two-digit number.</p>
-					  		</div>
-					  		<div class="row error" ng-show="entry.day.$touched">
-    							<p class="error" ng-show="entry.day.$error.pattern">Please enter a valid two-digit day.</p>
-					  		</div>
-				    	</div>
-				  	</div>
-
-						<div class="form-group">
-					 		<label class="col-md-6 control-label data-input" for="first-search">Click Button for Results: </label>
-			  	 		<div class="col-md-4 text-col">
-				     		<button class="btn button-custom" name="first-search" type="submit" ng-click="searchAll()">Click Me</button>
-				  		</div>
-				  	</div>
-
-					</form>
+						</form>
+					</div>
+					<div class="col-md-1"></div>
 				</div>
 
 			</div><!-- Closing div for initial search info -->
@@ -91,10 +93,10 @@
 			  	<img ng-src="{{giphy}}" alt="giphy of {{firstName}}"/>
 			  </div>
 				<div class="row text-center" ng-show="showGiphy">
-					<button class="btn giphy-btn" type="submit" ng-click="toggleGiphy()">Had Enough Giphy? Click Here to Hide It</button>
+					<button class="btn btn-custom" type="submit" ng-click="toggleGiphy()">Had Enough Giphy? Click Here to Hide It</button>
 				</div>
 				<div class="row text-center" ng-show="noGiphy">
-					<button class="btn giphy-btn" type="submit" ng-click="toggleGiphy()">I Changed My Mind, Show Me The Giphy</button>
+					<button class="btn btn-custom" type="submit" ng-click="toggleGiphy()">I Changed My Mind, Show Me The Giphy</button>
 				</div>
 				<div class="row text-center">
 					<h2>{{giphyError}}</h2>
@@ -119,8 +121,8 @@
 				<table class="table">
 			  	<thead>
 			  		<tr>
-			  			<th>Year</th>
-			  			<th>Information</th>
+			  			<th><h4>Year</h4></th>
+			  			<th><h4>Information</h4></th>
 			  		</tr>
 			  	</thead>
 			  	<tbody>
@@ -138,8 +140,8 @@
 					<table class="table">
 				  	<thead>
 				  		<tr>
-				  			<th>Year</th>
-				  			<th>Information</th>
+				  			<th><h4>Year</h4></th>
+			  				<th><h4>Information</h4></th>
 				  		</tr>
 				  	</thead>
 				  	<tbody>
@@ -321,7 +323,9 @@
 					<h4>(Or nearest available date)</h4>
 					<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
 				</div>
-				<iframe width="100%" height="700px" ng-src="{{laTimes}}"></iframe>
+				<div class="embed-responsive embed-responsive-16by9">
+					<iframe class="embed-responsive-item" ng-src="{{laTimes}}"></iframe>
+				</div>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -337,7 +341,9 @@
 					<h4>(Or nearest available date)</h4>
 					<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
 				</div>
-				<iframe width="100%" height="700px" ng-src="{{imdb}}"></iframe>
+				<div class="embed-responsive embed-responsive-16by9">
+					<iframe class="embed-responsive-item" ng-src="{{imdb}}"></iframe>
+				</div>
 			</div>
 		</div>
 	</div><!-- Closing div for Wayback IMDb section -->

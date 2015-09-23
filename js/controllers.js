@@ -208,7 +208,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 			$scope.showITunes = false;
 			$scope.showMovies = false;
 			$scope.showIBooks = false;
-			 $scope.getGiphy();
+			$scope.getGiphy();
 			$scope.getWiki();
 			$scope.searchITunes();
 			$scope.searchImdb();
