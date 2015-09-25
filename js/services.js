@@ -1,4 +1,4 @@
-app.factory('GiphyService', ["$http", "$q", function($http, $q) {
+app.factory('GiphyService', ["DataService", function(DataService) {
   var GiphyService = {};
   var baseUrl = "http://api.giphy.com/v1/gifs/search?q=";
   var rating = "&rating=g"
@@ -20,22 +20,14 @@ app.factory('GiphyService', ["$http", "$q", function($http, $q) {
 
     var url = baseUrl + searchTerm + rating + publicKey;
 
-    var deferred = $q.defer();
-
-    $http.get(url).success(function(data) {
-      deferred.resolve(data);
-    }).error(function() {
-      deferred.reject("Cannot Get Giphy")
-    });
-
-    return deferred.promise;
+    return DataService.getData(url);
   }
 
   return GiphyService;
 }]);
 
 
-app.factory('WaybackLAService', ["$http", "$q", function($http, $q) {
+app.factory('WaybackLAService', ["DataService", function(DataService) {
   var WaybackLAService = {};
   var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=latimes.com&timestamp=2005";
   var searchTerm = '';
@@ -55,22 +47,14 @@ app.factory('WaybackLAService', ["$http", "$q", function($http, $q) {
 
     var url = baseUrl + searchTerm;
 
-    var deferred = $q.defer();
-
-    $http.jsonp(url).success(function(data) {
-      deferred.resolve(data);
-    }).error(function() {
-      deferred.reject("Cannot Get LA Times Website");
-    });
-
-    return deferred.promise;
+    return DataService.getData(url);
   }
 
   return WaybackLAService;
 }]);
 
 
-app.factory('WaybackIMDbService', ["$http", "$q", function($http, $q) {
+app.factory('WaybackIMDbService', ["DataService", function(DataService) {
   var WaybackIMDbService = {};
   var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=imdb.com&timestamp=2005";
   var searchTerm = '';
@@ -90,22 +74,14 @@ app.factory('WaybackIMDbService', ["$http", "$q", function($http, $q) {
 
     var url = baseUrl + searchTerm;
 
-    var deferred = $q.defer();
-
-    $http.jsonp(url).success(function(data) {
-      deferred.resolve(data);
-    }).error(function() {
-      deferred.reject("Cannot Get IMDb Website");
-    });
-
-    return deferred.promise;
+    return DataService.getData(url);
   }
 
   return WaybackIMDbService;
 }]);
 
 
-app.factory('ITunesService', ["$http", "$q", function($http, $q) {
+app.factory('ITunesService', ["DataService", function(DataService) {
   var ITunesService = {};
   var baseUrl = "http://itunes.apple.com/search?callback=JSON_CALLBACK&term=";
   var searchTerm = '';
@@ -126,22 +102,14 @@ app.factory('ITunesService', ["$http", "$q", function($http, $q) {
 
     var url = baseUrl + searchTerm + songSearch;
 
-    var deferred = $q.defer();
-
-    $http.jsonp(url).success(function(data) {
-      deferred.resolve(data);
-    }).error(function() {
-      deferred.reject("Cannot get songs")
-    });
-
-    return deferred.promise;
+    return DataService.getData(url);
   }
 
   return ITunesService;
 }]);
 
 
-app.factory('ImdbService', ["$http", "$q", function($http, $q) {
+app.factory('ImdbService', ["DataService", function(DataService) {
   var ImdbService = {};
   var baseUrl = "http://www.omdbapi.com/?s=";
   var searchTerm = '';
@@ -161,22 +129,14 @@ app.factory('ImdbService', ["$http", "$q", function($http, $q) {
 
     var url = baseUrl + searchTerm;
 
-    var deferred = $q.defer();
-
-    $http.get(url).success(function(data) {
-      deferred.resolve(data);
-    }).error(function() {
-      deferred.reject("Cannot Get Movies")
-    });
-
-    return deferred.promise;
+    return DataService.getData(url);
   }
 
   return ImdbService;
 }]);
 
 
-app.factory('MovieService', ["$http", "$q", function($http, $q) {
+app.factory('MovieService', ["DataService", function(DataService) {
   var MovieService = {};
   var baseUrl = "http://www.omdbapi.com/?i=";
   var searchTerm = '';
@@ -197,22 +157,14 @@ app.factory('MovieService', ["$http", "$q", function($http, $q) {
 
     var url = baseUrl + searchTerm + tomatoes;
 
-    var deferred = $q.defer();
-
-    $http.get(url).success(function(data) {
-      deferred.resolve(data);
-    }).error(function() {
-      deferred.reject("Cannot Get Movie")
-    });
-
-    return deferred.promise;
+    return DataService.getData(url);
   }
 
   return MovieService;
 }]);
 
 
-app.factory('IBooksService', ["$http", "$q", function($http, $q) {
+app.factory('IBooksService', ["DataService", function(DataService) {
   var IBooksService = {};
   var baseUrl = "http://itunes.apple.com/search?callback=JSON_CALLBACK&term=";
   var searchTerm = '';
@@ -233,16 +185,28 @@ app.factory('IBooksService', ["$http", "$q", function($http, $q) {
 
     var url = baseUrl + searchTerm + bookSearch;
 
+    return DataService.getData(url);
+  }
+
+  return IBooksService;
+}]);
+
+
+// service used in all factories in this file
+app.service('DataService', ["$http", "$q", function($http, $q) {
+  var DataService = {};
+
+  DataService.getData = function(url) {
     var deferred = $q.defer();
 
     $http.jsonp(url).success(function(data) {
       deferred.resolve(data);
     }).error(function() {
-      deferred.reject("Cannot get books")
+      deferred.reject("Failed to fetch: " + url);
     });
 
     return deferred.promise;
   }
 
-  return IBooksService;
+  return DataService;
 }]);

@@ -24,6 +24,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Abril Fatface', Georgia, serif;
   font-size: 2em;
   text-shadow: 1.8px 1.8px 1.8px #aaa;
+  text-decoration: none !important;
 }
 
 .nav-link {
