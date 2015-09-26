@@ -9,10 +9,6 @@ app.factory('GiphyService', ["DataService", function(DataService) {
     searchTerm = encodeURIComponent(term);
   }
 
-  GiphyService.getSearchTerm = function() {
-    return decodeURIComponent(searchTerm);
-  }
-
   GiphyService.search = function(term,cb) {
     if (term !== undefined) {
       GiphyService.setSearchTerm(term);
@@ -27,17 +23,41 @@ app.factory('GiphyService', ["DataService", function(DataService) {
 }]);
 
 
-app.factory('WaybackLAService', ["DataService", function(DataService) {
+app.factory('WikiService', ["JSONPDataService", function(JSONPDataService) {
+  var WikiService = {};
+  var baseUrl = "http://history.muffinlabs.com/date/";
+  var jsonp = "?callback=JSON_CALLBACK";
+  var searchTerm = '';
+
+  WikiService.setSearchTerm = function(month, day) {
+    searchMonth = encodeURIComponent(month);
+    searchDay = encodeURIComponent(day);
+  }
+
+  WikiService.search = function(month, day, cb) {
+    if (month !== undefined) {
+      WikiService.setSearchTerm(month);
+    };
+    if (day !== undefined) {
+      WikiService.setSearchTerm(day);
+    };
+
+    var url = baseUrl + month + "/" + day + jsonp;
+
+    return JSONPDataService.getData(url);
+  }
+
+  return WikiService;
+}]);
+
+
+app.factory('WaybackLAService', ["JSONPDataService", function(JSONPDataService) {
   var WaybackLAService = {};
   var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=latimes.com&timestamp=2005";
   var searchTerm = '';
 
   WaybackLAService.setSearchTerm = function(term) {
     searchTerm = encodeURIComponent(term);
-  }
-
-  WaybackLAService.getSearchTerm = function() {
-    return decodeURIComponent(searchTerm);
   }
 
   WaybackLAService.search = function(term,cb) {
@@ -47,24 +67,20 @@ app.factory('WaybackLAService', ["DataService", function(DataService) {
 
     var url = baseUrl + searchTerm;
 
-    return DataService.getData(url);
+    return JSONPDataService.getData(url);
   }
 
   return WaybackLAService;
 }]);
 
 
-app.factory('WaybackIMDbService', ["DataService", function(DataService) {
+app.factory('WaybackIMDbService', ["JSONPDataService", function(JSONPDataService) {
   var WaybackIMDbService = {};
   var baseUrl = "http://archive.org/wayback/available?callback=JSON_CALLBACK&url=imdb.com&timestamp=2005";
   var searchTerm = '';
 
   WaybackIMDbService.setSearchTerm = function(term) {
     searchTerm = encodeURIComponent(term);
-  }
-
-  WaybackIMDbService.getSearchTerm = function() {
-    return decodeURIComponent(searchTerm);
   }
 
   WaybackIMDbService.search = function(term,cb) {
@@ -74,14 +90,14 @@ app.factory('WaybackIMDbService', ["DataService", function(DataService) {
 
     var url = baseUrl + searchTerm;
 
-    return DataService.getData(url);
+    return JSONPDataService.getData(url);
   }
 
   return WaybackIMDbService;
 }]);
 
 
-app.factory('ITunesService', ["DataService", function(DataService) {
+app.factory('ITunesService', ["JSONPDataService", function(JSONPDataService) {
   var ITunesService = {};
   var baseUrl = "http://itunes.apple.com/search?callback=JSON_CALLBACK&term=";
   var searchTerm = '';
@@ -91,10 +107,6 @@ app.factory('ITunesService', ["DataService", function(DataService) {
     searchTerm = encodeURIComponent(term);
   }
 
-  ITunesService.getSearchTerm = function() {
-    return decodeURIComponent(searchTerm);
-  }
-
   ITunesService.search = function(term,cb) {
     if (term !== undefined) {
       ITunesService.setSearchTerm(term);
@@ -102,7 +114,7 @@ app.factory('ITunesService', ["DataService", function(DataService) {
 
     var url = baseUrl + searchTerm + songSearch;
 
-    return DataService.getData(url);
+    return JSONPDataService.getData(url);
   }
 
   return ITunesService;
@@ -118,16 +130,13 @@ app.factory('ImdbService', ["DataService", function(DataService) {
     searchTerm = encodeURIComponent(term);
   }
 
-  ImdbService.getSearchTerm = function() {
-    return decodeURIComponent(searchTerm);
-  }
-
   ImdbService.search = function(term,cb) {
     if (term !== undefined) {
       ImdbService.setSearchTerm(term);
     }
 
     var url = baseUrl + searchTerm;
+    console.log(url);
 
     return DataService.getData(url);
   }
@@ -146,10 +155,6 @@ app.factory('MovieService', ["DataService", function(DataService) {
     searchTerm = encodeURIComponent(term);
   }
 
-  MovieService.getSearchTerm = function() {
-    return decodeURIComponent(searchTerm);
-  }
-
   MovieService.search = function(term,cb) {
     if (term !== undefined) {
       MovieService.setSearchTerm(term);
@@ -164,7 +169,7 @@ app.factory('MovieService', ["DataService", function(DataService) {
 }]);
 
 
-app.factory('IBooksService', ["DataService", function(DataService) {
+app.factory('IBooksService', ["JSONPDataService", function(JSONPDataService) {
   var IBooksService = {};
   var baseUrl = "http://itunes.apple.com/search?callback=JSON_CALLBACK&term=";
   var searchTerm = '';
@@ -174,10 +179,6 @@ app.factory('IBooksService', ["DataService", function(DataService) {
     searchTerm = encodeURIComponent(term);
   }
 
-  IBooksService.getSearchTerm = function() {
-    return decodeURIComponent(searchTerm);
-  }
-
   IBooksService.search = function(term,cb) {
     if (term !== undefined) {
       IBooksService.setSearchTerm(term);
@@ -185,21 +186,20 @@ app.factory('IBooksService', ["DataService", function(DataService) {
 
     var url = baseUrl + searchTerm + bookSearch;
 
-    return DataService.getData(url);
+    return JSONPDataService.getData(url);
   }
 
   return IBooksService;
 }]);
 
-
-// service used in all factories in this file
+// service used in all factories in this file that call $http.get
 app.service('DataService', ["$http", "$q", function($http, $q) {
   var DataService = {};
 
   DataService.getData = function(url) {
     var deferred = $q.defer();
-
-    $http.jsonp(url).success(function(data) {
+    console.log(url);
+    $http.get(url).success(function(data) {
       deferred.resolve(data);
     }).error(function() {
       deferred.reject("Failed to fetch: " + url);
@@ -209,4 +209,24 @@ app.service('DataService', ["$http", "$q", function($http, $q) {
   }
 
   return DataService;
+}]);
+
+
+// service used in all factories in this file that call $http.jsonp
+app.service('JSONPDataService', ["$http", "$q", function($http, $q) {
+  var JSONPDataService = {};
+
+  JSONPDataService.getData = function(url) {
+    var deferred = $q.defer();
+    console.log(url);
+    $http.jsonp(url).success(function(data) {
+      deferred.resolve(data);
+    }).error(function() {
+      deferred.reject("Failed to fetch: " + url);
+    });
+
+    return deferred.promise;
+  }
+
+  return JSONPDataService;
 }]);

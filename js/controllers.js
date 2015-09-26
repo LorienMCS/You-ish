@@ -1,4 +1,4 @@
-app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService', 'WaybackIMDbService', 'ITunesService', 'ImdbService', 'MovieService', 'IBooksService', '$http', '$sce', '$timeout', function($scope, GiphyService, WaybackLAService, WaybackIMDbService, ITunesService, ImdbService, MovieService, IBooksService, $http, $sce, $timeout) {
+app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'WaybackLAService', 'WaybackIMDbService', 'ITunesService', 'ImdbService', 'MovieService', 'IBooksService', '$http', '$sce', '$timeout', function($scope, GiphyService, WikiService, WaybackLAService, WaybackIMDbService, ITunesService, ImdbService, MovieService, IBooksService, $http, $sce, $timeout) {
 	$scope.firstName = "";
 	$scope.month = "";
 	$scope.day = "";
@@ -53,27 +53,30 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		};
 	};
 
+
 	$scope.getWiki = function() {
 		$scope.showWiki = true;
-		$http.jsonp('http://history.muffinlabs.com/date/' + $scope.month + '/' + $scope.day + '?callback=JSON_CALLBACK').then(function(obj){
-			if(obj.data.data.Births[0]!=undefined && obj.data.data.Births.length !== 0){
-				var birthArr = obj.data.data.Births;
-				for(var i = birthArr.length-1; i > birthArr.length-201; i--) {
-					$scope.births.push({'info': birthArr[i].text, 'year': birthArr[i].year});
-				};
+		WikiService.search($scope.month, $scope.day)
+		.then(function(obj) {
+			if(obj.data.Births[0]!=undefined && obj.data.Births.length !== 0){
+	 			var birthArr = obj.data.Births;
+	 			for(var i = birthArr.length-1; i > birthArr.length-201; i--) {
+	 				$scope.births.push({'info': birthArr[i].text, 'year': birthArr[i].year});
+	 			}
+	 		} else {
+				$scope.wikiError = "Sorry, not able to get births";
 			};
-			if(obj.data.data.Events[0]!=undefined && obj.data.data.Events.length !== 0){
-				var eventArr = obj.data.data.Events;
-				for(var i = eventArr.length-1; i >= 0; i--) {
-					$scope.events.push({'info': eventArr[i].text, 'year': eventArr[i].year});
-				};
+	 		if(obj.data.Events[0]!=undefined && obj.data.Events.length !== 0){
+	 			var eventArr = obj.data.Events;
+	 			for(var i = eventArr.length-1; i >= 0; i--) {
+	 				$scope.events.push({'info': eventArr[i].text, 'year': eventArr[i].year});
+	 			};
+			} else {
+				$scope.wikiError = "Sorry, not able to get events";
 			};
-		 },function(data){
-			 	if(data.status){
-		 		$scope.wikiError = "Sorry, not able to get data";
-		 		};
 		});
 	};
+
 
 	$scope.searchITunes = function() {
 		$scope.showITunes = true;
@@ -106,6 +109,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WaybackLAService'
 		$scope.showMovies = true;
 		ImdbService.search($scope.firstName)
 		.then(function(obj) {
+			console.log(obj);
 			if(!obj.Error && obj.Search[0]!=undefined && obj.Search.length !== 0){
 				var objArr = obj.Search;
 				objArr.forEach(function(movie){
