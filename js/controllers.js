@@ -38,7 +38,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 				$scope.giphy = obj.data[0].images.fixed_height.url;
 			} else {
 				$scope.showGiphy = false;
-				$scope.giphyError = "Sorry, not able to get Giphy"
+				$scope.giphyError = "Sorry, no Giphy for your name"
 			}
 		});
 	};
@@ -53,7 +53,6 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 		};
 	};
 
-
 	$scope.getWiki = function() {
 		$scope.showWiki = true;
 		WikiService.search($scope.month, $scope.day)
@@ -64,7 +63,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 	 				$scope.births.push({'info': birthArr[i].text, 'year': birthArr[i].year});
 	 			}
 	 		} else {
-				$scope.wikiError = "Sorry, not able to get births";
+				$scope.wikiError = "Sorry, not able to get any birthday data";
 			};
 	 		if(obj.data.Events[0]!=undefined && obj.data.Events.length !== 0){
 	 			var eventArr = obj.data.Events;
@@ -72,11 +71,10 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 	 				$scope.events.push({'info': eventArr[i].text, 'year': eventArr[i].year});
 	 			};
 			} else {
-				$scope.wikiError = "Sorry, not able to get events";
+				$scope.wikiError = "Sorry, not able to get any event data";
 			};
 		});
 	};
-
 
 	$scope.searchITunes = function() {
 		$scope.showITunes = true;
@@ -88,7 +86,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 					$scope.songs.push({'artist': song.artistName, 'title': song.trackName, 'album': song.collectionName, 'image': song.artworkUrl100, 'date': song.releaseDate, 'id': song.trackId, 'preview': $sce.trustAsResourceUrl(song.previewUrl), 'itunes': song.trackViewUrl});
 				});
 			} else {
-			 	$scope.iTunesError = "Sorry, not able to get songs"
+			 	$scope.iTunesError = "Sorry, no songs for your name"
 		 	};
 		});
 	};
@@ -116,7 +114,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 					$scope.movies.push({'title': movie.Title, 'year': movie.Year, 'id': movie.imdbID});
 				});
 			} else {
-				$scope.moviesError = "Sorry, not able to get movies"
+				$scope.moviesError = "Sorry, no movies for your name"
 			};
 		});
 	};
@@ -144,7 +142,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 				 $scope.books.push({'artist': book.artistName, 'title': book.trackName, 'image': book.artworkUrl100, 'date': book.releaseDate, 'itunes': book.trackViewUrl});
 				});
 			} else {
-			 	$scope.iBooksError = "Sorry, not able to get books"
+			 	$scope.iBooksError = "Sorry, no books for your name"
 		 	};
 		});
 	};

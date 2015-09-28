@@ -9,7 +9,7 @@ app.factory('GiphyService', ["DataService", function(DataService) {
     searchTerm = encodeURIComponent(term);
   }
 
-  GiphyService.search = function(term,cb) {
+  GiphyService.search = function(term) {
     if (term !== undefined) {
       GiphyService.setSearchTerm(term);
     }
@@ -34,7 +34,7 @@ app.factory('WikiService', ["JSONPDataService", function(JSONPDataService) {
     searchDay = encodeURIComponent(day);
   }
 
-  WikiService.search = function(month, day, cb) {
+  WikiService.search = function(month, day) {
     if (month !== undefined) {
       WikiService.setSearchTerm(month);
     };
@@ -60,7 +60,7 @@ app.factory('WaybackLAService', ["JSONPDataService", function(JSONPDataService) 
     searchTerm = encodeURIComponent(term);
   }
 
-  WaybackLAService.search = function(term,cb) {
+  WaybackLAService.search = function(term) {
     if (term !== undefined) {
       WaybackLAService.setSearchTerm(term);
     }
@@ -83,7 +83,7 @@ app.factory('WaybackIMDbService', ["JSONPDataService", function(JSONPDataService
     searchTerm = encodeURIComponent(term);
   }
 
-  WaybackIMDbService.search = function(term,cb) {
+  WaybackIMDbService.search = function(term) {
     if (term !== undefined) {
       WaybackIMDbService.setSearchTerm(term);
     }
@@ -107,7 +107,7 @@ app.factory('ITunesService', ["JSONPDataService", function(JSONPDataService) {
     searchTerm = encodeURIComponent(term);
   }
 
-  ITunesService.search = function(term,cb) {
+  ITunesService.search = function(term) {
     if (term !== undefined) {
       ITunesService.setSearchTerm(term);
     }
@@ -130,7 +130,7 @@ app.factory('ImdbService', ["DataService", function(DataService) {
     searchTerm = encodeURIComponent(term);
   }
 
-  ImdbService.search = function(term,cb) {
+  ImdbService.search = function(term) {
     if (term !== undefined) {
       ImdbService.setSearchTerm(term);
     }
@@ -155,7 +155,7 @@ app.factory('MovieService', ["DataService", function(DataService) {
     searchTerm = encodeURIComponent(term);
   }
 
-  MovieService.search = function(term,cb) {
+  MovieService.search = function(term) {
     if (term !== undefined) {
       MovieService.setSearchTerm(term);
     }
@@ -179,7 +179,7 @@ app.factory('IBooksService', ["JSONPDataService", function(JSONPDataService) {
     searchTerm = encodeURIComponent(term);
   }
 
-  IBooksService.search = function(term,cb) {
+  IBooksService.search = function(term) {
     if (term !== undefined) {
       IBooksService.setSearchTerm(term);
     }
