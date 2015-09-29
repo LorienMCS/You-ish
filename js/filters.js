@@ -3,8 +3,8 @@ app.filter('reverse', function() {
     var reversed = "";
     var output = "";
     if(input !== undefined && input.length > 0) {
-      for(var i = input.length-1; i >= 0; i--) {
-        reversed += input[i];
+      for(var i = 0; i < input.length; i++) {
+        reversed = input[i] + reversed;
       };
     };
     output = reversed.replace(/\w\S*/g, function(text) {

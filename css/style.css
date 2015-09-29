@@ -16,6 +16,10 @@ h1, h2, h3, h4, h5, h6 {
     text-shadow: .5px .5px .5px #aaa;
 }
 
+p, ul {
+	font-size: 1.2em;
+}
+
 .logo, h1, h2, h3 {
 	color: #096E66;
 }
