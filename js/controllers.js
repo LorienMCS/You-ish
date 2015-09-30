@@ -107,7 +107,6 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 		$scope.showMovies = true;
 		ImdbService.search($scope.firstName)
 		.then(function(obj) {
-			console.log(obj);
 			if(!obj.Error && obj.Search[0]!=undefined && obj.Search.length !== 0){
 				var objArr = obj.Search;
 				objArr.forEach(function(movie){

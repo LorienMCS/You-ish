@@ -136,7 +136,6 @@ app.factory('ImdbService', ["DataService", function(DataService) {
     }
 
     var url = baseUrl + searchTerm;
-    console.log(url);
 
     return DataService.getData(url);
   }
@@ -198,7 +197,6 @@ app.service('DataService', ["$http", "$q", function($http, $q) {
 
   DataService.getData = function(url) {
     var deferred = $q.defer();
-    console.log(url);
     $http.get(url).success(function(data) {
       deferred.resolve(data);
     }).error(function() {
@@ -218,7 +216,6 @@ app.service('JSONPDataService', ["$http", "$q", function($http, $q) {
 
   JSONPDataService.getData = function(url) {
     var deferred = $q.defer();
-    console.log(url);
     $http.jsonp(url).success(function(data) {
       deferred.resolve(data);
     }).error(function() {
