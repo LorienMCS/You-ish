@@ -27,7 +27,8 @@ app.factory('WikiService', ["JSONPDataService", function(JSONPDataService) {
   var WikiService = {};
   var baseUrl = "http://history.muffinlabs.com/date/";
   var jsonp = "?callback=JSON_CALLBACK";
-  var searchTerm = '';
+  var searchMonth = '';
+  var searchDay = '';
 
   WikiService.setSearchTerm = function(month, day) {
     searchMonth = encodeURIComponent(month);
