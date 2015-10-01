@@ -33,7 +33,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 	$scope.getGiphy = function() {
 		GiphyService.search($scope.firstName)
 		.then(function(obj) {
-			if(obj.data[0]!=undefined && obj.data.length !== 0){
+			if(obj.data[0]!==undefined && obj.data.length !== 0){
 				$scope.showGiphy = true;
 				$scope.giphy = obj.data[0].images.fixed_height.url;
 			} else {
@@ -57,7 +57,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 		$scope.showWiki = true;
 		WikiService.search($scope.month, $scope.day)
 		.then(function(obj) {
-			if(obj.data.Births[0]!=undefined && obj.data.Births.length !== 0){
+			if(obj.data.Births[0]!==undefined && obj.data.Births.length !== 0){
 	 			var birthArr = obj.data.Births;
 	 			for(var i = birthArr.length-1; i > birthArr.length-201; i--) {
 	 				$scope.births.push({'info': birthArr[i].text, 'year': birthArr[i].year});
@@ -65,7 +65,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 	 		} else {
 				$scope.wikiError = "Sorry, not able to get any birthday data";
 			};
-	 		if(obj.data.Events[0]!=undefined && obj.data.Events.length !== 0){
+	 		if(obj.data.Events[0]!==undefined && obj.data.Events.length !== 0){
 	 			var eventArr = obj.data.Events;
 	 			for(var i = eventArr.length-1; i >= 0; i--) {
 	 				$scope.events.push({'info': eventArr[i].text, 'year': eventArr[i].year});
@@ -107,7 +107,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 		$scope.showMovies = true;
 		ImdbService.search($scope.firstName)
 		.then(function(obj) {
-			if(!obj.Error && obj.Search[0]!=undefined && obj.Search.length !== 0){
+			if(!obj.Error && obj.Search[0]!==undefined && obj.Search.length !== 0){
 				var objArr = obj.Search;
 				objArr.forEach(function(movie){
 					$scope.movies.push({'title': movie.Title, 'year': movie.Year, 'id': movie.imdbID});
@@ -154,7 +154,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 			WaybackLAService.search(date)
 			.then(function(obj) {
 				waybackObj = obj.archived_snapshots.closest;
-				if(waybackObj!=undefined && waybackObj.available){
+				if(waybackObj!==undefined && waybackObj.available){
 					$scope.laTimes = $sce.trustAsResourceUrl(waybackObj.url);
 					waybackObj = {};
 				} else {
@@ -174,7 +174,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 			WaybackIMDbService.search(date)
 			.then(function(obj) {
 				waybackObj = obj.archived_snapshots.closest;
-				if(waybackObj!=undefined && waybackObj.available){
+				if(waybackObj!==undefined && waybackObj.available){
 					$scope.imdb = $sce.trustAsResourceUrl(waybackObj.url);
 					waybackObj = {};
 				} else {
