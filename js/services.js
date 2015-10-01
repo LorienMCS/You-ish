@@ -98,30 +98,6 @@ app.factory('WaybackIMDbService', ["JSONPDataService", function(JSONPDataService
 }]);
 
 
-app.factory('ITunesService', ["JSONPDataService", function(JSONPDataService) {
-  var ITunesService = {};
-  var baseUrl = "http://itunes.apple.com/search?callback=JSON_CALLBACK&term=";
-  var searchTerm = '';
-  var songSearch = "&entity=song&attribute=songTerm&explicit=no&limit=20";
-
-  ITunesService.setSearchTerm = function(term) {
-    searchTerm = encodeURIComponent(term);
-  }
-
-  ITunesService.search = function(term) {
-    if (term !== undefined) {
-      ITunesService.setSearchTerm(term);
-    }
-
-    var url = baseUrl + searchTerm + songSearch;
-
-    return JSONPDataService.getData(url);
-  }
-
-  return ITunesService;
-}]);
-
-
 app.factory('ImdbService', ["DataService", function(DataService) {
   var ImdbService = {};
   var baseUrl = "http://www.omdbapi.com/?s=";
@@ -166,6 +142,30 @@ app.factory('MovieService', ["DataService", function(DataService) {
   }
 
   return MovieService;
+}]);
+
+
+app.factory('ITunesService', ["JSONPDataService", function(JSONPDataService) {
+  var ITunesService = {};
+  var baseUrl = "http://itunes.apple.com/search?callback=JSON_CALLBACK&term=";
+  var searchTerm = '';
+  var songSearch = "&entity=song&attribute=songTerm&explicit=no&limit=20";
+
+  ITunesService.setSearchTerm = function(term) {
+    searchTerm = encodeURIComponent(term);
+  }
+
+  ITunesService.search = function(term) {
+    if (term !== undefined) {
+      ITunesService.setSearchTerm(term);
+    }
+
+    var url = baseUrl + searchTerm + songSearch;
+
+    return JSONPDataService.getData(url);
+  }
+
+  return ITunesService;
 }]);
 
 
