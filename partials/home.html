@@ -4,11 +4,11 @@
 
 		<div class="row">
 			<!-- Entry form for initial search info -->
-			<div class="col-md-6 data-form">
+			<div class="col-md-7 data-form">
 
 				<div class="row">
 					<h2 class="intro">Enter Some Data About Yourself</h2>
-					<h2 class="intro">And See Some Interesting Results!</h2>
+					<h2 class="intro form-row">And See Some Interesting Results!</h2>
 				</div>
 
 				<div class="row">
@@ -16,11 +16,13 @@
 					<div class="col-md-10">
 						<form class="form-horizontal" name="entry" novalidate>
 						  <div class="form-group">
-						  	<label class="col-md-6 control-label data-input" for="name">First Name: </label>
+						  	<label class="col-md-5 control-label data-input form-row" for="name">First Name: </label>
 						    <div class="col-md-4 text-col">
 						    	<div class="row">
-						    		<input class="form-control input-md data-input" type="text" ng-model="firstName" name="name" placeholder="First Name" required>
+						    		<input class="form-control input-md data-input form-row" type="text" ng-model="firstName" name="name" placeholder="First Name" required>
 						    	</div>
+						    </div>
+						    <div class="col-md-3">
 						    	<div class="row error" ng-show="entry.name.$touched">
 	    							<p class="error" ng-show="entry.name.$error.required">Please enter your first name.</p>
 						  		</div>
@@ -28,11 +30,13 @@
 						  </div>
 
 							<div class="form-group">
-					    	<label class="col-md-6 control-label data-input" for="month">Two-Digit Birth Month: </label>
-					    	<div class="col-md-4 text-col">
+					    	<label class="col-md-5 control-label data-input form-row" for="month">Two-Digit Birth Month: </label>
+					    	<div class="col-md-2 text-col">
 					    		<div class="row">
-					    			<input class="form-control input-md data-input" type="text" ng-model="month" ng-minlength=2 ng-pattern="/^(0?[1-9]|1[012])$/" name="month" placeholder="MM" required>
+					    			<input class="form-control input-md data-input form-row" type="text" ng-model="month" ng-minlength=2 ng-pattern="/^(0?[1-9]|1[012])$/" name="month" placeholder="MM" required>
 					    		</div>
+					    	</div>
+					    	<div class="col-md-5">
 					    		<div class="row error" ng-show="entry.month.$touched">
 	    							<p class="error" ng-show="entry.month.$error.required">Please enter your birth month.</p>
 						  		</div>
@@ -46,11 +50,13 @@
 					  	</div>
 
 							<div class="form-group">
-					    	<label class="col-md-6 control-label data-input" for="day">Two-Digit Birth Day: </label>
-					    	<div class="col-md-4 text-col">
+					    	<label class="col-md-5 control-label data-input form-row" for="day">Two-Digit Birth Day: </label>
+					    	<div class="col-md-2 text-col">
 					    		<div class="row">
-					    			<input class="form-control input-md data-input" type="text" ng-model="day" ng-minlength=2 ng-pattern="/^(0[1-9]|[12][0-9]|3[01])$/" name="day" placeholder="DD" required>
+					    			<input class="form-control input-md data-input form-row" type="text" ng-model="day" ng-minlength=2 ng-pattern="/^(0[1-9]|[12][0-9]|3[01])$/" name="day" placeholder="DD" required>
 					    		</div>
+					    	</div>
+					    	<div class="col-md-5">
 					    		<div class="row error" ng-show="entry.day.$touched">
 	    							<p class="error" ng-show="entry.day.$error.required">Please enter your birth day.</p>
 						  		</div>
@@ -64,10 +70,11 @@
 					  	</div>
 
 							<div class="form-group">
-						 		<label class="col-md-6 control-label data-input" for="first-search">Click Button for Results: </label>
-				  	 		<div class="col-md-4 text-col">
-					     		<button class="btn btn-custom" name="first-search" type="submit" ng-click="searchAll()">Click Me</button>
+						 		<label class="col-md-5 control-label data-input form-row" for="first-search">Click Button for Results: </label>
+				  	 		<div class="col-md-2 text-col">
+					     		<button class="btn btn-custom form-row" name="first-search" type="submit" ng-click="searchAll()">Click Me</button>
 					  		</div>
+					  		<div class="col-md-5"></div>
 					  	</div>
 						</form>
 					</div>
@@ -79,12 +86,13 @@
 			<div class="col-md-1">
 			</div>
 
-			<div class="col-md-4">
-				<div class="row">
-			  	<h3 class="reverse">Your Name, Reversed: <span>{{firstName | reverse}}</span></h3>
+			<div class="col-md-3">
+				<div class="row change-name">
+			  	<h4>Your Name, Reversed:</h4>
+			  	<h3>{{firstName | reverse}}</h3>
 			  </div>
-			  <div class="row flip-word">
-			  	<h3>Your Name, Upside-Down:</h3>
+			  <div class="row change-name">
+			  	<h4>Your Name, Upside-Down:</h4>
 			  	<div class="flip">
 			  		<h3>{{firstName}}</h3>
 			  	</div>

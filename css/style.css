@@ -16,7 +16,7 @@ p, ul {
 	font-size: 1.2em;
 }
 
-.logo, h1, h2, h3 {
+.logo, h1, h2, h3, h4 {
 	color: #096E66;
 }
 
@@ -34,6 +34,11 @@ p, ul {
 
 .error {
 	color: red;
+	padding-left: 5px;
+}
+
+.form-row {
+	margin-bottom: 28px;
 }
 
 .form-horizontal input.ng-invalid.ng-touched {
@@ -43,6 +48,10 @@ p, ul {
 
 input.ng-valid.ng-touched {
   border: 1px solid 3FABA3;
+}
+
+.form-horizontal .control-label{
+   text-align: left;
 }
 
 .panel-heading {
@@ -66,7 +75,12 @@ table {
 	padding-bottom: 10px;
 }
 
-.data-form, .reverse, .flip-word, .wayback-frame {
+.data-form {
+	padding-top: 20px;
+	height: 580px;
+}
+
+.data-form, .change-name, .wayback-frame {
 	background-color: #F6F7F7;
 	-webkit-box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
 	-moz-box-shadow: 9px 7px 22px -7px rgba(147,153,150,0.62);
@@ -84,10 +98,10 @@ table {
 	padding-top: 3px;
 }
 
-.flip-word {
-	padding-left: 10px;
+.change-name {
+	padding: 0 0 10px 10px;
 	margin-bottom: 20px;
-	height: 112px;
+	height: 120px;
 }
 
 .flip {
