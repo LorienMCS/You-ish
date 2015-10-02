@@ -1,14 +1,14 @@
 <div ng-controller="YouishController">
 
-	<div class="col-md-12">
+	<div class="col-md-12 new-section">
 
 		<div class="row">
+			<div class="col-md-1"></div>
 			<!-- Entry form for initial search info -->
-			<div class="col-md-7 data-form">
+			<div class="col-md-10 data-form">
 
 				<div class="row">
-					<h2 class="intro">Enter Some Data About Yourself</h2>
-					<h2 class="intro form-row">And See Some Interesting Results!</h2>
+					<h2 class="intro form-row">Enter Some Data About Yourself, and See Some Interesting Results!</h2>
 				</div>
 
 				<div class="row">
@@ -16,8 +16,8 @@
 					<div class="col-md-10">
 						<form class="form-horizontal" name="entry" novalidate>
 						  <div class="form-group">
-						  	<label class="col-md-5 control-label data-input form-row" for="name">First Name: </label>
-						    <div class="col-md-4 text-col">
+						  	<label class="col-md-4 control-label data-input form-row" for="name">First Name: </label>
+						    <div class="col-md-5 text-col">
 						    	<div class="row">
 						    		<input class="form-control input-md data-input form-row" type="text" ng-model="firstName" name="name" placeholder="First Name" required>
 						    	</div>
@@ -30,19 +30,23 @@
 						  </div>
 
 							<div class="form-group">
-					    	<label class="col-md-5 control-label data-input form-row" for="month">Two-Digit Birth Month: </label>
-					    	<div class="col-md-2 text-col">
+					    	<label class="col-md-4 control-label data-input form-row" for="month">Two-Digit Birth Month: </label>
+					    	<div class="col-md-1 text-col">
 					    		<div class="row">
 					    			<input class="form-control input-md data-input form-row" type="text" ng-model="month" ng-minlength=2 ng-pattern="/^(0?[1-9]|1[012])$/" name="month" placeholder="MM" required>
 					    		</div>
 					    	</div>
-					    	<div class="col-md-5">
+					    	<div class="col-md-2">
 					    		<div class="row error" ng-show="entry.month.$touched">
 	    							<p class="error" ng-show="entry.month.$error.required">Please enter your birth month.</p>
 						  		</div>
+						  	</div>
+						  	<div class="col-md-2">
 						  		<div class="row error" ng-show="entry.month.$touched">
 	    							<p class="error" ng-show="entry.month.$error.minlength">Please enter a two-digit number.</p>
 						  		</div>
+						  	</div>
+						  	<div class="col-md-3">
 						  		<div class="row error" ng-show="entry.month.$touched">
 	    							<p class="error" ng-show="entry.month.$error.pattern">Please enter a valid two-digit month.</p>
 						  		</div>
@@ -50,19 +54,23 @@
 					  	</div>
 
 							<div class="form-group">
-					    	<label class="col-md-5 control-label data-input form-row" for="day">Two-Digit Birth Day: </label>
-					    	<div class="col-md-2 text-col">
+					    	<label class="col-md-4 control-label data-input form-row" for="day">Two-Digit Birth Day: </label>
+					    	<div class="col-md-1 text-col">
 					    		<div class="row">
 					    			<input class="form-control input-md data-input form-row" type="text" ng-model="day" ng-minlength=2 ng-pattern="/^(0[1-9]|[12][0-9]|3[01])$/" name="day" placeholder="DD" required>
 					    		</div>
 					    	</div>
-					    	<div class="col-md-5">
+					    	<div class="col-md-2">
 					    		<div class="row error" ng-show="entry.day.$touched">
 	    							<p class="error" ng-show="entry.day.$error.required">Please enter your birth day.</p>
 						  		</div>
+						  	</div>
+						  	<div class="col-md-2">
 						  		<div class="row error" ng-show="entry.day.$touched">
 	    							<p class="error" ng-show="entry.day.$error.minlength">Please enter a two-digit number.</p>
 						  		</div>
+						  	</div>
+						  	<div class="col-md-3">
 						  		<div class="row error" ng-show="entry.day.$touched">
 	    							<p class="error" ng-show="entry.day.$error.pattern">Please enter a valid two-digit day.</p>
 						  		</div>
@@ -70,7 +78,7 @@
 					  	</div>
 
 							<div class="form-group">
-						 		<label class="col-md-5 control-label data-input form-row" for="first-search">Click Button for Results: </label>
+						 		<label class="col-md-5 control-label data-input form-row" for="first-search">Click Button or Press Enter for Results: </label>
 				  	 		<div class="col-md-2 text-col">
 					     		<button class="btn btn-custom form-row" name="first-search" type="submit" ng-click="searchAll()">Click Me</button>
 					  		</div>
@@ -83,20 +91,36 @@
 
 			</div><!-- Closing div for initial search info -->
 
-			<div class="col-md-1">
-			</div>
+			<div class="col-md-1"></div>
+		</div>
+	</div><!-- Closing div for search form section -->
+
+
+	<div class="clearfix"></div>
+
+	<div class="col-md-12 new-section">
+
+		<div class="row first-section">
+
+			<div class="col-md-1"></div>
 
 			<div class="col-md-3">
 				<div class="row change-name">
 			  	<h4>Your Name, Reversed:</h4>
 			  	<h3>{{firstName | reverse}}</h3>
 			  </div>
+			</div>
+
+			<div class="col-md-3">
 			  <div class="row change-name">
 			  	<h4>Your Name, Upside-Down:</h4>
 			  	<div class="flip">
 			  		<h3>{{firstName}}</h3>
 			  	</div>
 			  </div>
+			</div>
+
+			<div class="col-md-4">
 			  <div class="row text-center" ng-show="showGiphy">
 			  	<img ng-src="{{giphy}}" alt="giphy of {{firstName}}"/>
 			  </div>
@@ -108,14 +132,11 @@
 				</div>
 				<div class="row text-center">
 					<h2>{{giphyError}}</h2>
-				<div>
+				</div>
 			</div>
 
-			<div class="col-md-1">
-			</div>
-
+			<div class="col-md-1"></div>
 		</div>
-
 	</div><!-- Closing div for first section -->
 
 	<div class="clearfix"></div>
