@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col-md-1"></div>
 			<!-- Entry form for initial search info -->
-			<div class="col-md-10 data-form">
+			<div class="col-md-10 data-form" id="form-landing">
 
 				<div class="row">
 					<h2 class="intro form-row">Enter Some Data About Yourself, and See Some Interesting Results!</h2>
@@ -98,7 +98,7 @@
 
 	<div class="clearfix"></div>
 
-	<div class="col-md-12 new-section">
+	<div class="col-md-12 new-section" id="giphy-landing">
 
 		<div class="row first-section">
 
@@ -141,7 +141,7 @@
 
 	<div class="clearfix"></div>
 
-	<div class="col-md-12 new-section">
+	<div class="col-md-12 new-section" id="wiki-landing">
 		<!-- Wiki search -->
 		<div class="row" ng-show="showWiki">
 			<div class="col-md-6">
@@ -183,7 +183,7 @@
 				</div>
 				<!-- Songs search -->
 				<div class="clearfix"></div>
-				<div class="row">
+				<div class="row" id="itunes-landing">
 					<div class="text-center" ng-show="showITunes"><h3 class="header">Some Songs With {{firstName}} In The Title</h3></div>
 					<div class="row" ng-show="showITunes">
 						<h2>{{iTunesError}}</h2>
@@ -231,7 +231,7 @@
 
 	<div class="clearfix"></div>
 
-	<div class="col-md-12 new-section">
+	<div class="col-md-12 new-section" id="movies-landing">
 		<!-- Movies search -->
 		<div class="text-center" ng-show="showMovies"><h3 class="header">Some Movies and TV Shows With {{firstName}} In The Title</h3></div>
 		<h2>{{moviesError}}</h2>
@@ -301,7 +301,7 @@
 
 	<div class="clearfix"></div>
 
-	<div class="col-md-12 new-section">
+	<div class="col-md-12 new-section" id="books-landing">
 		<!-- iTunes book search -->
 		<div class="text-center" ng-show="showIBooks"><h3 class="header">Some Books With {{firstName}} In The Title</h3></div>
 		<h2>{{iBooksError}}</h2>
@@ -342,7 +342,7 @@
 
 	<!-- Wayback Machine search -->
 
-	<div class="col-md-12 new-section">
+	<div class="col-md-12 new-section" id="wayback-landing">
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-10 wayback-frame" ng-show="showLATimes">
