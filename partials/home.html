@@ -1,380 +1,405 @@
 <div ng-controller="YouishController">
 
-	<div class="col-md-12 new-section">
+	<header>
+	  <nav class="navbar navbar-default navbar-fixed-top">
+	    <div class="navbar-header">
+	      <div class="navbar-brand"><a href="/home" class="logo">You-ish</a></div>
+	    </div>
+	      <ul class="nav navbar-nav">
+	        <li><a href="/about" class="nav-link">About</a></li>
+	        <li><a href="/contact" class="nav-link">Contact</a></li>
+	      </ul>
+	      <ul class="nav navbar-nav" ng-show="showJumpLinks">
+	        <li ><a href ng-click="scrollTo('jump-to-form')" class="nav-link">Form</a></li>
+	        <li ><a href ng-click="scrollTo('jump-to-giphy')" class="nav-link">Giphy</a></li>
+	        <li ><a href ng-click="scrollTo('jump-to-wiki')" class="nav-link">Wiki Data</a></li>
+	        <li ><a href ng-click="scrollTo('jump-to-itunes')" class="nav-link">Songs</a></li>
+	        <li ><a href ng-click="scrollTo('jump-to-movies')" class="nav-link">Movies</a></li>
+	        <li ><a href ng-click="scrollTo('jump-to-books')" class="nav-link">Books</a></li>
+	        <li ><a href ng-click="scrollTo('jump-to-wayback')" class="nav-link">Wayback Pages</a></li>
+	      </ul>
+	  </nav>
+	</header>
 
-		<div class="row">
-			<div class="col-md-1"></div>
-			<!-- Entry form for initial search info -->
-			<div class="col-md-10 data-form" id="form-landing">
+	<div class="container">
 
-				<div class="row">
-					<h2 class="intro form-row">Enter Some Data About Yourself, and See Some Interesting Results!</h2>
-				</div>
+			<div class="col-md-12 new-section">
 
 				<div class="row">
 					<div class="col-md-1"></div>
-					<div class="col-md-10">
-						<form class="form-horizontal" name="entry" novalidate>
-						  <div class="form-group">
-						  	<label class="col-md-4 control-label data-input form-row" for="name">First Name: </label>
-						    <div class="col-md-5 text-col">
-						    	<div class="row">
-						    		<input class="form-control input-md data-input form-row" type="text" ng-model="firstName" name="name" placeholder="First Name" required>
-						    	</div>
-						    </div>
-						    <div class="col-md-3">
-						    	<div class="row error" ng-show="entry.name.$touched">
-	    							<p class="error" ng-show="entry.name.$error.required">Please enter your first name.</p>
-						  		</div>
+					<!-- Entry form for initial search info -->
+					<div class="col-md-10 data-form" id="jump-to-form">
+
+						<div class="row">
+							<h2 class="intro form-row">Enter Some Data About Yourself, and See Some Interesting Results!</h2>
+						</div>
+
+						<div class="row">
+							<div class="col-md-1"></div>
+							<div class="col-md-10">
+								<form class="form-horizontal" name="entry" novalidate>
+								  <div class="form-group">
+								  	<label class="col-md-4 control-label data-input form-row" for="name">First Name: </label>
+								    <div class="col-md-5 text-col">
+								    	<div class="row">
+								    		<input class="form-control input-md data-input form-row" type="text" ng-model="firstName" name="name" placeholder="First Name" required>
+								    	</div>
+								    </div>
+								    <div class="col-md-3">
+								    	<div class="row error" ng-show="entry.name.$touched">
+			    							<p class="error" ng-show="entry.name.$error.required">Please enter your first name.</p>
+								  		</div>
+								  	</div>
+								  </div>
+
+									<div class="form-group">
+							    	<label class="col-md-4 control-label data-input form-row" for="month">Two-Digit Birth Month: </label>
+							    	<div class="col-md-1 text-col">
+							    		<div class="row">
+							    			<input class="form-control input-md data-input form-row" type="text" ng-model="month" ng-minlength=2 ng-pattern="/^(0?[1-9]|1[012])$/" name="month" placeholder="MM" required>
+							    		</div>
+							    	</div>
+							    	<div class="col-md-2">
+							    		<div class="row error" ng-show="entry.month.$touched">
+			    							<p class="error" ng-show="entry.month.$error.required">Please enter your birth month.</p>
+								  		</div>
+								  	</div>
+								  	<div class="col-md-2">
+								  		<div class="row error" ng-show="entry.month.$touched">
+			    							<p class="error" ng-show="entry.month.$error.minlength">Please enter a two-digit number.</p>
+								  		</div>
+								  	</div>
+								  	<div class="col-md-3">
+								  		<div class="row error" ng-show="entry.month.$touched">
+			    							<p class="error" ng-show="entry.month.$error.pattern">Please enter a valid two-digit month.</p>
+								  		</div>
+							    	</div>
+							  	</div>
+
+									<div class="form-group">
+							    	<label class="col-md-4 control-label data-input form-row" for="day">Two-Digit Birth Day: </label>
+							    	<div class="col-md-1 text-col">
+							    		<div class="row">
+							    			<input class="form-control input-md data-input form-row" type="text" ng-model="day" ng-minlength=2 ng-pattern="/^(0[1-9]|[12][0-9]|3[01])$/" name="day" placeholder="DD" required>
+							    		</div>
+							    	</div>
+							    	<div class="col-md-2">
+							    		<div class="row error" ng-show="entry.day.$touched">
+			    							<p class="error" ng-show="entry.day.$error.required">Please enter your birth day.</p>
+								  		</div>
+								  	</div>
+								  	<div class="col-md-2">
+								  		<div class="row error" ng-show="entry.day.$touched">
+			    							<p class="error" ng-show="entry.day.$error.minlength">Please enter a two-digit number.</p>
+								  		</div>
+								  	</div>
+								  	<div class="col-md-3">
+								  		<div class="row error" ng-show="entry.day.$touched">
+			    							<p class="error" ng-show="entry.day.$error.pattern">Please enter a valid two-digit day.</p>
+								  		</div>
+							    	</div>
+							  	</div>
+
+									<div class="form-group">
+								 		<label class="col-md-5 control-label data-input form-row" for="first-search">Click Button or Press Enter for Results: </label>
+						  	 		<div class="col-md-2 text-col">
+							     		<button class="btn btn-custom form-row" name="first-search" type="submit" ng-click="searchAll()">Click Me</button>
+							  		</div>
+							  		<div class="col-md-5"></div>
+							  	</div>
+								</form>
+							</div>
+							<div class="col-md-1"></div>
+						</div>
+
+					</div><!-- Closing div for initial search info -->
+
+					<div class="col-md-1"></div>
+				</div>
+			</div><!-- Closing div for search form section -->
+
+
+			<div class="clearfix"></div>
+
+			<div class="col-md-12 new-section" id="jump-to-giphy">
+
+				<div class="row first-section">
+
+					<div class="col-md-1"></div>
+
+					<div class="col-md-3">
+						<div class="row change-name">
+					  	<h4>Your Name, Reversed:</h4>
+					  	<h3>{{firstName | reverse}}</h3>
+					  </div>
+					</div>
+
+					<div class="col-md-3">
+					  <div class="row change-name">
+					  	<h4>Your Name, Upside-Down:</h4>
+					  	<div class="flip">
+					  		<h3>{{firstName}}</h3>
+					  	</div>
+					  </div>
+					</div>
+
+					<div class="col-md-4">
+					  <div class="row text-center" ng-show="showGiphy">
+					  	<img ng-src="{{giphy}}" alt="giphy of {{firstName}}"/>
+					  </div>
+						<div class="row text-center" ng-show="showGiphy">
+							<button class="btn btn-custom" type="submit" ng-click="toggleGiphy()">Had Enough Giphy? Click Here to Hide It</button>
+						</div>
+						<div class="row text-center" ng-show="noGiphy">
+							<button class="btn btn-custom" type="submit" ng-click="toggleGiphy()">I Changed My Mind, Show Me The Giphy</button>
+						</div>
+						<div class="row text-center">
+							<h2>{{giphyError}}</h2>
+						</div>
+					</div>
+
+					<div class="col-md-1"></div>
+				</div>
+			</div><!-- Closing div for first section -->
+
+			<div class="clearfix"></div>
+
+			<div class="col-md-12 new-section" id="jump-to-wiki">
+				<!-- Wiki search -->
+				<div class="row" ng-show="showWiki">
+					<div class="col-md-6">
+						<div class="text-center"><h3 class="header">Some Other Notable People Born on {{month}}/{{day}}</h3></div>
+						<h2>{{wikiError}}</h2>
+						<table class="table">
+					  	<thead>
+					  		<tr>
+					  			<th><h4>Year</h4></th>
+					  			<th><h4>Information</h4></th>
+					  		</tr>
+					  	</thead>
+					  	<tbody>
+					  		<tr ng-repeat="birth in births" class="births-animate">
+					  			<td>{{birth.year}}</td>
+									<td>{{birth.info}}</td>
+					  		</tr>
+					  	</tbody>
+					  </table>
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="text-center"><h3 class="header">Some Notable Events on {{month}}/{{day}}</h3></div>
+							<h2>{{wikiError}}</h2>
+							<table class="table">
+						  	<thead>
+						  		<tr>
+						  			<th><h4>Year</h4></th>
+					  				<th><h4>Information</h4></th>
+						  		</tr>
+						  	</thead>
+						  	<tbody>
+						  		<tr ng-repeat="event in events" class="events-animate">
+						  			<td>{{event.year}}</td>
+										<td>{{event.info}}</td>
+						  		</tr>
+						  	</tbody>
+						  </table>
+						</div>
+						<!-- Songs search -->
+						<div class="clearfix"></div>
+						<div class="row" id="jump-to-itunes">
+							<div class="text-center" ng-show="showITunes"><h3 class="header">Some Songs With {{firstName}} In The Title</h3></div>
+							<div class="row" ng-show="showITunes">
+								<h2>{{iTunesError}}</h2>
+								<div ng-repeat="song in songs track by $index">
+							  	<div class="panel panel-default itunes-data">
+							    	<div class="panel-heading">
+							      	<h3 class="panel-title">{{song.title}}</h3>
+							    	</div>
+							  		<div class="panel-body">
+							  			<div class="row">
+											  <div class="col-md-3"><img ng-src="{{song.image}}" alt="photo of {{song.title}}" class="img-responsive" class="itunes-img"/></div>
+											  <div class="col-md-9">
+											  	<div class="row">
+											  		<strong>Artist: </strong>{{song.artist}}
+											  	</div>
+											  	<div class="row">
+											  		<strong>Album: </strong>{{song.album}}
+											  	</div>
+											  	<div class="row">
+											  		<strong>Release Date: </strong>{{song.date | amDateFormat: 'MMMM Do, YYYY'}}
+											  	</div>
+											  </div>
+											</div>
+											<div class="row">
+											  <div class="col-md-4">
+											  	<audio id="{{song.id}}" ng-src="{{song.preview}}"></audio>
+							  					<button class="btn btn-default btn-sm" name="play-song" ng-click="play(song)">Play Song Preview</button>
+							  				</div>
+											  <div class="col-md-4">
+											  	<button class="btn btn-default btn-sm" name="pause-song" ng-click="pause(song)">Pause Song Preview</button>
+											  </div>
+											  <div class="col-md-4">
+											  	<a href="{{song.itunes}}" target="_blank">
+													<img ng-src="images/iTunes_Badge.png" width="95" height="32" alt="Link to iTunes" /></a>
+												</div>
+											</div>
+							  		</div>
+									</div>
 						  	</div>
 						  </div>
+			  		</div>
+					</div>
+				</div>
+			</div><!-- Closing div for second section -->
 
-							<div class="form-group">
-					    	<label class="col-md-4 control-label data-input form-row" for="month">Two-Digit Birth Month: </label>
-					    	<div class="col-md-1 text-col">
-					    		<div class="row">
-					    			<input class="form-control input-md data-input form-row" type="text" ng-model="month" ng-minlength=2 ng-pattern="/^(0?[1-9]|1[012])$/" name="month" placeholder="MM" required>
-					    		</div>
-					    	</div>
-					    	<div class="col-md-2">
-					    		<div class="row error" ng-show="entry.month.$touched">
-	    							<p class="error" ng-show="entry.month.$error.required">Please enter your birth month.</p>
-						  		</div>
-						  	</div>
-						  	<div class="col-md-2">
-						  		<div class="row error" ng-show="entry.month.$touched">
-	    							<p class="error" ng-show="entry.month.$error.minlength">Please enter a two-digit number.</p>
-						  		</div>
-						  	</div>
-						  	<div class="col-md-3">
-						  		<div class="row error" ng-show="entry.month.$touched">
-	    							<p class="error" ng-show="entry.month.$error.pattern">Please enter a valid two-digit month.</p>
-						  		</div>
-					    	</div>
-					  	</div>
+			<div class="clearfix"></div>
 
-							<div class="form-group">
-					    	<label class="col-md-4 control-label data-input form-row" for="day">Two-Digit Birth Day: </label>
-					    	<div class="col-md-1 text-col">
-					    		<div class="row">
-					    			<input class="form-control input-md data-input form-row" type="text" ng-model="day" ng-minlength=2 ng-pattern="/^(0[1-9]|[12][0-9]|3[01])$/" name="day" placeholder="DD" required>
-					    		</div>
-					    	</div>
-					    	<div class="col-md-2">
-					    		<div class="row error" ng-show="entry.day.$touched">
-	    							<p class="error" ng-show="entry.day.$error.required">Please enter your birth day.</p>
-						  		</div>
-						  	</div>
-						  	<div class="col-md-2">
-						  		<div class="row error" ng-show="entry.day.$touched">
-	    							<p class="error" ng-show="entry.day.$error.minlength">Please enter a two-digit number.</p>
-						  		</div>
-						  	</div>
-						  	<div class="col-md-3">
-						  		<div class="row error" ng-show="entry.day.$touched">
-	    							<p class="error" ng-show="entry.day.$error.pattern">Please enter a valid two-digit day.</p>
-						  		</div>
-					    	</div>
-					  	</div>
+			<div class="col-md-12 new-section" id="jump-to-movies">
+				<!-- Movies search -->
+				<div class="text-center" ng-show="showMovies"><h3 class="header">Some Movies and TV Shows With {{firstName}} In The Title</h3></div>
+				<h2>{{moviesError}}</h2>
+				<div class="row" ng-show="showMovies">
+					<div ng-repeat="movie in movies track by $index">
+			    	<div class="col-md-6">
+			      	<div class="panel panel-default">
+			        	<div class="panel-heading">
+			          	<h3 class="panel-title">{{movie.title}}</h3>
+			        	</div>
+			      		<div class="panel-body">{{movie.year}}<span class="pull-right"><button class="btn btn-default btn-sm" name="find-movie" type="submit" ng-click="getMovieDetails(movie)">Click for Details</button></span>
+			      		</div>
+			    		</div>
+			  		</div>
+			  	</div>
+			  </div>
+			</div><!-- Closing div for all movies section -->
 
-							<div class="form-group">
-						 		<label class="col-md-5 control-label data-input form-row" for="first-search">Click Button or Press Enter for Results: </label>
-				  	 		<div class="col-md-2 text-col">
-					     		<button class="btn btn-custom form-row" name="first-search" type="submit" ng-click="searchAll()">Click Me</button>
-					  		</div>
-					  		<div class="col-md-5"></div>
-					  	</div>
-						</form>
+			<div class="clearfix"></div>
+
+			<div class="col-md-12 new-section">
+				<!-- Display individual movie -->
+			  <div class="row" ng-show="showMovie">
+			  	<div class="text-center"><h2>{{movieError}}</h2></div>
+			    <div class="col-md-6">
+			    	<div class="panel panel-default">
+		   				<div class="panel-heading">{{details.Title}}</div>
+		      		<div class="panel-body">
+		         		<p><strong>Plot: </strong>{{details.Plot}}</p>
+		   				</div>
+		   				<ul class="list-group">
+		   				  <li class="list-group-item"><strong>Director: </strong>{{details.Director}}</li>
+		      			<li class="list-group-item"><strong>Starring: </strong>{{details.Actors}}</li>
+		      			<li class="list-group-item"><strong>Awards: </strong>{{details.Awards}}</li>
+		      			<li class="list-group-item"><strong>Country: </strong>{{details.Country}}</li>
+		      			<li class="list-group-item"><strong>Genre: </strong>{{details.Genre}}</li>
+		      			<li class="list-group-item"><strong>Language: </strong>{{details.Language}}</li>
+		      			<li class="list-group-item"><strong>Rated: </strong>{{details.Rated}}</li>
+		      			<li class="list-group-item"><strong>Runtime: </strong>{{details.Runtime}}</li>
+		      			<li class="list-group-item"><strong>Writer: </strong>{{details.Writer}}</li>
+		      			<li class="list-group-item"><strong>Year: </strong>{{details.Year}}</li>
+		      			<li class="list-group-item"><strong>imdb Rating: </strong>{{details.imdbRating}}</li>
+		      			<li class="list-group-item"><strong>imdb Votes: </strong>{{details.imdbVotes}}</li>
+		   				</ul>
+						</div>
+					</div><!-- closing div for movie details section -->
+					<div class="col-md-6">
+						<div class="panel panel-default">
+					   	<div class="panel-heading">Rotten Tomatoes details for {{details.Title}}</div>
+					   	<ul class="list-group">
+					   		<li class="list-group-item"><strong>Tomato Consensus: </strong>{{details.tomatoConsensus}}</li>
+					      <li class="list-group-item"><strong>Tomato Fresh: </strong>{{details.tomatoFresh}}</li>
+					      <li class="list-group-item"><strong>Tomato Rotten: </strong>{{details.tomatoRotten}}</li>
+					      <li class="list-group-item"><strong>Tomato Meter: </strong>{{details.tomatoMeter}}</li>
+					      <li class="list-group-item"><strong>Tomato Rating: </strong>{{details.tomatoRating}}</li>
+					      <li class="list-group-item"><strong>Tomato Reviews: </strong>{{details.tomatoReviews}}</li>
+					      <li class="list-group-item"><strong>Tomato User Meter: </strong>{{details.tomatoUserMeter}}</li>
+					      <li class="list-group-item"><strong>Tomato User Rating: </strong>{{details.tomatoUserRating}}</li>
+					      <li class="list-group-item"><strong>Tomato User Reviews: </strong>{{details.tomatoUserReviews}}</li>
+					   	</ul>
+						</div>
+					</div><!-- closing div for Rotten Tomatoes section -->
+			  </div><!-- closing div for all details -->
+
+			</div><!-- Closing div for individual movie section -->
+
+
+			<div class="clearfix"></div>
+
+			<div class="col-md-12 new-section" id="jump-to-books">
+				<!-- iTunes book search -->
+				<div class="text-center" ng-show="showIBooks"><h3 class="header">Some Books With {{firstName}} In The Title</h3></div>
+				<h2>{{iBooksError}}</h2>
+				<div class="row" ng-show="showIBooks">
+					<div ng-repeat="book in books track by $index">
+			    	<div class="col-md-12">
+			      	<div class="panel panel-default itunes-data">
+			        	<div class="panel-heading">
+			          	<h4 class="panel-title">{{book.title}}</h4>
+			        	</div>
+			      		<div class="panel-body">
+			      			<div class="row">
+			    				  <div class="col-md-3"><img ng-src="{{book.image}}" alt="photo of {{book.title}}" class="img-responsive" class="itunes-img"/></div>
+			    				  <div class="col-md-9">
+			    				  	<div class="row">
+			    				  		<strong>Artist: </strong>{{book.artist}}
+			    				  	</div>
+			    				  	<div class="row">
+			    				  		<strong>Release Date: </strong>{{book.date | amDateFormat: 'MMMM Do, YYYY'}}
+			    				  	</div>
+			    				  	<div class="row">
+			    				  		<a href="{{book.itunes}}" target="_blank">
+			    							<img ng-src="images/iTunes_Badge.png" width="90" height="28" alt="Link to iTunes" /></a>
+			    				  	</div>
+			    				  </div>
+			    				</div>
+			      		</div>
+			    		</div>
+			  		</div>
+			  	</div>
+			  </div>
+			</div><!-- Closing div for books section -->
+
+
+
+
+			<div class="clearfix"></div>
+
+			<!-- Wayback Machine search -->
+
+			<div class="col-md-12 new-section" id="jump-to-wayback">
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-10 wayback-frame" ng-show="showLATimes">
+						<div class="text-center">
+							<h2>{{laTimesError}}</h2>
+							<h3>Website for the LA Times From {{month}}/{{day}}/05</h3>
+							<h4>(Or nearest available date)</h4>
+							<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
+						</div>
+						<div class="embed-responsive embed-responsive-16by9">
+							<iframe class="embed-responsive-item" ng-src="{{laTimes}}"></iframe>
+						</div>
 					</div>
 					<div class="col-md-1"></div>
 				</div>
+			</div><!-- Closing div for Wayback LA Times section -->
 
-			</div><!-- Closing div for initial search info -->
-
-			<div class="col-md-1"></div>
-		</div>
-	</div><!-- Closing div for search form section -->
-
-
-	<div class="clearfix"></div>
-
-	<div class="col-md-12 new-section" id="giphy-landing">
-
-		<div class="row first-section">
-
-			<div class="col-md-1"></div>
-
-			<div class="col-md-3">
-				<div class="row change-name">
-			  	<h4>Your Name, Reversed:</h4>
-			  	<h3>{{firstName | reverse}}</h3>
-			  </div>
-			</div>
-
-			<div class="col-md-3">
-			  <div class="row change-name">
-			  	<h4>Your Name, Upside-Down:</h4>
-			  	<div class="flip">
-			  		<h3>{{firstName}}</h3>
-			  	</div>
-			  </div>
-			</div>
-
-			<div class="col-md-4">
-			  <div class="row text-center" ng-show="showGiphy">
-			  	<img ng-src="{{giphy}}" alt="giphy of {{firstName}}"/>
-			  </div>
-				<div class="row text-center" ng-show="showGiphy">
-					<button class="btn btn-custom" type="submit" ng-click="toggleGiphy()">Had Enough Giphy? Click Here to Hide It</button>
-				</div>
-				<div class="row text-center" ng-show="noGiphy">
-					<button class="btn btn-custom" type="submit" ng-click="toggleGiphy()">I Changed My Mind, Show Me The Giphy</button>
-				</div>
-				<div class="row text-center">
-					<h2>{{giphyError}}</h2>
-				</div>
-			</div>
-
-			<div class="col-md-1"></div>
-		</div>
-	</div><!-- Closing div for first section -->
-
-	<div class="clearfix"></div>
-
-	<div class="col-md-12 new-section" id="wiki-landing">
-		<!-- Wiki search -->
-		<div class="row" ng-show="showWiki">
-			<div class="col-md-6">
-				<div class="text-center"><h3 class="header">Some Other Notable People Born on {{month}}/{{day}}</h3></div>
-				<h2>{{wikiError}}</h2>
-				<table class="table">
-			  	<thead>
-			  		<tr>
-			  			<th><h4>Year</h4></th>
-			  			<th><h4>Information</h4></th>
-			  		</tr>
-			  	</thead>
-			  	<tbody>
-			  		<tr ng-repeat="birth in births" class="births-animate">
-			  			<td>{{birth.year}}</td>
-							<td>{{birth.info}}</td>
-			  		</tr>
-			  	</tbody>
-			  </table>
-			</div>
-			<div class="col-md-6">
+			<div class="col-md-12 new-section">
 				<div class="row">
-					<div class="text-center"><h3 class="header">Some Notable Events on {{month}}/{{day}}</h3></div>
-					<h2>{{wikiError}}</h2>
-					<table class="table">
-				  	<thead>
-				  		<tr>
-				  			<th><h4>Year</h4></th>
-			  				<th><h4>Information</h4></th>
-				  		</tr>
-				  	</thead>
-				  	<tbody>
-				  		<tr ng-repeat="event in events" class="events-animate">
-				  			<td>{{event.year}}</td>
-								<td>{{event.info}}</td>
-				  		</tr>
-				  	</tbody>
-				  </table>
+					<div class="col-md-1"></div>
+					<div class="col-md-10 wayback-frame" ng-show="showImdb">
+						<div class="text-center">
+							<h2>{{imdbError}}</h2>
+							<h3>Website for IMDb From {{month}}/{{day}}/05</h3>
+							<h4>(Or nearest available date)</h4>
+							<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
+						</div>
+						<div class="embed-responsive embed-responsive-16by9">
+							<iframe class="embed-responsive-item" ng-src="{{imdb}}"></iframe>
+						</div>
+					</div>
 				</div>
-				<!-- Songs search -->
-				<div class="clearfix"></div>
-				<div class="row" id="itunes-landing">
-					<div class="text-center" ng-show="showITunes"><h3 class="header">Some Songs With {{firstName}} In The Title</h3></div>
-					<div class="row" ng-show="showITunes">
-						<h2>{{iTunesError}}</h2>
-						<div ng-repeat="song in songs track by $index">
-					  	<div class="panel panel-default itunes-data">
-					    	<div class="panel-heading">
-					      	<h3 class="panel-title">{{song.title}}</h3>
-					    	</div>
-					  		<div class="panel-body">
-					  			<div class="row">
-									  <div class="col-md-3"><img ng-src="{{song.image}}" alt="photo of {{song.title}}" class="img-responsive" class="itunes-img"/></div>
-									  <div class="col-md-9">
-									  	<div class="row">
-									  		<strong>Artist: </strong>{{song.artist}}
-									  	</div>
-									  	<div class="row">
-									  		<strong>Album: </strong>{{song.album}}
-									  	</div>
-									  	<div class="row">
-									  		<strong>Release Date: </strong>{{song.date | amDateFormat: 'MMMM Do, YYYY'}}
-									  	</div>
-									  </div>
-									</div>
-									<div class="row">
-									  <div class="col-md-4">
-									  	<audio id="{{song.id}}" ng-src="{{song.preview}}"></audio>
-					  					<button class="btn btn-default btn-sm" name="play-song" ng-click="play(song)">Play Song Preview</button>
-					  				</div>
-									  <div class="col-md-4">
-									  	<button class="btn btn-default btn-sm" name="pause-song" ng-click="pause(song)">Pause Song Preview</button>
-									  </div>
-									  <div class="col-md-4">
-									  	<a href="{{song.itunes}}" target="_blank">
-											<img ng-src="images/iTunes_Badge.png" width="95" height="32" alt="Link to iTunes" /></a>
-										</div>
-									</div>
-					  		</div>
-							</div>
-				  	</div>
-				  </div>
-	  		</div>
-			</div>
-		</div>
-	</div><!-- Closing div for second section -->
+			</div><!-- Closing div for Wayback IMDb section -->
 
-	<div class="clearfix"></div>
-
-	<div class="col-md-12 new-section" id="movies-landing">
-		<!-- Movies search -->
-		<div class="text-center" ng-show="showMovies"><h3 class="header">Some Movies and TV Shows With {{firstName}} In The Title</h3></div>
-		<h2>{{moviesError}}</h2>
-		<div class="row" ng-show="showMovies">
-			<div ng-repeat="movie in movies track by $index">
-	    	<div class="col-md-6">
-	      	<div class="panel panel-default">
-	        	<div class="panel-heading">
-	          	<h3 class="panel-title">{{movie.title}}</h3>
-	        	</div>
-	      		<div class="panel-body">{{movie.year}}<span class="pull-right"><button class="btn btn-default btn-sm" name="find-movie" type="submit" ng-click="getMovieDetails(movie)">Click for Details</button></span>
-	      		</div>
-	    		</div>
-	  		</div>
-	  	</div>
-	  </div>
-	</div><!-- Closing div for all movies section -->
-
-	<div class="clearfix"></div>
-
-	<div class="col-md-12 new-section">
-		<!-- Display individual movie -->
-	  <div class="row" ng-show="showMovie">
-	  	<div class="text-center"><h2>{{movieError}}</h2></div>
-	    <div class="col-md-6">
-	    	<div class="panel panel-default">
-   				<div class="panel-heading">{{details.Title}}</div>
-      		<div class="panel-body">
-         		<p><strong>Plot: </strong>{{details.Plot}}</p>
-   				</div>
-   				<ul class="list-group">
-   				  <li class="list-group-item"><strong>Director: </strong>{{details.Director}}</li>
-      			<li class="list-group-item"><strong>Starring: </strong>{{details.Actors}}</li>
-      			<li class="list-group-item"><strong>Awards: </strong>{{details.Awards}}</li>
-      			<li class="list-group-item"><strong>Country: </strong>{{details.Country}}</li>
-      			<li class="list-group-item"><strong>Genre: </strong>{{details.Genre}}</li>
-      			<li class="list-group-item"><strong>Language: </strong>{{details.Language}}</li>
-      			<li class="list-group-item"><strong>Rated: </strong>{{details.Rated}}</li>
-      			<li class="list-group-item"><strong>Runtime: </strong>{{details.Runtime}}</li>
-      			<li class="list-group-item"><strong>Writer: </strong>{{details.Writer}}</li>
-      			<li class="list-group-item"><strong>Year: </strong>{{details.Year}}</li>
-      			<li class="list-group-item"><strong>imdb Rating: </strong>{{details.imdbRating}}</li>
-      			<li class="list-group-item"><strong>imdb Votes: </strong>{{details.imdbVotes}}</li>
-   				</ul>
-				</div>
-			</div><!-- closing div for movie details section -->
-			<div class="col-md-6">
-				<div class="panel panel-default">
-			   	<div class="panel-heading">Rotten Tomatoes details for {{details.Title}}</div>
-			   	<ul class="list-group">
-			   		<li class="list-group-item"><strong>Tomato Consensus: </strong>{{details.tomatoConsensus}}</li>
-			      <li class="list-group-item"><strong>Tomato Fresh: </strong>{{details.tomatoFresh}}</li>
-			      <li class="list-group-item"><strong>Tomato Rotten: </strong>{{details.tomatoRotten}}</li>
-			      <li class="list-group-item"><strong>Tomato Meter: </strong>{{details.tomatoMeter}}</li>
-			      <li class="list-group-item"><strong>Tomato Rating: </strong>{{details.tomatoRating}}</li>
-			      <li class="list-group-item"><strong>Tomato Reviews: </strong>{{details.tomatoReviews}}</li>
-			      <li class="list-group-item"><strong>Tomato User Meter: </strong>{{details.tomatoUserMeter}}</li>
-			      <li class="list-group-item"><strong>Tomato User Rating: </strong>{{details.tomatoUserRating}}</li>
-			      <li class="list-group-item"><strong>Tomato User Reviews: </strong>{{details.tomatoUserReviews}}</li>
-			   	</ul>
-				</div>
-			</div><!-- closing div for Rotten Tomatoes section -->
-	  </div><!-- closing div for all details -->
-
-	</div><!-- Closing div for individual movie section -->
-
-
-	<div class="clearfix"></div>
-
-	<div class="col-md-12 new-section" id="books-landing">
-		<!-- iTunes book search -->
-		<div class="text-center" ng-show="showIBooks"><h3 class="header">Some Books With {{firstName}} In The Title</h3></div>
-		<h2>{{iBooksError}}</h2>
-		<div class="row" ng-show="showIBooks">
-			<div ng-repeat="book in books track by $index">
-	    	<div class="col-md-12">
-	      	<div class="panel panel-default itunes-data">
-	        	<div class="panel-heading">
-	          	<h4 class="panel-title">{{book.title}}</h4>
-	        	</div>
-	      		<div class="panel-body">
-	      			<div class="row">
-	    				  <div class="col-md-3"><img ng-src="{{book.image}}" alt="photo of {{book.title}}" class="img-responsive" class="itunes-img"/></div>
-	    				  <div class="col-md-9">
-	    				  	<div class="row">
-	    				  		<strong>Artist: </strong>{{book.artist}}
-	    				  	</div>
-	    				  	<div class="row">
-	    				  		<strong>Release Date: </strong>{{book.date | amDateFormat: 'MMMM Do, YYYY'}}
-	    				  	</div>
-	    				  	<div class="row">
-	    				  		<a href="{{book.itunes}}" target="_blank">
-	    							<img ng-src="images/iTunes_Badge.png" width="90" height="28" alt="Link to iTunes" /></a>
-	    				  	</div>
-	    				  </div>
-	    				</div>
-	      		</div>
-	    		</div>
-	  		</div>
-	  	</div>
-	  </div>
-	</div><!-- Closing div for books section -->
-
-
-
-
-	<div class="clearfix"></div>
-
-	<!-- Wayback Machine search -->
-
-	<div class="col-md-12 new-section" id="wayback-landing">
-		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-10 wayback-frame" ng-show="showLATimes">
-				<div class="text-center">
-					<h2>{{laTimesError}}</h2>
-					<h3>Website for the LA Times From {{month}}/{{day}}/05<h3>
-					<h4>(Or nearest available date)</h4>
-					<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
-				</div>
-				<div class="embed-responsive embed-responsive-16by9">
-					<iframe class="embed-responsive-item" ng-src="{{laTimes}}"></iframe>
-				</div>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
-	</div><!-- Closing div for Wayback LA Times section -->
-
-	<div class="col-md-12 new-section">
-		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-10 wayback-frame" ng-show="showImdb">
-				<div class="text-center">
-					<h2>{{imdbError}}</h2>
-					<h3>Website for IMDb From {{month}}/{{day}}/05<h3>
-					<h4>(Or nearest available date)</h4>
-					<h5><a href="https://archive.org/about/faqs.php#18" target="_blank">(Not all website elements may be available)</a></h5>
-				</div>
-				<div class="embed-responsive embed-responsive-16by9">
-					<iframe class="embed-responsive-item" ng-src="{{imdb}}"></iframe>
-				</div>
-			</div>
-		</div>
-	</div><!-- Closing div for Wayback IMDb section -->
+	</div>
 
 </div><!-- closing div for controller -->

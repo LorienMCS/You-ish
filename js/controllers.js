@@ -1,4 +1,6 @@
-app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'WaybackLAService', 'WaybackIMDbService', 'ITunesService', 'ImdbService', 'MovieService', 'IBooksService', '$http', '$sce', '$timeout', function($scope, GiphyService, WikiService, WaybackLAService, WaybackIMDbService, ITunesService, ImdbService, MovieService, IBooksService, $http, $sce, $timeout) {
+app.controller('YouishController', ['$scope', '$location', '$anchorScroll', 'GiphyService', 'WikiService', 'WaybackLAService', 'WaybackIMDbService', 'ITunesService', 'ImdbService', 'MovieService', 'IBooksService', '$http', '$sce', '$timeout', 
+	function($scope, $location, $anchorScroll, GiphyService, WikiService, WaybackLAService, WaybackIMDbService, ITunesService, ImdbService, MovieService, IBooksService, $http, $sce, $timeout) {
+	$scope.showJumpLinks = false;
 	$scope.firstName = "";
 	$scope.month = "";
 	$scope.day = "";
@@ -29,6 +31,14 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 	$scope.iBooks = "";
 	$scope.showIBooks = false;
 	$scope.iBooksError = "";
+
+	$scope.scrollTo = function(id) {
+    var old = $location.hash();
+    $location.hash(id);
+    $anchorScroll();
+    //reset to old to keep any additional routing logic from kicking in
+    $location.hash(old);
+	};
 
 	$scope.getGiphy = function() {
 		GiphyService.search($scope.firstName)
@@ -209,6 +219,7 @@ app.controller('YouishController', ['$scope', 'GiphyService', 'WikiService', 'Wa
 			$scope.showITunes = false;
 			$scope.showMovies = false;
 			$scope.showIBooks = false;
+			$scope.showJumpLinks = true;
 			$scope.getGiphy();
 			$scope.getWiki();
 			$scope.searchITunes();
