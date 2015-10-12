@@ -13,6 +13,7 @@
 #####A couple of my project's buttons were styled using [Beautiful Buttons for Twitter Bootstrappers](http://charliepark.org/bootstrap_buttons/)
 #####My project's cool background came from [Subtle Patterns](http://subtlepatterns.com/solid/)
 #####I designed the site icon for this project using [X-Icon Editor](http://www.xiconeditor.com/)
+#####Thanks to [this Stack Overflow page](http://stackoverflow.com/questions/14712223/how-to-handle-anchor-hash-linking-in-angularjs) for the solution to keeping the page from reloading when using Angular's $anchorScroll method.
 #####Thanks for visiting!
 
 :sunny: :palm_tree: :evergreen_tree: :evergreen_tree: :palm_tree: :sunny:

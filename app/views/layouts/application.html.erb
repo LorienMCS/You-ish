@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="youishApp">
+<head>
+	<meta charset="utf-8">
+  <!-- The preferred legacy document mode as of IE11 -->
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Youish</title>
+  <meta name="description" content="Capstone project using Angular, for Galvanize Full Stack Web Development Program">
+  <base href="/">
+  <%= stylesheet_link_tag    'application', "//fonts.googleapis.com/css?family=Abril+Fatface", "//fonts.googleapis.com/css?family=Playfair+Display", "//fonts.googleapis.com/css?family=Droid+Sans", media: 'all', 'data-turbolinks-track' => false %>
+  <!-- Tell browser to display the page at screen width -->
+  <!-- When width is set to device-width, initial scale default is 1 -->
+  <meta name="viewport" content="width=device-width">
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+	<div>
+    <div ng-view></div>
+  </div>
+
+</body>
+</html>
